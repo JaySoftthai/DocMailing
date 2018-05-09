@@ -1,0 +1,11 @@
+page-home {
+    // page-modal-alert {
+    //     background-color: rgba(0, 0, 0, 0.5);
+    ion-content.content {
+        white-space: normal; // min-height: 80px; // <-- fixed 
+        border-radius: 10px;
+        .scroll-content {
+            border-radius: 20px;
+        }
+    } // }
+}

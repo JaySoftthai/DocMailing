@@ -1,0 +1,59 @@
+ ion-header {
+     .toolbar-background-ios,
+     .toolbar-background-md {
+         background-image: url('../assets/image/bg_portrait.png');
+     }
+     .toolbar-title-ios,
+     .toolbar-title-md {
+         //color: #868e96;
+         color: #514F66;
+     }
+     .bar-button-default-ios,
+     .bar-button-default-md {
+         //color: #868e96;
+         color: #514F66;
+     }
+ }
+
+ @media (max-width: 1242px) {
+     ion-content {
+         background-image: url('../assets/image/bg_portrait.png'); //background-position: fixed;
+         background-size: 100%;
+         background-repeat: no-repeat;
+         width: 100%;
+         height: 100%
+     }
+ }
+
+ @media (min-width: 1243px) {
+     ion-content {
+         background-image: url('../assets/image/bg_portrait.png'); //background-position: fixed;
+         background-size: 100%;
+         background-repeat: no-repeat;
+         width: 100%;
+         height: 100%
+     }
+ }
+
+ .reqField {
+     color: #dc3545 !important;
+ }
+
+ .content-ios,
+ .content-md {
+     background-color: transparent;
+ }
+
+ .p-h3 {
+     font-size: 1.4rem;
+     color: black !important;
+ }
+
+ .p-h3-primary {
+     font-size: 1.4rem;
+     color: #007bff !important;
+ }
+
+ .navbar-background {
+     background-color: #488aff;
+ }
