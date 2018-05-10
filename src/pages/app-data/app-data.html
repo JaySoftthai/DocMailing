@@ -7,44 +7,35 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Application Data(Read Only)</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only color="royal" (click)="openForm()">
+    <ion-title>Inbound Scan</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only color="royal">
         <ion-icon name="person-add"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
+  </ion-toolbar>
+  <ion-toolbar>
+    <h3>สแกนรับเข้าเอกสาร</h3>
+    <button ion-button end default class="btn-Confirm">ยืนยัน</button>
+    <button ion-button end default class="btn-Clear">ยกเลิก</button>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <!-- <form *ngIf="isToogle" novalidate #myForm="ngForm" (ngSubmit)="add(myForm.value)">
-    <ion-list>
-      <ion-item>
-        <ion-label floating>ชื่อ-สกุล</ion-label>
-        <ion-input #fullname="ngModel" ngModel type="text" name="fullname" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>เบอร์โทรศัพท์</ion-label>
-        <ion-input #phone="ngModel" ngModel type="text" name="phone" required></ion-input>
-      </ion-item>
-      91
-      <div padding>
-        <button ion-button block type="submit" [disabled]="!myForm.form.valid">บันทึกข้อมูล</button>
-      </div>
-    </ion-list>
-  </form> -->
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of Master_DATA">
-      <ion-item>
-        <h3>{{item.sDataName}}</h3>
-        <p>{{item.sDataAbbr}}</p>
-      </ion-item>
-      <ion-item-options side="right">
-        <!--<button ion-button color="danger" (click)="delete(item)>" -->
-        <button ion-button color="danger">
-          <ion-icon name="trash"></ion-icon>
-          ลบ
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <button ion-button full (click)="CallScaner()">
+    Scan
+  </button>
+  <input type="text" [(ngModel)]="txtDocCode" value="{{sBarCode}}" />
+  <button ion-button (click)="GenList()">
+    Generate
+  </button>
+  <!-- <ion-list list-md>
+    <ion-item *ngFor="let c of lstDoc">
+      <ion-thumbnail item-start class="list-item-thumbnail">
+        <img src="{{c.sStepIcon}}">
+      </ion-thumbnail>
+      <h2 class="box-head">{{c.sDocRequestNo}}</h2>
+      <p class="box-detail">{{c.sStepName}}</p>
+      <button ion-button clear item-end (click)="viewdetail(c.nDocID)">View</button>
+    </ion-item>
+  </ion-list> -->
 </ion-content>

@@ -26,7 +26,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'Search', component: SearchPage },
-      { title: 'Application Data', component: AppDataPage }
+      { title: 'Inbound Documents', component: AppDataPage }
     ];
 
   }

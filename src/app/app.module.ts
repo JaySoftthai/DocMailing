@@ -5,6 +5,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite';
 import { HttpModule } from '@angular/http';
 import { Network } from '@ionic-native/network';
+import { AppVersion } from '@ionic-native/app-version';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -13,6 +16,7 @@ import { SearchPage } from '../pages/search/search';
 import { SearchPopoverPage } from '../pages/search-popover/search-popover';
 import { FilesPopoverPage } from '../pages/files-popover/files-popover';
 import { DetailPage } from '../pages/detail/detail';
+import { AppDataPage } from '../pages/app-data/app-data';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +31,7 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
     MyApp,
     HomePage,
     ListPage, SearchPage, DetailPage
-    , SearchPopoverPage, FilesPopoverPage
+    , SearchPopoverPage, FilesPopoverPage, AppDataPage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -38,7 +42,7 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage, SearchPage, DetailPage
+    ListPage, SearchPage, DetailPage, AppDataPage
     , SearchPopoverPage, FilesPopoverPage
   ],
   providers: [
@@ -49,7 +53,7 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
     ApiProvider
     , LocationServicesProvider,
     AutocompletesProvider,
-    MasterdataProvider
+    MasterdataProvider, AppVersion, Base64ToGallery, BarcodeScanner
     // ,UserloginProvider
   ]
 })
