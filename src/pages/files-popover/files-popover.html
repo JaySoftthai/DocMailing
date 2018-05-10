@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar no-border-bottom>
+    <ion-buttons end>
+      <button ion-button (click)="clear()">ปิด</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card-content>
+    <ion-grid>
+      <ion-row class="grd-header">
+        <ion-col col-2 center>ลำดับ</ion-col>
+        <ion-col col-10 center>เอกสารแนบ</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let obj of filesObj">
+        <ion-col col-2>{{obj.nFileID}}</ion-col>
+        <ion-col col-10>
+          <a href="{{webURL}}{{obj.sPath}}{{obj.sSysFileName}}">{{obj.sFileName}}</a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-content>

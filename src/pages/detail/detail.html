@@ -1,0 +1,94 @@
+<!-- <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"> -->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{DocObj.sDocRequestNo}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      ข้อมูลผู้ส่งเอกสาร
+    </ion-card-header>
+    <ion-card-content class="content_span">
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>เลขขอรับบริการ</ion-label>
+        <ion-label end class="box-detail">{{DocObj.sDocRequestNo}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>ชื่อผู้ส่ง</ion-label>
+        <ion-label end class="box-detail">{{DocObj.sSendName}}</ion-label>
+
+      </ion-item>
+      <ion-item>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>หน่วยงานที่สังกัด</ion-label>
+        <ion-label col-8 end text-wrap class="box-detail">{{DocObj.sSendUnitName}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>ประเภท</ion-label>
+        <ion-label end class="box-detail">{{DocObj.sDocType}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>ประเภทการส่ง</ion-label>
+        <ion-label end class="box-detail">{{DocObj.sParcelType}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>จุดฝากบริการ</ion-label>
+        <ion-label end text-wrap class="box-detail">{{DocObj.sDeliveryPoint}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary">เอกสารแนบ</ion-label>
+        <ion-label end class="box-details">
+          <a (click)="viewAttachFiles(DocObj.DocID)">ดูเอกสารแนบ</a>
+        </ion-label>
+
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label start class="box-head box-head-primary">รูปถ่าย</ion-label>
+        <ion-label end class="box-details">ดูรูปถ่าย</ion-label>
+      </ion-item> -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>ข้อมูลผู้รับเอกสาร</ion-card-header>
+    <ion-card-content class="content_span">
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>ชื่อผู้รับ</ion-label>
+        <ion-label end class="box-detail">สมชาย ทองปาน</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>หน่วยงานปลายทาง</ion-label>
+        <ion-label end class="box-detail">สอ.ปตท</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>สถานที่จัดส่ง</ion-label>
+        <ion-label end class="box-detail">อาคาร ENCO B ชั้น 2</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>จำนวน</ion-label>
+        <ion-label end class="box-detail">1</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label start class="box-head box-head-primary">หมายเหตุ</ion-label>
+        <ion-label end text-wrap class="box-detail">{{DocObj.sNotes}}
+          <!-- <button ion-button outline (click)="viewremark()">ดูหมายเหตุ</button> -->
+        </ion-label>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label start class="box-head box-head-primary">รูปถ่าย</ion-label>
+        <ion-label end class="box-detail">
+          <button ion-button>Choose file</button>
+        </ion-label>
+      </ion-item> -->
+      <!-- <ion-item>
+        <ion-label start class="box-head box-head-primary" stacked>ลายเซ็นต์</ion-label>
+        <ion-label end class="box-detail">
+        </ion-label>
+      </ion-item> -->
+    </ion-card-content>
+  </ion-card>
+</ion-content>

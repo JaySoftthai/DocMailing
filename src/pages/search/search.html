@@ -1,0 +1,110 @@
+<!-- <link href="assets/css/site.css" rel="stylesheet"> -->
+<!-- <link href="assets/css/custom.css" rel="stylesheet"> -->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Search</ion-title>
+  </ion-navbar>
+  <!---->
+  <ion-toolbar no-border-top>
+    <ion-searchbar (ionInput)="getItems($event)" showCancelButton="true" placeholder="ค้นหาจาก เลขขอรับบริการ"></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="filterCust($event)">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      ค้นหาเอกสาร
+    </ion-card-header>
+    <ion-card-content class="content_span">
+      <!-- <ion-list>
+        <ion-item>
+          <ion-label color="primary">วันที่ขอรับบริการ</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate">
+          </ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary">เลือกจุดบริการ</ion-label>
+          <ion-select [(ngModel)]="CounterService"> 
+            <ion-option *ngFor="let itm of lstService" [value]="itm.nPointLocationID">{{itm.PointName}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary">เลขขอรับบริการ</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">สถานะ</ion-label>
+          <ion-select [(ngModel)]="status">
+            <ion-option value="">ทั้งหมด</ion-option>
+            <ion-option value="1">รับงาน</ion-option>
+            <ion-option value="2">เอกสารรอรับ</ion-option>
+            <ion-option value="3">รับเข้าโดยพนักงานเข้าเอกสาร</ion-option>
+            <ion-option value="4">บก.รับงานเอกสาร</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <button ion-button icon-left default>
+            <ion-icon name="search"></ion-icon> ค้นหา
+          </button>
+          <button ion-button icon-left default>
+            <ion-icon name="cancel"></ion-icon> ยกเลิก
+          </button>
+        </ion-item>
+      </ion-list> -->
+
+
+      <!-- <ion-item>
+        เอกสารทั้งหมด 4 รายการ
+      </ion-item> -->
+
+
+      <ion-list list-md>
+        <!-- <ion-item-divider color="info" *ngIf="isHasSelf">เอกสารทั้งหมด {{nTotalRows}} รายการ</ion-item-divider> -->
+        <!-- <button *ngFor="let c of lstDoc" ion-item> 
+          <p class="box-head">เลขขอรับบริการ:
+            <br>
+            <label class="box-detail">{{c.sDocRequestNo}}</label>
+          </p>
+          <p class="box-head">จุดฝากเอกสาร:
+            <br>{{c.nDeliveryPoint}}
+            <label class="box-detail"></label>
+          </p>
+          <p class="box-head">ชื่อผู้ขอรับบริการ:
+            <br>
+            <label class="box-detail"> {{c.sSendName}}</label>
+          </p>
+          <p class="box-head">สถานะ:
+            <button ion-button icon-left default> {{c.sStepName}}</button>
+          </p>
+        </button> -->
+        <ion-item *ngFor="let c of lstDoc">
+          <ion-thumbnail item-start class="list-item-thumbnail">
+            <img src="{{c.sStepIcon}}">
+          </ion-thumbnail>
+          <h2 class="box-head">{{c.sDocRequestNo}}</h2>
+          <p class="box-detail">{{c.sStepName}}</p>
+          <button ion-button clear item-end (click)="viewdetail(c.nDocID)">View</button>
+        </ion-item>
+      </ion-list>
+
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

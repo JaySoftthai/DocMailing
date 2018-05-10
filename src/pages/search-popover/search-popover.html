@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar no-border-bottom>
+    <ion-buttons start>
+      <button ion-button (click)="clear()">เคลียร์</button>
+    </ion-buttons>
+    <ion-title>ค้นหา</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">เสร็จ</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary">วันที่ขอรับบริการ</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="sSearch_ReqDate">
+        </ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary">เลือกจุดบริการ</ion-label>
+        <ion-select [(ngModel)]="sSearch_CounterService">
+          <ion-option *ngFor="let itm of lstCounter" [value]="itm.nPointLocationID">{{itm.PointName}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary">เลขขอรับบริการ</ion-label>
+        <ion-input [(ngModel)]="sSearch_TrackingNumber"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">สถานะ</ion-label>
+        <ion-select [(ngModel)]="sSearch_Status">
+          <ion-option *ngFor="let stp of lstStep" [value]="stp.sStepID">{{stp.sStepName}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </ion-card-content>
+</ion-content>
