@@ -1,6 +1,6 @@
 {
   "name": "PTT_DocMailing",
-  "app_id": "a2381bdf",
+  "app_id": "5dc4853f",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
