@@ -20,14 +20,14 @@ export class ApiProvider {
 
   constructor(public http: Http, public network: Network) {
     // this.apiUrl = "http://localhost:1871/Mobile/";
-    this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
+    // this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
     //this.apiUrl = "https://gsm.pttplc.com/Mobile/";
     // this.apiUrl = "https://pttwebtest8.pttplc.com/PTT-GSM-CSC_Test/Mobile/";///Test Server
-    //this.apiUrl = "http://www.softthai.com/PTT_CSCWeb/Mobile/";
+    this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/mobile/";
     //this.apiUrl = "http://localhost/PTTCSCweb/Mobile/";
 
     // this.epiUrl = "http://localhost:1871/";
-    this.epiUrl = "http://dev2012/PTT_Doc_Mailing/";
+    this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/mobile/";
     //this.epiUrl = "https://pttweb9.pttplc.com/PTT-GSM-EDoc";
     //this.epiUrl = "http://www.softthai.com/PTTCSC-EBook";
   }
