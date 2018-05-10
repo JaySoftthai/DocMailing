@@ -23,11 +23,11 @@ export class ApiProvider {
     // this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
     //this.apiUrl = "https://gsm.pttplc.com/Mobile/";
     // this.apiUrl = "https://pttwebtest8.pttplc.com/PTT-GSM-CSC_Test/Mobile/";///Test Server
-    this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/mobile/";
+    this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
     //this.apiUrl = "http://localhost/PTTCSCweb/Mobile/";
 
     // this.epiUrl = "http://localhost:1871/";
-    this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/mobile/";
+    this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
     //this.epiUrl = "https://pttweb9.pttplc.com/PTT-GSM-EDoc";
     //this.epiUrl = "http://www.softthai.com/PTTCSC-EBook";
   }
