@@ -6,7 +6,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 ////import providers 
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
 ////import models 
-import { trans_request } from '../../models/trans_request'
+import { trans_request } from '../../models/trans_request';
+import { Step } from '../../models/step';
 
 @IonicPage()
 @Component({
@@ -15,10 +16,11 @@ import { trans_request } from '../../models/trans_request'
 })
 export class AppDataPage {
   Master_DATA: Array<Object>;
+  lstInbound: Step[] = [];
   isToogle: boolean = false;
-  lstDoc: trans_request[];
+  lstDoc: Step[];
   sBarCode: string = '';
-
+  txtDocCode: string = '';
 
   constructor(
     public toastCtrl: ToastController,
@@ -39,17 +41,22 @@ export class AppDataPage {
     this.barcodeScanner.scan().then(barcodeData => {
       this.sBarCode = barcodeData.text;
       console.log('Barcode data', barcodeData);
-
+      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+      this.lstInbound.push(_InboundCode);
+      this.BindDocumentList(false);
     }).catch(err => {
       console.log('Error', err);
     });
   }
 
   BindDocumentList(isScroll?: boolean) {
+    console.log('BindDocumentList()');
+    console.log(this.lstInbound);
 
   }
   GenList() {
-
-
+    let barcodeData_text = this.txtDocCode;
+    let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+    this.lstInbound.push(_InboundCode);
   }
 }

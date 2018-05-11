@@ -28,14 +28,14 @@
   <button ion-button (click)="GenList()">
     Generate
   </button>
-  <!-- <ion-list list-md>
-    <ion-item *ngFor="let c of lstDoc">
+  <ion-list list-md>
+    <ion-item *ngFor="let c of lstInbound">
       <ion-thumbnail item-start class="list-item-thumbnail">
         <img src="{{c.sStepIcon}}">
       </ion-thumbnail>
-      <h2 class="box-head">{{c.sDocRequestNo}}</h2>
+      <h2 class="box-head">{{c.sDetail}}</h2>
       <p class="box-detail">{{c.sStepName}}</p>
       <button ion-button clear item-end (click)="viewdetail(c.nDocID)">View</button>
     </ion-item>
-  </ion-list> -->
+  </ion-list>
 </ion-content>
