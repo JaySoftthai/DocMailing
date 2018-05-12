@@ -59,12 +59,14 @@ export class AppDataPage {
         var IsDupplicate = false;
         if (barcodeData.text != "" && this.lstInbound.length > 0) {
           let aray_inbnd = this.lstInbound.filter(f => {
-            IsDupplicate = (f.sDetail.toLowerCase() == barcodeData.text.toLowerCase());
+            return (f.sDetail.toLowerCase() == barcodeData.text.toLowerCase());
           });
-        } else { IsDupplicate = false; }
+          IsDupplicate = aray_inbnd.length > 0;
+          this.presentToast(barcodeData.text + ' ' + '[' + aray_inbnd.length + ']' +
+            + ((IsDupplicate) ? + ' is dupplicate.' : ' can use.'));
+        }
 
-        this.presentToast(barcodeData.text + ' '
-          + ((IsDupplicate) ? + ' is dupplicate.' : ' can use.'));
+
 
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
