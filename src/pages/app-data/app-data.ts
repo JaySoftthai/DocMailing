@@ -175,7 +175,7 @@ export class AppDataPage {
     });
   }
   romoveDupplicate(sDocCode) {
-    if (sDocCode != "") {
+    if (sDocCode != "" && this.lstInbound.length > 0) {
       let aray_inbnd = this.lstInbound.filter(f => {
         return f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1;
       });
