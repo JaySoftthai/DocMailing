@@ -40,11 +40,11 @@ export class AppDataPage {
   CallScaner() {
 
     this.barcodeScanner.scan({
-      disableSuccessBeep: false, // iOS and Android
-      preferFrontCamera: true, // iOS and Android
-      showFlipCameraButton: true, // iOS and Android
-      showTorchButton: true, // iOS and Android
-      torchOn: true, // Android, launch with the torch switched on (if available)
+      // disableSuccessBeep: false, // iOS and Android
+      // preferFrontCamera: true, // iOS and Android
+      // showFlipCameraButton: true, // iOS and Android
+      // showTorchButton: true, // iOS and Android
+      // torchOn: true, // Android, launch with the torch switched on (if available)
       // saveHistory: true, // Android, save scan history (default false)
       // prompt: "Place a barcode inside the scan area", // Android
       // resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
@@ -52,18 +52,41 @@ export class AppDataPage {
       // orientation: "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
       // disableAnimations: true, // iOS
     }).then(barcodeData => {
-      this.sBarCode = barcodeData.text;
-      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
-      this.lstInbound.push(_InboundCode);
-      this.BindDocumentList(false);
+
+      if (barcodeData.cancelled == true) {
+        // alert(“Was cancelled”);
+        this.presentToast('barcodeData cancelled: true');
+
+      } else {
+        this.sBarCode = barcodeData.text;
+        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+        this.lstInbound.push(_InboundCode);
+        this.BindDocumentList(false);
+      }
     }).catch(err => {
       console.log('Error', err);
+      this.presentToast(err);
     });
   }
-  m
+
+  presentToast(err) {
+    let toast = this.toastCtrl.create({
+      message: err,
+      duration: 3000,
+      position: 'buttom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
   BindDocumentList(isScroll?: boolean) {
     console.log('BindDocumentList()');
     console.log(this.lstInbound);
+
     this.CallScaner()
   }
   GenList() {
