@@ -43,12 +43,12 @@ export class AppDataPage {
       preferFrontCamera: false
       , showFlipCameraButton: false
       , showTorchButton: false
+      , torchOn: false
       , disableAnimations: false
       , disableSuccessBeep: false
-      , prompt: "Do you want to next?"
+      // , prompt: "Do you want to next?"
       // , orientation: "portrait"
-      , torchOn: false
-      , resultDisplayDuration: 0
+      , resultDisplayDuration: 1000
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
@@ -64,19 +64,18 @@ export class AppDataPage {
 
       }
 
+      this.BindDocumentList(barcodeData.cancelled);
 
-      this.BindDocumentList(false);
     }).catch(err => {
       console.log('Error', err);
       this.presentToast(err);
     });
   }
 
-  BindDocumentList(isScroll?: boolean) {
-    console.log('BindDocumentList()');
-    console.log(this.lstInbound);
-
-    this.CallScaner()
+  BindDocumentList(isCanceled?: boolean) {
+    if (!isCanceled) {
+      this.CallScaner();
+    }
   }
   presentToast(err) {
     let toast = this.toastCtrl.create({
