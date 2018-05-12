@@ -49,7 +49,7 @@ export class AppDataPage {
       , disableSuccessBeep: false
       // , prompt: "Do you want to next?"
       // , orientation: "portrait"
-      , resultDisplayDuration: 500
+      , resultDisplayDuration: 1000
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
@@ -172,10 +172,11 @@ export class AppDataPage {
     let aray_inbnd = this.lstInbound.filter(f => {
       return f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1;
     });
-    let inbnd = aray_inbnd[0];
-    let idx_remv = this.lstInbound.indexOf(inbnd);
-    this.lstInbound.splice(idx_remv, 1);
-
+    if (aray_inbnd.length > 0) {
+      let inbnd = aray_inbnd[0];
+      let idx_remv = this.lstInbound.indexOf(inbnd);
+      this.lstInbound.splice(idx_remv, 1);
+    }
   }
   CancelInbound() {
 
