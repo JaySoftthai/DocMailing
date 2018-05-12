@@ -38,9 +38,21 @@ export class AppDataPage {
     console.log('ionViewDidLoad AppDataPage');
   }
   CallScaner() {
-    this.barcodeScanner.scan().then(barcodeData => {
+
+    this.barcodeScanner.scan({
+      disableSuccessBeep: false, // iOS and Android
+      preferFrontCamera: true, // iOS and Android
+      showFlipCameraButton: true, // iOS and Android
+      showTorchButton: true, // iOS and Android
+      torchOn: true, // Android, launch with the torch switched on (if available)
+      // saveHistory: true, // Android, save scan history (default false)
+      // prompt: "Place a barcode inside the scan area", // Android
+      // resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+      // formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+      // orientation: "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
+      // disableAnimations: true, // iOS
+    }).then(barcodeData => {
       this.sBarCode = barcodeData.text;
-      console.log('Barcode data', barcodeData);
       let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
       this.lstInbound.push(_InboundCode);
       this.BindDocumentList(false);
@@ -48,11 +60,11 @@ export class AppDataPage {
       console.log('Error', err);
     });
   }
-
+  m
   BindDocumentList(isScroll?: boolean) {
     console.log('BindDocumentList()');
     console.log(this.lstInbound);
-
+    this.CallScaner()
   }
   GenList() {
     let barcodeData_text = this.txtDocCode;
