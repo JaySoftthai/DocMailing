@@ -13,6 +13,11 @@ export class HomePage {
   }
   ///Method
   ionViewDidLoad() {
+    this.appVersion.getVersionNumber().then(res => {
+      this.versionNumber = res;
+    }).catch(err => {
+      this.versionNumber = err;
+    });
     // console.log(this.appVersion.getVersionNumber()); 
     // this.BindVersion();
 

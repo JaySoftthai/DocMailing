@@ -41,24 +41,33 @@ export class AppDataPage {
 
     this.barcodeScanner.scan().then(barcodeData => {
 
-      this.presentToast('barcodeData cancelled: ' + barcodeData.cancelled);
-      if (1 == 1)//(barcodeData.cancelled == true)
-      {
-        // alert(“Was cancelled”);
-        this.presentToast('barcodeData cancelled: true');
+      this.sBarCode = barcodeData.text;
+      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+      this.lstInbound.push(_InboundCode);
+
+      this.presentToast('lstInbound: ' + this.lstInbound.length);
+      if (barcodeData.cancelled == true) {
+        this.presentToast('barcodeData if is cancelled: ' + barcodeData.cancelled);
 
       } else {
-        this.sBarCode = barcodeData.text;
-        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
-        this.lstInbound.push(_InboundCode);
-        this.BindDocumentList(false);
+        this.presentToast('barcodeData else is cancelled: ' + barcodeData.cancelled);
+
       }
+
+
+      this.BindDocumentList(false);
     }).catch(err => {
       console.log('Error', err);
       this.presentToast(err);
     });
   }
 
+  BindDocumentList(isScroll?: boolean) {
+    console.log('BindDocumentList()');
+    console.log(this.lstInbound);
+
+    this.CallScaner()
+  }
   presentToast(err) {
     let toast = this.toastCtrl.create({
       message: err,
@@ -73,12 +82,6 @@ export class AppDataPage {
     toast.present();
   }
 
-  BindDocumentList(isScroll?: boolean) {
-    console.log('BindDocumentList()');
-    console.log(this.lstInbound);
-
-    this.CallScaner()
-  }
   GenList() {
     let barcodeData_text = this.txtDocCode;
     let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
