@@ -169,9 +169,13 @@ export class AppDataPage {
   }
   CheckDupplicate(sDocCode): Promise<boolean> {
     return new Promise(resolve => {
-      let aray_inbnd = this.lstInbound.filter(f => {
-        resolve(f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1);
-      });
+      var IsDupplicate = false;
+      if (sDocCode != "" && this.lstInbound.length > 0) {
+        let aray_inbnd = this.lstInbound.filter(f => {
+          IsDupplicate = (f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1);
+        });
+      }
+      resolve(IsDupplicate);
     });
   }
   romoveDupplicate(sDocCode) {
