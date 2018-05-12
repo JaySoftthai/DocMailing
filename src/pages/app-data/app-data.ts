@@ -60,7 +60,7 @@ export class AppDataPage {
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
 
-        // this.romoveDupplicate(this.txtDocCode); 
+        this.romoveDupplicate(this.txtDocCode);
         // this.presentToast(this.CheckDupplicate(barcodeData.text));
         this.BindDocumentList(barcodeData.cancelled);
       }
