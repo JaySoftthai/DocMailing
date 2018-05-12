@@ -69,12 +69,10 @@ export class AppDataPage {
           let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
           this.lstInbound.push(_InboundCode);
 
-          this.BindDocumentList(barcodeData.cancelled);
         } else {
-
           this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? + ' is dupplicate.' : ' can use.'));
-
         }
+        this.BindDocumentList(barcodeData.cancelled);
       }
 
     }).catch(err => {
@@ -142,7 +140,7 @@ export class AppDataPage {
             let inbnd = aray_inbnd[0];
             let idx_remv = this.lstInbound.indexOf(inbnd);
             this.lstInbound.splice(idx_remv, 1);
-            // this.presentToast('lstInbound length: ' + this.lstInbound.length);
+
           }
         },
         {
@@ -201,7 +199,6 @@ export class AppDataPage {
       if (aray_inbnd.length > 0) {
         let inbnd = aray_inbnd[0];
         let idx_remv = this.lstInbound.indexOf(inbnd);
-        this.presentToast(idx_remv);
         this.lstInbound.splice(idx_remv, 1);
       }
     }
