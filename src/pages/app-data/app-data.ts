@@ -53,10 +53,11 @@ export class AppDataPage {
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
-      this.presentToast(barcodeData.text + ' '
-        + ((this.CheckDupplicate(barcodeData.text)) ? + ' is dupplicate.' : ' can use.'));
       if (barcodeData.text != "") {
-        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+        this.presentToast(barcodeData.text + ' '
+          + ((this.CheckDupplicate(barcodeData.text)) ? + ' is dupplicate.' : ' can use.'));
+
+        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
 
         // this.romoveDupplicate(this.txtDocCode); 
