@@ -53,7 +53,8 @@ export class AppDataPage {
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
-      this.presentToast(barcodeData.text + ' ' + ((this.CheckDupplicate(barcodeData.text)) ? + ' is dupplicate.' : ' can use.'));
+      this.presentToast(barcodeData.text + ' '
+        + ((this.CheckDupplicate(barcodeData.text)) ? + ' is dupplicate.' : ' can use.'));
       if (barcodeData.text != "") {
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
@@ -174,7 +175,7 @@ export class AppDataPage {
         let aray_inbnd = this.lstInbound.filter(f => {
           IsDupplicate = (f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1);
         });
-      }
+      } else { IsDupplicate = false; }
       resolve(IsDupplicate);
     });
   }
