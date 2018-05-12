@@ -167,15 +167,15 @@ export class AppDataPage {
     confirm.present();
   }
   romoveDupplicate(sDocCode) {
-
-    this.lstInbound.filter(f => { f.sDetail == sDocCode });
-    let aray_inbnd = this.lstInbound.filter(f => {
-      return f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1;
-    });
-    if (aray_inbnd.length > 0) {
-      let inbnd = aray_inbnd[0];
-      let idx_remv = this.lstInbound.indexOf(inbnd);
-      this.lstInbound.splice(idx_remv, 1);
+    if (sDocCode != "") {
+      let aray_inbnd = this.lstInbound.filter(f => {
+        return f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1;
+      });
+      if (aray_inbnd.length > 0) {
+        let inbnd = aray_inbnd[0];
+        let idx_remv = this.lstInbound.indexOf(inbnd);
+        this.lstInbound.splice(idx_remv, 1);
+      }
     }
   }
   CancelInbound() {
