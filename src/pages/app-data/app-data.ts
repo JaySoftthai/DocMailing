@@ -187,9 +187,9 @@ export class AppDataPage {
       });
 
       if (aray_inbnd.length > 0) {
-        this.presentToast(aray_inbnd[0].sDetail);
         let inbnd = aray_inbnd[0];
         let idx_remv = this.lstInbound.indexOf(inbnd);
+        this.presentToast(idx_remv);
         this.lstInbound.splice(idx_remv, 1);
       }
     }
