@@ -39,7 +39,17 @@ export class AppDataPage {
   }
   CallScaner() {
 
-    this.barcodeScanner.scan().then(barcodeData => {
+    this.barcodeScanner.scan({
+      preferFrontCamera: false
+      , showFlipCameraButton: false
+      , showTorchButton: false
+      , disableAnimations: false
+      , disableSuccessBeep: false
+      , prompt: "Do you want to next?"
+      // , orientation: "portrait"
+      , torchOn: false
+      , resultDisplayDuration: 0
+    }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
       let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
