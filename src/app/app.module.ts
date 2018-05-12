@@ -8,6 +8,7 @@ import { Network } from '@ionic-native/network';
 import { AppVersion } from '@ionic-native/app-version';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+// import { ActionSheetController } from 'ionic-angular'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';

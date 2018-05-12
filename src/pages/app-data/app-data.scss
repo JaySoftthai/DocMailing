@@ -1,12 +1,32 @@
 page-app-data {
     .btn-Confirm {
-        background-color: #3c8dbc;
-        border-color: #32769e;
+        background-color: #007bff;
+        border-color: #007bff;
         color: white;
     }
     .btn-Clear {
         color: #fff;
-        background-color: #ac2925;
-        border-color: #761c19;
+        background-color: #d61e19;
+        border-color: #d61e19;
+    }
+    .list-item-thumbnail {
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+    .list-item-thumbnail>img {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    .action-sheet-center {
+        text-align: center !important;
+        -webkit-box-pack: center !important;
+    }
+    .action-sheet-center .button-inner {
+        text-align: center !important;
+        -webkit-box-pack: center !important;
+        -webkit-box-align: center !important;
+    }
+    .bgTextBox {
+        background-color: whitesmoke;
     }
 }

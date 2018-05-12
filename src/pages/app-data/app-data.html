@@ -15,27 +15,46 @@
     </ion-buttons> -->
   </ion-toolbar>
   <ion-toolbar>
-    <h3>สแกนรับเข้าเอกสาร</h3>
-    <button ion-button end default class="btn-Confirm">ยืนยัน</button>
-    <button ion-button end default class="btn-Clear">ยกเลิก</button>
+    <ion-row>
+      <ion-col col-12>
+        <h3>สแกนรับเข้าเอกสาร</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full end default class="btn-Confirm" (click)="ConfirmInbound()">ยืนยัน</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full end default class="btn-Clear" (click)="CancelInbound()">ยกเลิก</button>
+      </ion-col>
+    </ion-row>
+
+
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <button ion-button full (click)="CallScaner()">
     Scan
   </button>
-  <input type="text" [(ngModel)]="txtDocCode" value="{{sBarCode}}" />
-  <button ion-button (click)="GenList()">
-    Generate
+  <hr />
+  <h6 style="text-align: center;">
+    <small>Or</small>
+  </h6>
+  <hr />
+  <ion-input class="bgTextBox" [(ngModel)]="txtDocCode" value="{{sBarCode}}" start></ion-input>
+  <!-- <input start type="text" [(ngModel)]="txtDocCode" value="{{sBarCode}}" /> -->
+  <button ion-button full (click)="GenList()">Manual Key
   </button>
   <ion-list list-md>
     <ion-item *ngFor="let c of lstInbound">
       <ion-thumbnail item-start class="list-item-thumbnail">
-        <img src="{{c.sStepIcon}}">
+        <img src="{{c.sImg}}">
       </ion-thumbnail>
       <h2 class="box-head">{{c.sDetail}}</h2>
       <p class="box-detail">{{c.sStepName}}</p>
-      <button ion-button clear item-end (click)="viewdetail(c.nDocID)">View</button>
+      <button ion-button clear item-end (click)="presentActionSheet(c.nDocID,c.sDetail)">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>
