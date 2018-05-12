@@ -185,6 +185,8 @@ export class AppDataPage {
       let aray_inbnd = this.lstInbound.filter(f => {
         return f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1;
       });
+
+      this.presentToast(aray_inbnd);
       if (aray_inbnd.length > 0) {
         let inbnd = aray_inbnd[0];
         let idx_remv = this.lstInbound.indexOf(inbnd);
