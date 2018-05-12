@@ -53,12 +53,13 @@ export class AppDataPage {
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
-      this.presentToast(barcodeData.text);
+      this.presentToast(barcodeData.text + ' ' + ((this.CheckDupplicate(barcodeData.text)) ? + ' is dupplicate.' : ' can use.'));
       if (barcodeData.text != "") {
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
 
-        this.romoveDupplicate(this.txtDocCode);
+        // this.romoveDupplicate(this.txtDocCode); 
+        // this.presentToast(this.CheckDupplicate(barcodeData.text));
         this.BindDocumentList(barcodeData.cancelled);
       }
 
@@ -165,6 +166,13 @@ export class AppDataPage {
       ]
     });
     confirm.present();
+  }
+  CheckDupplicate(sDocCode): Promise<boolean> {
+    return new Promise(resolve => {
+      let aray_inbnd = this.lstInbound.filter(f => {
+        resolve(f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1);
+      });
+    });
   }
   romoveDupplicate(sDocCode) {
     if (sDocCode != "") {
