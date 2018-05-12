@@ -54,13 +54,22 @@ export class AppDataPage {
 
       this.sBarCode = barcodeData.text;
       if (barcodeData.text != "") {
+
+
+        var IsDupplicate = false;
+        if (barcodeData.text != "" && this.lstInbound.length > 0) {
+          let aray_inbnd = this.lstInbound.filter(f => {
+            IsDupplicate = (f.sDetail.toLowerCase() == barcodeData.text.toLowerCase());
+          });
+        } else { IsDupplicate = false; }
+
         this.presentToast(barcodeData.text + ' '
-          + ((this.CheckDupplicate(barcodeData.text)) ? + ' is dupplicate.' : ' can use.'));
+          + ((IsDupplicate) ? + ' is dupplicate.' : ' can use.'));
 
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
 
-        this.romoveDupplicate(this.txtDocCode);
+        // this.romoveDupplicate(this.txtDocCode);
         // this.presentToast(this.CheckDupplicate(barcodeData.text));
         this.BindDocumentList(barcodeData.cancelled);
       }
