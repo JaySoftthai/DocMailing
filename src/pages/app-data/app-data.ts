@@ -57,6 +57,8 @@ export class AppDataPage {
       if (barcodeData.text != "") {
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
+
+        this.romoveDupplicate(this.txtDocCode);
         this.BindDocumentList(barcodeData.cancelled);
       }
 
@@ -164,6 +166,17 @@ export class AppDataPage {
     });
     confirm.present();
   }
+  romoveDupplicate(sDocCode) {
+
+    this.lstInbound.filter(f => { f.sDetail == sDocCode });
+    let aray_inbnd = this.lstInbound.filter(f => {
+      return f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1;
+    });
+    let inbnd = aray_inbnd[0];
+    let idx_remv = this.lstInbound.indexOf(inbnd);
+    this.lstInbound.splice(idx_remv, 1);
+
+  }
   CancelInbound() {
 
     let confirm = this.alertCtrl.create({
@@ -188,6 +201,7 @@ export class AppDataPage {
     confirm.present();
   }
   delScan(nDocID) {
+
   }
 
   viewdetail(nDocID) {
