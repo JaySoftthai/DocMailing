@@ -4,9 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+// import { ListPage } from '../pages/list/list';
 import { SearchPage } from '../pages/search/search';
 import { AppDataPage } from '../pages/app-data/app-data';
+import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
+import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,10 +25,12 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Search', component: SearchPage },
-      { title: 'Inbound Documents', component: AppDataPage }
+      { title: 'หน้าหลัก', component: HomePage },
+      { title: 'สแกนรับเข้าเอกสาร', component: AppDataPage },
+      { title: 'สแกนรับเอกสารจาก บก.', component: AppOutboundPage },
+      { title: 'สแกนเปลี่ยนสถานะรายการ', component: AppTrackStatusPage },
+      { title: 'ค้นหาเอกสาร', component: SearchPage }
+      // ,{ title: 'List', component: ListPage }
     ];
 
   }

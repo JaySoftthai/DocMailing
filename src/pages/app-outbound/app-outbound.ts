@@ -10,12 +10,14 @@ import { MasterdataProvider } from '../../providers/masterdata/masterdata';
 import { trans_request } from '../../models/trans_request';
 import { Step } from '../../models/step';
 
+
 @IonicPage()
 @Component({
-  selector: 'page-app-data',
-  templateUrl: 'app-data.html',
+  selector: 'page-app-outbound',
+  templateUrl: 'app-outbound.html',
 })
-export class AppDataPage {
+export class AppOutboundPage {
+
   Master_DATA: Array<Object>;
   lstInbound: Step[] = [];
   isToogle: boolean = false;
@@ -33,7 +35,6 @@ export class AppDataPage {
 
     });
   }
-
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad AppDataPage');
@@ -253,3 +254,4 @@ export class AppDataPage {
 
   }
 }
+

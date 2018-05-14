@@ -12,10 +12,11 @@ import { Step } from '../../models/step';
 
 @IonicPage()
 @Component({
-  selector: 'page-app-data',
-  templateUrl: 'app-data.html',
+  selector: 'page-app-track-status',
+  templateUrl: 'app-track-status.html',
 })
-export class AppDataPage {
+export class AppTrackStatusPage {
+
   Master_DATA: Array<Object>;
   lstInbound: Step[] = [];
   isToogle: boolean = false;
@@ -33,7 +34,6 @@ export class AppDataPage {
 
     });
   }
-
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad AppDataPage');

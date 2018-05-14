@@ -12,12 +12,13 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { SearchPage } from '../pages/search/search';
 import { SearchPopoverPage } from '../pages/search-popover/search-popover';
 import { FilesPopoverPage } from '../pages/files-popover/files-popover';
 import { DetailPage } from '../pages/detail/detail';
 import { AppDataPage } from '../pages/app-data/app-data';
+import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
+import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,9 +31,9 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage, SearchPage, DetailPage
-    , SearchPopoverPage, FilesPopoverPage, AppDataPage
+    HomePage
+    , SearchPage, DetailPage
+    , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppOutboundPage, AppTrackStatusPage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -42,9 +43,9 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage, SearchPage, DetailPage, AppDataPage
-    , SearchPopoverPage, FilesPopoverPage
+    HomePage
+    , SearchPage, DetailPage, AppDataPage, AppOutboundPage
+    , SearchPopoverPage, FilesPopoverPage, AppTrackStatusPage
   ],
   providers: [
     StatusBar,

@@ -17,7 +17,17 @@
   <ion-toolbar>
     <ion-row>
       <ion-col col-12>
-        <h3 style="color: #514F66;text-align: center;">สแกนรับเข้าเอกสาร</h3>
+        <h3 style="color: #514F66;text-align: center;">สแกนเปลี่ยนสถานะรายการ</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-select full [(ngModel)]="ddlStatus" placeholder="Select status">
+          <ion-option value="5">บก. รับเอกสาร</ion-option>
+          <ion-option value="8">เอกสารส่งคืน</ion-option>
+          <ion-option value="10">ปลายทางไม่มีผู้รับ</ion-option>
+          <ion-option value="11">ปิดงาน</ion-option>
+        </ion-select>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -41,7 +51,7 @@
     <small>Or</small>
   </h6>
   <hr />
-  <ion-input class="bgTextBox" [(ngModel)]="txtDocCode" value="{{sBarCode}}" start></ion-input>
+  <ion-input class="bgTextBox" [(ngModel)]="txtDocCode" value="{{sBarCode}}" start placeholder="Enter barcode"></ion-input>
   <!-- <input start type="text" [(ngModel)]="txtDocCode" value="{{sBarCode}}" /> -->
   <button ion-button full (click)="GenList()">Manual Key
   </button>

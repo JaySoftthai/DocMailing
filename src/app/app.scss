@@ -1,17 +1,18 @@
  ion-header {
      .toolbar-background-ios,
      .toolbar-background-md {
-         background-image: url('../assets/image/bg_portrait.png');
+         background-image: url('../assets/image/bg_portrait.png'); //  background-color: #3c8dbc;
      }
+     .toolbar-content {}
      .toolbar-title-ios,
      .toolbar-title-md {
          //color: #868e96;
-         color: #514F66;
+         color: #514F66; //    background-color: #3c8dbc;
      }
      .bar-button-default-ios,
      .bar-button-default-md {
          //color: #868e96;
-         color: #514F66;
+         color: #514F66; //514F66  
      }
  }
 
