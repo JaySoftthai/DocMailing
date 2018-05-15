@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpModule, Response, Http } from '@angular/http';
+import { HttpModule, Response, Http, RequestOptions, Headers } from '@angular/http';
 import { Network } from '@ionic-native/network';
 import { isNumber } from 'ionic-angular/util/util';
 
@@ -19,17 +19,13 @@ export class ApiProvider {
   epiUrl: string;
 
   constructor(public http: Http, public network: Network) {
-    // this.apiUrl = "http://localhost:1871/Mobile/";
+    this.apiUrl = "http://localhost:1871/Mobile/";
     // this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
-    //this.apiUrl = "https://gsm.pttplc.com/Mobile/";
-    // this.apiUrl = "https://pttwebtest8.pttplc.com/PTT-GSM-CSC_Test/Mobile/";///Test Server
-    this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
-    //this.apiUrl = "http://localhost/PTTCSCweb/Mobile/";
+    // this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/"; 
 
-    // this.epiUrl = "http://localhost:1871/";
-    this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
-    //this.epiUrl = "https://pttweb9.pttplc.com/PTT-GSM-EDoc";
-    //this.epiUrl = "http://www.softthai.com/PTTCSC-EBook";
+    this.epiUrl = "http://localhost:1871/Mobile/";
+    // this.epiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
+    // this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/"; 
   }
 
   getApiUrl(): string { return this.apiUrl; }
@@ -43,6 +39,18 @@ export class ApiProvider {
     return this.http.get(this.apiUrl + sFile_Handler)
       .map((res: Response) => <any>res.json())
       .catch(this.handleError);
+  }
+  postApiEndpoint(sFile_Handler: string, jsStringItem: string, imgSignature: string): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + sFile_Handler, jsStringItem)
+        .subscribe(res => {
+          resolve(res);
+          // this.data.response = res["_body"];
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
   getApiEndpointWithObject(sFile_Handler: string, jsStringItem: string): Promise<any> {
 

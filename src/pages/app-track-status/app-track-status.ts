@@ -2,13 +2,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, ModalController, LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
-// import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 ////import providers 
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
 ////import models 
 import { trans_request } from '../../models/trans_request';
 import { Step } from '../../models/step';
+import { ReceiveItems } from '../../models/receiveItems';
 
 @IonicPage()
 @Component({
@@ -23,10 +24,14 @@ export class AppTrackStatusPage {
   lstDoc: Step[];
   sBarCode: string = '';
   txtDocCode: string = '';
+  lstRespDocUDP3: Step[];
+  sub: Subscription;
+  errorMessage: string;
+  lstRecvItms: ReceiveItems[];
 
   constructor(
     public toastCtrl: ToastController,
-    public platform: Platform,
+    public platform: Platform, private loadingCtrl: LoadingController,
     public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController,
     public navCtrl: NavController, private MasterdataProv: MasterdataProvider,
     public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
@@ -248,8 +253,24 @@ export class AppTrackStatusPage {
     // this.navCtrl.push(DetailPage, { nID: nID });
 
   }
-  UpdateDocumentStatus() {
-    console.log(this.lstInbound);
+  UpdateDocumentStatus(isScroll?: boolean) {
+
+    // let loading = this.loadingCtrl.create({ content: 'Loading...' });
+    // loading.present();//เริ่มแสดง Loading 
+    let imgSignature = '';
+    let UserScan = '';
+    let lst = this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
+      // let jsnResp = JSON.parse(res["_body"]);
+      this.lstRecvItms = JSON.parse(res["_body"]);
+      if (this.lstRecvItms.length > 0) {
+        this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
+      }
+      console.log(this.lstInbound);
+    }).catch(err => {
+
+      console.log(err.message);
+
+    });
 
   }
 }

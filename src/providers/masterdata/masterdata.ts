@@ -45,6 +45,12 @@ export class MasterdataProvider {
     return this.apiProvider.getApiEndpoint(sFile_Handler);
   }
 
+  postDocument_ScanStat_3(sDataType, jsnData, imgSignature, UserScan): Promise<any> {
+    let sFile_Handler = 'transaction_status.ashx';
+    return this.apiProvider.postApiEndpoint(sFile_Handler, JSON.stringify({ img: imgSignature, sUserID: UserScan, sAssignUserID: UserScan, itm: jsnData }), imgSignature);
+
+  }
+
 
   getReqDocument(sDataType, sDocID): Observable<trans_request[]> {
     let sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&sKeyword=' + sDocID;

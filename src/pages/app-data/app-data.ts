@@ -9,6 +9,7 @@ import { MasterdataProvider } from '../../providers/masterdata/masterdata';
 ////import models 
 import { trans_request } from '../../models/trans_request';
 import { Step } from '../../models/step';
+import { ReceiveItems } from '../../models/receiveItems';
 
 @IonicPage()
 @Component({
@@ -22,6 +23,7 @@ export class AppDataPage {
   lstDoc: Step[];
   sBarCode: string = '';
   txtDocCode: string = '';
+  lstRecvItms: ReceiveItems[];
 
   constructor(
     public toastCtrl: ToastController,
@@ -249,7 +251,23 @@ export class AppDataPage {
 
   }
   UpdateDocumentStatus() {
-    console.log(this.lstInbound);
+
+    // let loading = this.loadingCtrl.create({ content: 'Loading...' });
+    // loading.present();//เริ่มแสดง Loading 
+    let imgSignature = '';
+    let UserScan = '';
+    let lst = this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
+      // let jsnResp = JSON.parse(res["_body"]);
+      this.lstRecvItms = JSON.parse(res["_body"]);
+      if (this.lstRecvItms.length > 0) {
+        this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
+      }
+      console.log(this.lstInbound);
+    }).catch(err => {
+
+      console.log(err.message);
+
+    });
 
   }
 }
