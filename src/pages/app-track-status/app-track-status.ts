@@ -178,27 +178,70 @@ export class AppTrackStatusPage {
     actionSheet.present();
   }
   ConfirmInbound() {
-    let confirm = this.alertCtrl.create({
-      title: 'Do you want to confirm?',
-      message: 'Do you agree to confirm Recieve post/document and update to next status ?',
-      buttons: [
-        {
-          text: 'Disagree',
-          handler: () => {
-            confirm.dismiss();
-            return false;
+    let IsValid = (this.ddlStatus != undefined && this.lstInbound.length > 0);
+    if (IsValid) {
+      let confirm = this.alertCtrl.create({
+        title: 'Do you want to confirm?',
+        message: 'Do you agree to confirm Recieve post/document and update to next status ?',
+        buttons: [
+          {
+            text: 'Disagree',
+            handler: () => {
+              confirm.dismiss();
+              return false;
+            }
+          },
+          {
+            text: 'Agree',
+            handler: () => {
+              let curr = ''; let next = '';
+              this.presentToast(this.ddlStatus);
+              switch (this.ddlStatus) {
+                case "5":
+                  curr = '3,4';
+                  next = '5';
+                  break;
+                case "8":
+                  curr = '3,4,5,6,7';
+                  next = '8';
+                  break;
+                case "10":
+                  curr = '4,5,6,7,8,9';
+                  next = '10';
+                  break;
+                case "11":
+                  curr = '3,4,5,6,7,8,9,10';
+                  next = '11';
+                  break;
+
+              }
+              this.UpdateDocumentStatus(curr, next);
+            }
           }
-        },
-        {
-          text: 'Agree',
-          handler: () => {
-            this.presentToast(this.ddlStatus);
-            // this.UpdateDocumentStatus('','');
+        ]
+      });
+      confirm.present();
+    } else {
+
+      let wrnMsg = (this.ddlStatus == undefined) ? "Please select status." : ((this.lstInbound.length <= 0) ? "Please scan your barcode." : "");
+
+      console.log(wrnMsg)
+      let wrn = this.alertCtrl.create({
+        title: 'Warning',
+        message: wrnMsg,
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              wrn.dismiss();
+              return false;
+            }
           }
-        }
-      ]
-    });
-    confirm.present();
+        ]
+      });
+      wrn.present();
+
+    }
   }
   CheckDupplicate(sDocCode): Promise<boolean> {
     return new Promise(resolve => {
