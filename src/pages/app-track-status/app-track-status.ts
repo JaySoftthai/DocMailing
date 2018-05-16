@@ -195,7 +195,6 @@ export class AppTrackStatusPage {
             text: 'Agree',
             handler: () => {
               let curr = ''; let next = '';
-              this.presentToast(this.ddlStatus);
               switch (this.ddlStatus) {
                 case "5":
                   curr = '3,4';

@@ -19,6 +19,8 @@ import { DetailPage } from '../pages/detail/detail';
 import { AppDataPage } from '../pages/app-data/app-data';
 import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
+import { LoginPage } from '../pages/login/login';
+import { LogoutPage } from '../pages/logout/logout';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,6 +36,7 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
     HomePage
     , SearchPage, DetailPage
     , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppOutboundPage, AppTrackStatusPage
+    , LoginPage, LogoutPage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -46,6 +49,7 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
     HomePage
     , SearchPage, DetailPage, AppDataPage, AppOutboundPage
     , SearchPopoverPage, FilesPopoverPage, AppTrackStatusPage
+    , LoginPage, LogoutPage
   ],
   providers: [
     StatusBar,

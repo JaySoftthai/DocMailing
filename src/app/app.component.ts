@@ -9,6 +9,8 @@ import { SearchPage } from '../pages/search/search';
 import { AppDataPage } from '../pages/app-data/app-data';
 import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
+import { LoginPage } from '../pages/login/login';
+import { LogoutPage } from '../pages/logout/logout';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +31,9 @@ export class MyApp {
       { title: 'สแกนรับเข้าเอกสาร', component: AppDataPage },
       { title: 'สแกนรับเอกสารจาก บก.', component: AppOutboundPage },
       { title: 'สแกนเปลี่ยนสถานะรายการ', component: AppTrackStatusPage },
-      { title: 'ค้นหาเอกสาร', component: SearchPage }
+      { title: 'ค้นหาเอกสาร', component: SearchPage },
+      { title: 'เข้าสู่ระบบ', component: LoginPage },
+      { title: 'ออกจากระบบ', component: LogoutPage }
       // ,{ title: 'List', component: ListPage }
     ];
 
