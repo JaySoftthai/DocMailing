@@ -28,7 +28,7 @@ export class AppDataPage {
   constructor(
     public toastCtrl: ToastController,
     public platform: Platform,
-    public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController,
+    public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController, private loadingCtrl: LoadingController,
     public navCtrl: NavController, private MasterdataProv: MasterdataProvider,
     public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
     this.platform.ready().then(() => {
@@ -251,9 +251,8 @@ export class AppDataPage {
 
   }
   UpdateDocumentStatus() {
-
-    // let loading = this.loadingCtrl.create({ content: 'Loading...' });
-    // loading.present();//เริ่มแสดง Loading 
+    let loading = this.loadingCtrl.create({ content: 'Loading...' });
+    loading.present();//เริ่มแสดง Loading 
     let imgSignature = '';
     let UserScan = '';
     let lst = this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
@@ -263,9 +262,15 @@ export class AppDataPage {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       }
       console.log(this.lstInbound);
+      loading.dismiss();
+      let sMsg = 'transaction has been completed.';
+      if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
+        sMsg = 'Some items are not available.';
+      }
+      this.presentToast(sMsg);
     }).catch(err => {
-
-      console.log(err.message);
+      this.presentToast(err.message)
+      loading.dismiss();
 
     });
 

@@ -61,7 +61,7 @@
         <img src="{{c.sImg}}">
       </ion-thumbnail>
       <h2 class="box-head">{{c.sDetail}}</h2>
-      <p class="box-detail">{{c.sStepName}}</p>
+      <p class="box-detail" [ngClass]="{'DefaultFont': c.cActive == 'Y', 'ErrorFont': c.cActive == 'N' }">{{c.sStepName}}</p>
       <button ion-button clear item-end (click)="presentActionSheet(c.nDocID,c.sDetail)">
         <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </button>

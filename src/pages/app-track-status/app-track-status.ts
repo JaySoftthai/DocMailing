@@ -28,7 +28,8 @@ export class AppTrackStatusPage {
   sub: Subscription;
   errorMessage: string;
   lstRecvItms: ReceiveItems[];
-
+  ///Ctrl
+  ddlStatus: any;
   constructor(
     public toastCtrl: ToastController,
     public platform: Platform, private loadingCtrl: LoadingController,
@@ -191,7 +192,8 @@ export class AppTrackStatusPage {
         {
           text: 'Agree',
           handler: () => {
-            this.UpdateDocumentStatus();
+            this.presentToast(this.ddlStatus);
+            // this.UpdateDocumentStatus('','');
           }
         }
       ]
@@ -253,22 +255,27 @@ export class AppTrackStatusPage {
     // this.navCtrl.push(DetailPage, { nID: nID });
 
   }
-  UpdateDocumentStatus(isScroll?: boolean) {
-
-    // let loading = this.loadingCtrl.create({ content: 'Loading...' });
-    // loading.present();//เริ่มแสดง Loading 
+  UpdateDocumentStatus(CurrStat: string, ToStat: string) {
+    let loading = this.loadingCtrl.create({ content: 'Loading...' });
+    loading.present();//เริ่มแสดง Loading 
     let imgSignature = '';
     let UserScan = '';
-    let lst = this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
+    let lst = this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
       this.lstRecvItms = JSON.parse(res["_body"]);
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       }
       console.log(this.lstInbound);
+      loading.dismiss();
+      let sMsg = 'transaction has been completed.';
+      if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
+        sMsg = 'Some items are not available.';
+      }
+      this.presentToast(sMsg);
     }).catch(err => {
-
-      console.log(err.message);
+      this.presentToast(err.message)
+      loading.dismiss();
 
     });
 
