@@ -1,6 +1,8 @@
 
 export class UserAccount {
-    constructor(public code: string,
+    constructor(
+        public userid: string,
+        public code: string,
         public fname: string,
         public lname: string,
         public unitcode: string,
@@ -10,5 +12,10 @@ export class UserAccount {
         public email: string,
         public ismale: boolean,
         public issalemanager: boolean,
-        public photo: string) { }
+        public photo: string,
+        public role: string,
+        public prms: any,
+        public isactive: boolean
+
+    ) { }
 }

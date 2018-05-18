@@ -28,6 +28,7 @@ import { ApiProvider } from '../providers/api/api';
 import { LocationServicesProvider } from '../providers/location-services/location-services';
 import { AutocompletesProvider } from '../providers/autocompletes/autocompletes';
 import { MasterdataProvider } from '../providers/masterdata/masterdata';
+import { UseraccountProvider } from '../providers/useraccount/useraccount';
 // import { UserloginProvider } from '../providers/userlogin/userlogin';
 
 @NgModule({
@@ -59,7 +60,8 @@ import { MasterdataProvider } from '../providers/masterdata/masterdata';
     ApiProvider
     , LocationServicesProvider,
     AutocompletesProvider,
-    MasterdataProvider, AppVersion, Base64ToGallery, BarcodeScanner
+    MasterdataProvider, AppVersion, Base64ToGallery, BarcodeScanner,
+    UseraccountProvider
     // ,UserloginProvider
   ]
 })

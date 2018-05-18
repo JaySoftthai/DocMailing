@@ -1,17 +1,37 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>PTT DocMailing</ion-title>
+    <ion-row>
+      <ion-col>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <ion-title>
+          PTT DocMailing</ion-title>
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
+  <ion-grid class="grid-head-info">
+    <ion-row>
+      <ion-col col-12 center text-center>
+        <div>
+          <ion-icon name="contact">
+          </ion-icon>
+          <strong>{{name}}</strong>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
 <ion-content padding>
   <ion-slides pager>
     <ion-slide style="background-color: whitesmoke">
-      <h3>2018.05.16.003:Include Login UI</h3>
-      <small>Remark: </small>
+      <h3>2018.05.18.001:Include Login </h3>
+      <small>Remark: without check permission</small>
       <small>version {{versionNumber}}</small>
     </ion-slide>
   </ion-slides>
