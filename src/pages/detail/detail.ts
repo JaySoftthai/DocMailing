@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ModalController, Platform } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+
 import { Subscription } from 'rxjs/Subscription'; //import Subscription เพื่อ unsubscribe() ข้อมูลจาก Server 
 ///Import Provider 
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
@@ -24,7 +24,7 @@ export class DetailPage {
     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public AlertCtrl: AlertController,
-    private pltfrm: Platform, private modalCtrl: ModalController
+    private modalCtrl: ModalController
     , private MasterdataProv: MasterdataProvider) {
   }
 

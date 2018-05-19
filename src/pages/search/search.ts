@@ -1,8 +1,8 @@
 //import Component 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, ModalController, LoadingController } from 'ionic-angular';
-import { AlertInputOptions } from 'ionic-angular/components/alert/alert-options';
-import { Storage } from '@ionic/storage';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, ModalController, LoadingController } from 'ionic-angular';
+// import { AlertInputOptions } from 'ionic-angular/components/alert/alert-options';
+
 import { Subscription } from 'rxjs/Subscription'; //import Subscription เพื่อ unsubscribe() ข้อมูลจาก Server
 ////import providers
 import { LocationServicesProvider } from '../../providers/location-services/location-services';
@@ -45,7 +45,7 @@ export class SearchPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private platform: Platform,
+    private loadingCtrl: LoadingController,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
@@ -55,8 +55,8 @@ export class SearchPage {
   ///Method
   ionViewDidLoad() {
 
-    //console.log('ionViewDidLoad SearchPage');
-
+    let loader = this.loadingCtrl.create({ content: "Loading..." });
+    loader.present();
     this.getLocationServices(); // เรียกใช้ method getLocationServices()
     this.BindDocumentList();
     // this.UserProv.getUserAccount().then(res => {
@@ -64,7 +64,7 @@ export class SearchPage {
     // this.sUserID = res.code;
     // this.getLocationServices(); // เรียกใช้ method getLocationServices()
     // });
-
+    loader.dismiss();
   }
 
   ionViewWillLeave() {

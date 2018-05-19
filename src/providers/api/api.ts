@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpModule, Response, Http, RequestOptions, Headers } from '@angular/http';
+import { Response, Http } from '@angular/http';
 import { Network } from '@ionic-native/network';
 import { isNumber } from 'ionic-angular/util/util';
 
@@ -20,12 +20,12 @@ export class ApiProvider {
 
   constructor(public http: Http, public network: Network) {
     // this.apiUrl = "http://localhost:1871/Mobile/";
-    // this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
-    this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
+    this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
+    // this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
 
     // this.epiUrl = "http://localhost:1871/Mobile/";
-    // this.epiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
-    this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
+    this.epiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
+    // this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
   }
 
   getApiUrl(): string { return this.apiUrl; }

@@ -18,9 +18,9 @@
     <ion-row>
       <ion-col col-12 center text-center>
         <div>
-          <ion-icon name="contact">
-          </ion-icon>
-          <strong>{{name}}</strong>
+          <!-- <ion-icon name="contact">
+          </ion-icon> -->
+          <strong style="color: #514F66;">{{name}}</strong>
         </div>
       </ion-col>
     </ion-row>
@@ -36,6 +36,15 @@
     </ion-slide>
   </ion-slides>
 
-
-  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
+      <ion-tab [root]="tab2Root" tabTitle="My Tasks" tabIcon="keypad"></ion-tab>
+      <ion-tab [root]="tab3Root" tabTitle="Scan" tabIcon="barcode"></ion-tab>
+      <ion-tab [root]="tab4Root" tabTitle="Search" tabIcon="search"></ion-tab>
+      <ion-tab [root]="tab5Root" tabTitle="My Profile" tabIcon="contact"></ion-tab>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

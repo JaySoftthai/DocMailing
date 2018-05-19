@@ -40,6 +40,7 @@ export class MyApp {
   }
 
   initializeApp() {
+    this.splashScreen.show();
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

@@ -1,15 +1,17 @@
 //import Component 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, ModalController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
 // import { Subscription } from 'rxjs/Subscription';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 ////import providers 
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
+import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 ////import models 
-import { trans_request } from '../../models/trans_request';
+// import { trans_request } from '../../models/trans_request';
 import { Step } from '../../models/step';
 import { ReceiveItems } from '../../models/receiveItems';
+import { UserAccount } from '../../models/useraccount';
 
 @IonicPage()
 @Component({
@@ -24,12 +26,14 @@ export class AppDataPage {
   sBarCode: string = '';
   txtDocCode: string = '';
   lstRecvItms: ReceiveItems[];
-
+  userdata: UserAccount;
+  IsScanner: boolean;
+  arr_RoleAcction: string = ',9,10,';
   constructor(
     public toastCtrl: ToastController,
     public platform: Platform,
     public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController, private loadingCtrl: LoadingController,
-    public navCtrl: NavController, private MasterdataProv: MasterdataProvider,
+    public navCtrl: NavController, private MasterdataProv: MasterdataProvider, private userProv: UseraccountProvider,
     public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
     this.platform.ready().then(() => {
 
@@ -38,7 +42,15 @@ export class AppDataPage {
 
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad AppDataPage');
+    this.userProv.getUserAccount().then((value: UserAccount) => {
+      this.userdata = value;
+      if (value != undefined && value.code != null) {
+        this.IsScanner = this.arr_RoleAcction.indexOf(',' + this.userdata + ',') > 0;
+
+
+        this.presentToast(this.IsScanner + ':' + value.code + ' ' + value.fname + ' ' + value.lname);
+      }
+    });
   }
   CallScaner() {
 
@@ -114,7 +126,7 @@ export class AppDataPage {
       }
 
       if (!IsDupplicate) {
-        let barcodeData_text = this.txtDocCode;
+        // let barcodeData_text = this.txtDocCode;
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
         this.txtDocCode = '';
@@ -165,7 +177,8 @@ export class AppDataPage {
           icon: 'close-circle',
           cssClass: 'action-sheet-center',
           handler: () => {
-            let navTransition = actionSheet.dismiss();
+            // let navTransition =
+            actionSheet.dismiss();
             return false;
           }
         }

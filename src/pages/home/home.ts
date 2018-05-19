@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AppVersion } from '@ionic-native/app-version';
-///providers
-import { ApiProvider } from '../../providers/api/api';
+///providers 
 import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 ///models
 import { UserAccount } from '../../models/useraccount';
+///Pages 
+// import { MytaskPage } from '../mytask/mytask';
+// import { SearchPage } from '../search/search';
+// import { ScanmodePage } from '../scanmode/scanmode';
+// import { MyprofilePage } from '../myprofile/myprofile';
 
 @Component({
   selector: 'page-home',
@@ -18,8 +21,14 @@ export class HomePage {
   organization: string;
   photo: string;
   versionNumber: string = '';
+
+  tab1Root = HomePage;
+  tab2Root = HomePage;
+  tab3Root = HomePage;
+  tab4Root = HomePage;
+  tab5Root = HomePage;
+
   constructor(public navCtrl: NavController,
-    private apiProv: ApiProvider,
     private userProv: UseraccountProvider) {
 
   }

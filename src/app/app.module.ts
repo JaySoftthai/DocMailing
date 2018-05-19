@@ -21,6 +21,9 @@ import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
+import { MyprofilePage } from '../pages/myprofile/myprofile';
+import { MytaskPage } from '../pages/mytask/mytask';
+import { ScanmodePage } from '../pages/scanmode/scanmode';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,7 +40,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     HomePage
     , SearchPage, DetailPage
     , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppOutboundPage, AppTrackStatusPage
-    , LoginPage, LogoutPage
+    , LoginPage, LogoutPage, MyprofilePage, MytaskPage, ScanmodePage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -50,7 +53,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     HomePage
     , SearchPage, DetailPage, AppDataPage, AppOutboundPage
     , SearchPopoverPage, FilesPopoverPage, AppTrackStatusPage
-    , LoginPage, LogoutPage
+    , LoginPage, LogoutPage, MyprofilePage, MytaskPage, ScanmodePage
   ],
   providers: [
     StatusBar,

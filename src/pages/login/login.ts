@@ -83,7 +83,6 @@ export class LoginPage {
     let remember = true;
 
     this.userProv.login(username, password, remember).then((res: boolean) => {
-      console.log(username + ' ' + password)
       this.logined = res;
       if (this.logined) {
         this.navCtrl.setRoot(HomePage);

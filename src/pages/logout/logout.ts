@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+///providers
+import { ApiProvider } from '../../providers/api/api';
+import { UseraccountProvider } from '../../providers/useraccount/useraccount';
+///models
+import { UserAccount } from '../../models/useraccount';
+//Page
+import { LoginPage } from '../login/login';
 
-/**
- * Generated class for the LogoutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LogoutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams
+    , private apiProv: ApiProvider
+    , private userProv: UseraccountProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LogoutPage');
+
+    this.userProv.logout().then((value: UserAccount) => {
+      if (value == undefined || value.code == null)
+        this.navCtrl.push(LoginPage);
+    });
   }
 
 }
