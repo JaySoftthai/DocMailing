@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 ///providers
-import { ApiProvider } from '../../providers/api/api';
+// import { ApiProvider } from '../../providers/api/api';
 import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 ///models
 import { UserAccount } from '../../models/useraccount';
@@ -17,7 +17,7 @@ import { LoginPage } from '../login/login';
 export class LogoutPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams
-    , private apiProv: ApiProvider
+    // , private apiProv: ApiProvider
     , private userProv: UseraccountProvider) {
   }
 
