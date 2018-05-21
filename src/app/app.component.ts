@@ -32,8 +32,8 @@ export class MyApp {
       { title: 'สแกนรับเอกสารจาก บก.', component: AppOutboundPage },
       { title: 'สแกนเปลี่ยนสถานะรายการ', component: AppTrackStatusPage },
       { title: 'ค้นหาเอกสาร', component: SearchPage },
-      { title: 'เข้าสู่ระบบ', component: LoginPage },
-      { title: 'ออกจากระบบ', component: LogoutPage }
+      { title: 'ข้อมูลผู้ใช้งาน', component: LoginPage },
+      // { title: 'ออกจากระบบ', component: LogoutPage }
       // ,{ title: 'List', component: ListPage }
     ];
 

@@ -15,7 +15,10 @@ export class UserAccount {
         public photo: string,
         public role: string,
         public prms: any,
-        public isactive: boolean
+        public isactive: boolean,
 
+        public isManager: boolean,
+        public isMessenger: boolean,
+        public isCourier: boolean
     ) { }
 }

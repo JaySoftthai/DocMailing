@@ -1,4 +1,7 @@
 page-login {
+    ion-avatar img {
+        margin: auto !important;
+    }
     .form-control {
         width: 100%;
         height: 38px;
@@ -14,6 +17,11 @@ page-login {
         color: #fff;
         background-color: #488aff;
         border-color: #488aff;
+    }
+    .btn-danger {
+        color: #fff;
+        background-color: #ff3737;
+        border-color: #ff3737;
     }
     .btn {
         display: inline-block;

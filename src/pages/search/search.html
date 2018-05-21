@@ -22,7 +22,7 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      ค้นหาเอกสาร
+      <!-- ค้นหาเอกสาร -->
     </ion-card-header>
     <ion-card-content class="content_span">
       <!-- <ion-list>
@@ -89,6 +89,7 @@
             <button ion-button icon-left default> {{c.sStepName}}</button>
           </p>
         </button> -->
+        <ion-item *ngIf="isNoData" text-center>No Data</ion-item>
         <ion-item *ngFor="let c of lstDoc">
           <ion-thumbnail item-start class="list-item-thumbnail">
             <img src="{{c.sStepIcon}}">

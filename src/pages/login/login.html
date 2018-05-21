@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title text-center>PTT-DocMailing</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,7 +9,22 @@
 
 <ion-content class="padding" padding>
   <form novalidate [formGroup]="myForm" (ngSubmit)="login()">
-    <div class="list list-inset">
+    <div class="list list-inset" *ngIf="logined">
+      <ion-avatar class="avatar">
+        <img col-6 src="{{userphotoUrl}}">
+      </ion-avatar>
+      <h2 text-center style="color:#514F66">
+        <label class="item item-input floating">
+          {{fullname}}
+        </label>
+      </h2>
+      <h5 text-center style="color:#514F66"> {{userposition}}</h5>
+      <button ion-button block icon-right color="danger" type="button" round (click)="logout()">
+        Logout
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </div>
+    <div class="list list-inset" *ngIf="logouted">
       <label class="item item-input floating">
         <input class="form-control" type="text" placeholder="Username" [(ngModel)]="txtUsername" formControlName="username">
       </label>

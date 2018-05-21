@@ -16,23 +16,30 @@
      }
  }
 
+ .content-ios,
+ .content-md {
+     background-color: #d6ebed !important;
+ }
+
  @media (max-width: 1242px) {
      ion-content {
-         background-image: url('../assets/image/bg_portrait.png'); //background-position: fixed;
+         //  background-image: url('../assets/image/bg_portrait.png'); //background-position: fixed;
          background-size: 100%;
          background-repeat: no-repeat;
          width: 100%;
-         height: 100%
+         height: 100%;
+         background-color: #d6ebed;
      }
  }
 
  @media (min-width: 1243px) {
      ion-content {
-         background-image: url('../assets/image/bg_portrait.png'); //background-position: fixed;
+         //  background-image: url('../assets/image/bg_portrait.png'); //background-position: fixed;
          background-size: 100%;
          background-repeat: no-repeat;
          width: 100%;
-         height: 100%
+         height: 100%;
+         background-color: #d6ebed;
      }
  }
 

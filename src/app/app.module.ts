@@ -46,7 +46,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
   imports: [
     BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,9 +64,8 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ApiProvider
     , LocationServicesProvider,
-    AutocompletesProvider,
-    MasterdataProvider, AppVersion, Base64ToGallery, BarcodeScanner,
-    UseraccountProvider
+    AutocompletesProvider
+    , MasterdataProvider, AppVersion, Base64ToGallery, BarcodeScanner, UseraccountProvider
     // ,UserloginProvider
   ]
 })

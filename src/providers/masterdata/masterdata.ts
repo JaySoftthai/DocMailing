@@ -39,7 +39,7 @@ export class MasterdataProvider {
     let sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&nStart=' + nStartRow + '&nTopRow=' + nTopRow + '&sKeyword=' + sKeyword;
 
     if (sSearchData.length > 0) {
-      sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&nStart=' + nStartRow + '&nTopRow=' + nTopRow + '&sKeyword=' + sKeyword + '&sReqDate=' + sSearchData[0] + '&sCounterService=' + sSearchData[1] + '&sTrackingNumber=' + sSearchData[2] + '&sStatus=' + sSearchData[3];
+      sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&nStart=' + nStartRow + '&nTopRow=' + nTopRow + '&sKeyword=' + sKeyword + '&sReqDate=' + sSearchData[0] + '&sCounterService=' + sSearchData[1] + '&sTrackingNumber=' + sSearchData[2] + '&sStatus=' + sSearchData[3] + '&usr=' + sSearchData[4];
     }
 
     return this.apiProvider.getApiEndpoint(sFile_Handler);

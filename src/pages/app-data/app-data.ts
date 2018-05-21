@@ -12,6 +12,9 @@ import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 import { Step } from '../../models/step';
 import { ReceiveItems } from '../../models/receiveItems';
 import { UserAccount } from '../../models/useraccount';
+///Pages
+import { LoginPage } from '../../pages/login/login';
+
 
 @IonicPage()
 @Component({
@@ -28,7 +31,7 @@ export class AppDataPage {
   lstRecvItms: ReceiveItems[];
   userdata: UserAccount;
   IsScanner: boolean;
-  arr_RoleAcction: string = ',9,10,';
+  arr_RoleAcction: string = ',9,10,11,';
   constructor(
     public toastCtrl: ToastController,
     public platform: Platform,
@@ -45,11 +48,12 @@ export class AppDataPage {
     this.userProv.getUserAccount().then((value: UserAccount) => {
       this.userdata = value;
       if (value != undefined && value.code != null) {
-        this.IsScanner = this.arr_RoleAcction.indexOf(',' + this.userdata + ',') > 0;
-
-
-        this.presentToast(this.IsScanner + ':' + value.code + ' ' + value.fname + ' ' + value.lname);
+        this.IsScanner = this.arr_RoleAcction.indexOf(',' + this.userdata.role + ',') > 0;
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+        return false;
       }
+      this.presentToast(this.IsScanner + this.userdata.role + ':' + this.userdata.code + ' ' + this.userdata.fname + ' ' + this.userdata.lname);
     });
   }
   CallScaner() {
@@ -212,7 +216,8 @@ export class AppDataPage {
     return new Promise(resolve => {
       var IsDupplicate = false;
       if (sDocCode != "" && this.lstInbound.length > 0) {
-        let aray_inbnd = this.lstInbound.filter(f => {
+        // let aray_inbnd =
+        this.lstInbound.filter(f => {
           IsDupplicate = (f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1);
         });
       } else { IsDupplicate = false; }
@@ -268,13 +273,14 @@ export class AppDataPage {
     loading.present();//เริ่มแสดง Loading 
     let imgSignature = '';
     let UserScan = '';
-    let lst = this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
+    // let lst =
+    this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
       this.lstRecvItms = JSON.parse(res["_body"]);
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       }
-      console.log(this.lstInbound);
+      // console.log(this.lstInbound);
       loading.dismiss();
       let sMsg = 'transaction has been completed.';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {

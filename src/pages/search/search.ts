@@ -7,14 +7,16 @@ import { Subscription } from 'rxjs/Subscription'; //import Subscription เพ�
 ////import providers
 import { LocationServicesProvider } from '../../providers/location-services/location-services';
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
+import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 ////import models
 import { Servicelocations } from '../../models/servicelocations';
 import { trans_request } from '../../models/trans_request';
 import { EmployeeInfo } from '../../models/EmployeeInfo';
 import { SearchPopoverPage } from '../search-popover/search-popover';
-// import { UserAccount } from '../../models/useraccount';
+import { UserAccount } from '../../models/useraccount';
 ////import Page
 import { DetailPage } from '../detail/detail';
+import { LoginPage } from '../../pages/login/login';
 
 @IonicPage()
 @Component({
@@ -26,7 +28,7 @@ export class SearchPage {
   //Declare param
   nTotalRows: number = 0;//amout all row in db
   nStart: number = 0;//amout Start row display
-  nTop: number = 30;//amout Start row display
+  nTop: number = 10;//amout Start row display
   itemObj: EmployeeInfo;
   sCompanyName: string = '';
   sUserID: string = '';
@@ -35,11 +37,13 @@ export class SearchPage {
   sSearch_CounterService: string = '';
   sSearch_TrackingNumber: string = '';
   sSearch_Status: string = '';
+  usrdata: UserAccount;
 
   lstService: Servicelocations[];
   lstDoc: trans_request[];
   sub: Subscription;
   isHasService: boolean;
+  isNoData: boolean;
   errorMessage: string;
   //constructor
   constructor(
@@ -51,24 +55,33 @@ export class SearchPage {
     private alertCtrl: AlertController
     , private CounterServiceProv: LocationServicesProvider
     , private MasterdataProv: MasterdataProvider
+    , private userProv: UseraccountProvider
   ) { }
   ///Method
   ionViewDidLoad() {
 
-    let loader = this.loadingCtrl.create({ content: "Loading..." });
-    loader.present();
-    this.getLocationServices(); // เรียกใช้ method getLocationServices()
-    this.BindDocumentList();
-    // this.UserProv.getUserAccount().then(res => {
-    // //console.log('ionViewDidLoad UserloginProvider.getUserAccount=>then');
-    // this.sUserID = res.code;
-    // this.getLocationServices(); // เรียกใช้ method getLocationServices()
-    // });
-    loader.dismiss();
+
+    this.userProv.getUserAccount().then((value: UserAccount) => {
+      this.usrdata = value;
+      if (value != undefined && value.code != null) {
+
+        let loader = this.loadingCtrl.create({ content: "Loading..." });
+        loader.present();
+        this.getLocationServices(); // เรียกใช้ method getLocationServices()
+        this.BindDocumentList();
+        loader.dismiss();
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+        return false;
+      }
+    });
   }
 
   ionViewWillLeave() {
-    this.sub.unsubscribe(); // unsubscribe ข้อมูลที่มาจาก server
+    // console.log(this.sub)
+    if (this.sub != undefined) {
+      this.sub.unsubscribe(); // unsubscribe ข้อมูลที่มาจาก server
+    }
   }
 
   getRequestDocument(isScroll?: boolean) {
@@ -84,6 +97,7 @@ export class SearchPage {
         // this.lstOther = this.Sources.filter(w => w.cSelfCustomer == 'N');
         this.nTotalRows = this.lstService.length;
         this.isHasService = this.nTotalRows > 0;
+        this.isNoData = this.nTotalRows == 0;
       },
       (error) => { this.errorMessage = <any>error }
     );
@@ -110,8 +124,9 @@ export class SearchPage {
 
   BindDocumentList(isScroll?: boolean) {
     ///
-
-    this.sub = this.MasterdataProv.getDocument_Trans('request_list', this.sKeyword, [this.sSearch_ReqDate, this.sSearch_CounterService, this.sSearch_TrackingNumber, this.sSearch_Status], this.nStart, this.nTop).subscribe(
+    let _UserID = (this.usrdata == null) ? '' : this.usrdata.userid;
+    let _RoleID = (this.usrdata == null) ? '' : this.usrdata.role;
+    this.sub = this.MasterdataProv.getDocument_Trans('request_list', this.sKeyword, [this.sSearch_ReqDate, this.sSearch_CounterService, this.sSearch_TrackingNumber, this.sSearch_Status, _UserID], this.nStart, this.nTop).subscribe(
       (res) => {
         if (isScroll && this.lstDoc.length > 0)
           this.lstDoc = this.lstDoc.concat(res);
@@ -121,8 +136,10 @@ export class SearchPage {
         // this.lstSelf = this.Sources.filter(w => w.cSelfCustomer == 'Y');
         // this.lstOther = this.Sources.filter(w => w.cSelfCustomer == 'N');
         //console.log(this.lstDoc);
+        this.nStart = this.lstDoc.length;
         this.nTotalRows = this.lstDoc.length;
         this.isHasService = this.nTotalRows > 0;
+        this.isNoData = this.nTotalRows == 0;
       },
       (error) => { this.errorMessage = <any>error }
     );
@@ -145,7 +162,7 @@ export class SearchPage {
 
   doInfinite(infiniteScroll) {
 
-    this.nStart = this.nStart + 20;
+    this.nStart = this.nStart + this.nTop;
 
     return new Promise((resolve) => {
 

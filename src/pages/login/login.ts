@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, LoadingController
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
-import { Subscription } from 'rxjs/Subscription'; //import Subscription เพื่อ unsubscribe() ข้อมูลจาก Server
+// import { Subscription } from 'rxjs/Subscription'; //import Subscription เพื่อ unsubscribe() ข้อมูลจาก Server
 ////import providers
 import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 //import models
@@ -24,12 +24,17 @@ export class LoginPage {
   usracc: UserAccount;
 
   logined: boolean;
+  logouted: boolean;
 
   myForm: FormGroup;
   username: FormControl;
   password: FormControl;
   remember: FormControl;
   user: UserAccount;
+  fullname: string;
+  userphotoUrl: string;
+  userposition: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController
     , private loadingCtrl: LoadingController, private alertCtrl: AlertController
     , private userProv: UseraccountProvider
@@ -47,12 +52,25 @@ export class LoginPage {
   }
 
   ionViewWillEnter() {
-    //เมื่อเข้าหน้า login ให้ตรวจสอบก่อนว่าเคย login แล้วยัง หากเคยให้ไปยังหน้า HomePage
+    //เมื่อเข้าหน้า login ให้ตรวจสอบก่อนว่าเคย login แล้วยัง หากเคยให้ไปยังหน้า HomePage 
     this.userProv.isLogged().then((res: boolean) => {
       this.logined = res;
+      this.logouted = !this.logined;
+      console.log('logined:' + this.logined)
+      console.log('logouted:' + this.logouted)
       if (this.logined) {
-        this.navCtrl.setRoot(HomePage);
-      }
+
+        this.userProv.getUserAccount().then((value: UserAccount) => {
+          if (value != undefined && value.code != null) {
+            this.user = value;
+            this.fullname = ' ' + value.fname + '  ' + value.lname;
+            this.userposition = value.poscode + '';
+            this.userphotoUrl = value.photo != null ? value.photo : '../../assets/images/human.png';
+            // this.organization = value.unitname;
+          }
+        });
+        return false;// this.navCtrl.setRoot(HomePage);
+      } else { return false; }
     });
   }
   ionViewDidLoad() {
@@ -83,6 +101,10 @@ export class LoginPage {
     let remember = true;
 
     this.userProv.login(username, password, remember).then((res: boolean) => {
+      /*nSubID	nMainID	sName
+9		บก.
+10	Courier
+11	Messenger */
       this.logined = res;
       if (this.logined) {
         this.navCtrl.setRoot(HomePage);
@@ -100,6 +122,13 @@ export class LoginPage {
   }
   logout() {
 
+    this.userProv.logout().then((res: boolean) => {
+      // console.log('logout:' + res)
+      this.logined = res;
+      this.logouted = !this.logined;
+      this.navCtrl.setRoot(LoginPage);
+
+    });
 
   }
 }

@@ -1,15 +1,19 @@
 //import Component 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, ModalController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
 import { Subscription } from 'rxjs/Subscription';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 ////import providers 
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
+import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 ////import models 
-import { trans_request } from '../../models/trans_request';
+// import { trans_request } from '../../models/trans_request';
 import { Step } from '../../models/step';
 import { ReceiveItems } from '../../models/receiveItems';
+import { UserAccount } from '../../models/useraccount';
+///Pages
+import { LoginPage } from '../../pages/login/login';
 
 @IonicPage()
 @Component({
@@ -30,11 +34,14 @@ export class AppTrackStatusPage {
   lstRecvItms: ReceiveItems[];
   ///Ctrl
   ddlStatus: any;
+  userdata: UserAccount;
+  IsScanner: boolean;
+  arr_RoleAcction: string = ',9,10,11,';
   constructor(
     public toastCtrl: ToastController,
     public platform: Platform, private loadingCtrl: LoadingController,
     public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController,
-    public navCtrl: NavController, private MasterdataProv: MasterdataProvider,
+    public navCtrl: NavController, private MasterdataProv: MasterdataProvider, private userProv: UseraccountProvider,
     public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
     this.platform.ready().then(() => {
 
@@ -42,7 +49,16 @@ export class AppTrackStatusPage {
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad AppDataPage');
+    this.userProv.getUserAccount().then((value: UserAccount) => {
+      this.userdata = value;
+      if (value != undefined && value.code != null) {
+        this.IsScanner = this.arr_RoleAcction.indexOf(',' + this.userdata.role + ',') > 0;
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+        return false;
+      }
+      this.presentToast(this.IsScanner + this.userdata.role + ':' + this.userdata.code + ' ' + this.userdata.fname + ' ' + this.userdata.lname);
+    });
   }
   CallScaner() {
 
@@ -118,7 +134,7 @@ export class AppTrackStatusPage {
       }
 
       if (!IsDupplicate) {
-        let barcodeData_text = this.txtDocCode;
+        // let barcodeData_text = this.txtDocCode;
         let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
         this.txtDocCode = '';
@@ -169,7 +185,8 @@ export class AppTrackStatusPage {
           icon: 'close-circle',
           cssClass: 'action-sheet-center',
           handler: () => {
-            let navTransition = actionSheet.dismiss();
+            // let navTransition =
+            actionSheet.dismiss();
             return false;
           }
         }
@@ -246,7 +263,8 @@ export class AppTrackStatusPage {
     return new Promise(resolve => {
       var IsDupplicate = false;
       if (sDocCode != "" && this.lstInbound.length > 0) {
-        let aray_inbnd = this.lstInbound.filter(f => {
+        // let aray_inbnd =
+        this.lstInbound.filter(f => {
           IsDupplicate = (f.sDetail.toLowerCase().indexOf(sDocCode.toLowerCase()) > -1);
         });
       } else { IsDupplicate = false; }
@@ -302,7 +320,8 @@ export class AppTrackStatusPage {
     loading.present();//เริ่มแสดง Loading 
     let imgSignature = '';
     let UserScan = '';
-    let lst = this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
+    // let lst =
+    this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
       this.lstRecvItms = JSON.parse(res["_body"]);
       if (this.lstRecvItms.length > 0) {

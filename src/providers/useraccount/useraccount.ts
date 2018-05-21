@@ -21,6 +21,7 @@ export class UseraccountProvider {
     , public sqlite: SQLite
     , public storage: Storage
     , public platform: Platform
+    // , private navCtrl: NavController
   ) { }
 
   ///Method  
@@ -49,7 +50,7 @@ export class UseraccountProvider {
   login(username: string, password: string, remember: boolean): Promise<any> {
     return new Promise((resolve, reject) => {
       this.getUser(username, password).subscribe(res => {
-        console.log(res)
+
         let isSuccess = res != undefined && res.code != null;
         if (isSuccess) {
           this.storage.ready().then(() => { this.storage.set('useraccount', res); });
@@ -86,8 +87,9 @@ export class UseraccountProvider {
             });
           }
 
-          this.storage.remove('useraccount');
-          resolve(resolve);
+          let isRemoved = this.storage.remove('useraccount');
+          // console.log(resolve(isRemoved) == undefined)
+          resolve((resolve(isRemoved) == undefined));
         }, () => reject(false));
       });
 
@@ -108,5 +110,8 @@ export class UseraccountProvider {
         this.storage.get("useraccount").then((value: UserAccount) => resolve(value != undefined && value.code != null), (reason) => reject(false));
       });
     });
+  }
+  goToLogin() {
+
   }
 }
