@@ -11,4 +11,12 @@ page-home {
     ion-slides {
         height: 30% !important;
     }
+    .list-item-thumbnail {
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+    .list-item-thumbnail>img {
+        width: 36px !important;
+        height: 36px !important;
+    }
 }

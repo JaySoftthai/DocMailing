@@ -8,6 +8,7 @@ import { Network } from '@ionic-native/network';
 import { AppVersion } from '@ionic-native/app-version';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { SignaturePadModule } from 'angular2-signaturepad';
 // import { ActionSheetController } from 'ionic-angular'
 
 import { MyApp } from './app.component';
@@ -21,6 +22,7 @@ import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
+import { SignaturePage } from '../pages/signature/signature';
 // import { MyprofilePage } from '../pages/myprofile/myprofile';
 // import { MytaskPage } from '../pages/mytask/mytask';
 // import { ScanmodePage } from '../pages/scanmode/scanmode';
@@ -40,13 +42,13 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     HomePage
     , SearchPage, DetailPage
     , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppOutboundPage, AppTrackStatusPage
-    , LoginPage, LogoutPage
+    , LoginPage, LogoutPage, SignaturePage
     // , MyprofilePage, MytaskPage, ScanmodePage
   ],
   imports: [
     BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(), SignaturePadModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -54,7 +56,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     HomePage
     , SearchPage, DetailPage, AppDataPage, AppOutboundPage
     , SearchPopoverPage, FilesPopoverPage, AppTrackStatusPage
-    , LoginPage, LogoutPage
+    , LoginPage, LogoutPage, SignaturePage
     // , MyprofilePage, MytaskPage, ScanmodePage
   ],
   providers: [

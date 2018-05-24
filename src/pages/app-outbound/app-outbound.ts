@@ -55,7 +55,7 @@ export class AppOutboundPage {
         this.navCtrl.setRoot(LoginPage);
         return false;
       }
-      this.presentToast(this.IsScanner + this.userdata.role + ':' + this.userdata.code + ' ' + this.userdata.fname + ' ' + this.userdata.lname);
+      //this.presentToast(this.IsScanner + this.userdata.role + ':' + this.userdata.code + ' ' + this.userdata.fname + ' ' + this.userdata.lname);
     });
   }
   CallScaner() {

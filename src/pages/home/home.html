@@ -26,15 +26,16 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-slides pager>
+  <!-- <ion-slides pager>
     <ion-slide style="background-color: transparent">
       <h3>2018.05.21.001:Include check permission </h3>
       <small>Remark: </small>
       <small>version {{versionNumber}}</small>
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
   <ion-list list-md>
-    <ion-item text-center>No Data</ion-item>
+    <ion-item *ngIf="isNoData" text-center>No Data</ion-item>
+    <ion-item text-center round style="/*border-radius: 64px;*/background-color: #007bff; color:#ffffff;">My Tasks</ion-item>
     <ion-item *ngFor="let c of lstDoc">
       <ion-thumbnail item-start class="list-item-thumbnail">
         <img src="{{c.sStepIcon}}">

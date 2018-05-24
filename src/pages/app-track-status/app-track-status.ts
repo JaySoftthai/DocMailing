@@ -1,6 +1,6 @@
 //import Component 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, LoadingController, ModalController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
 import { Subscription } from 'rxjs/Subscription';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -14,6 +14,7 @@ import { ReceiveItems } from '../../models/receiveItems';
 import { UserAccount } from '../../models/useraccount';
 ///Pages
 import { LoginPage } from '../../pages/login/login';
+import { SignaturePage } from '../../pages/signature/signature';
 
 @IonicPage()
 @Component({
@@ -39,7 +40,7 @@ export class AppTrackStatusPage {
   arr_RoleAcction: string = ',9,10,11,';
   constructor(
     public toastCtrl: ToastController,
-    public platform: Platform, private loadingCtrl: LoadingController,
+    public platform: Platform, private loadingCtrl: LoadingController, private modalCtrl: ModalController,
     public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController,
     public navCtrl: NavController, private MasterdataProv: MasterdataProvider, private userProv: UseraccountProvider,
     public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
@@ -57,7 +58,7 @@ export class AppTrackStatusPage {
         this.navCtrl.setRoot(LoginPage);
         return false;
       }
-      this.presentToast(this.IsScanner + this.userdata.role + ':' + this.userdata.code + ' ' + this.userdata.fname + ' ' + this.userdata.lname);
+      //this.presentToast(this.IsScanner + this.userdata.role + ':' + this.userdata.code + ' ' + this.userdata.fname + ' ' + this.userdata.lname);
     });
   }
   CallScaner() {
@@ -196,47 +197,70 @@ export class AppTrackStatusPage {
   }
   ConfirmInbound() {
     let IsValid = (this.ddlStatus != undefined && this.lstInbound.length > 0);
-    if (IsValid) {
-      let confirm = this.alertCtrl.create({
-        title: 'Do you want to confirm?',
-        message: 'Do you agree to confirm Recieve post/document and update to next status ?',
-        buttons: [
-          {
-            text: 'Disagree',
-            handler: () => {
-              confirm.dismiss();
-              return false;
-            }
-          },
-          {
-            text: 'Agree',
-            handler: () => {
-              let curr = ''; let next = '';
-              switch (this.ddlStatus) {
-                case "5":
-                  curr = '3,4';
-                  next = '5';
-                  break;
-                case "8":
-                  curr = '3,4,5,6,7';
-                  next = '8';
-                  break;
-                case "10":
-                  curr = '4,5,6,7,8,9';
-                  next = '10';
-                  break;
-                case "11":
-                  curr = '3,4,5,6,7,8,9,10';
-                  next = '11';
-                  break;
 
+
+    if (IsValid) {
+
+      console.log('Event:ConfirmInbound ' + this.ddlStatus);
+      let IsCanUpdate = false;
+      if (this.ddlStatus == "11") { //ถ้าเป็นการปิดงาน
+        let modal = this.modalCtrl.create(SignaturePage, { lst: this.lstInbound, Updater: this.userdata.code });
+        modal.onDidDismiss(data => {
+          // this.sSearch_ReqDate = data[0];
+          // this.sSearch_CounterService = data[1];
+          // this.sSearch_TrackingNumber = data[2];
+          // this.sSearch_Status = data[3];
+
+          //console.log("filterCust=>modal.onDidDismiss");
+          console.log(data[0]);
+        });
+        modal.present();
+
+      } else {
+        //Other is not close
+        let confirm = this.alertCtrl.create({
+          title: 'Do you want to confirm?',
+          message: 'Do you agree to confirm Recieve post/document and update to next status ?',
+          buttons: [
+            {
+              text: 'Disagree',
+              handler: () => {
+                confirm.dismiss();
+                return false;
               }
-              this.UpdateDocumentStatus(curr, next);
+            },
+            {
+              text: 'Agree',
+              handler: () => {
+                let curr = ''; let next = '';
+                if (IsCanUpdate) {
+                  switch (this.ddlStatus) {
+                    case "5":
+                      curr = '3,4';
+                      next = '5';
+                      break;
+                    case "8":
+                      curr = '3,4,5,6,7';
+                      next = '8';
+                      break;
+                    case "10":
+                      curr = '4,5,6,7,8,9';
+                      next = '10';
+                      break;
+                    case "11":
+                      curr = '3,4,5,6,7,8,9,10';
+                      next = '11';
+                      break;
+
+                  }
+                  this.UpdateDocumentStatus(curr, next);
+                }
+              }
             }
-          }
-        ]
-      });
-      confirm.present();
+          ]
+        });
+        confirm.present();
+      }
     } else {
 
       let wrnMsg = (this.ddlStatus == undefined) ? "Please select status." : ((this.lstInbound.length <= 0) ? "Please scan your barcode." : "");

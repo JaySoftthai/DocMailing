@@ -11,6 +11,7 @@ import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
+// import { SignaturePage } from '../pages/signature/signature';
 
 @Component({
   templateUrl: 'app.html'

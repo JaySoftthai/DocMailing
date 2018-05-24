@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Signature</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <h2 text-center style=" text-align:center">Signature</h2>
+      <ion-col col-12>
+        <signature-pad [options]="signaturepadOptions" id="signatureCanvas" (onClear)="onClearHandler()" (onSave)="onSaveHandler($event)">
+        </signature-pad>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button color="danger" (click)="onCancelClick()">Cancel</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button color="light" (click)="onClearClick()">Clear</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button color="secondary" (click)="drawComplete()">OK</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
