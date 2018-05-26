@@ -62,6 +62,17 @@ export class MasterdataProvider {
 
     return this.apiProvider.getApiEndpoint(sFile_Handler);
   }
+  getReqDocumentByDocCode(sDataType, sDocCode): Observable<trans_request[]> {
+    let sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&sKeyword=' + sDocCode;
+
+    return this.apiProvider.getApiEndpoint(sFile_Handler);
+  }
+
+  UPDPriceDocument(sDataType, sDocID, sPrice): Observable<trans_request[]> {
+    let sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&sKeyword=' + sDocID + '&sTrackingNumber=' + sPrice;
+
+    return this.apiProvider.getApiEndpoint(sFile_Handler);
+  }
 
   getFilesDocument(sDataType, sDocID): Observable<files_request[]> {
     let sFile_Handler = 'master_data.ashx?sMode=' + sDataType + '&sKeyword=' + sDocID;

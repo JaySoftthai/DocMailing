@@ -24,17 +24,19 @@ export class SignaturePage {
   public sTT: string;
   private signaturepadOptions: Object = {
     'minWidth': 0.5,
-    'canvasWidth': 250,
+    'canvasWidth': 268,
     'canvasHeight': 200,
     'backgroundColor': 'rgb(255,255,255)',
   };
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignaturePage');
+    // console.log('ionViewDidLoad SignaturePage');
   }
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
     // console.log(this.signatureImage);
+    let sSign_URL = this.signatureImage;
+    this.viewCtrl.dismiss([sSign_URL]);
   }
 
   // ngAfterViewInit() {

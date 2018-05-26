@@ -44,7 +44,8 @@ export class trans_request {
         public sRecipientID,
         public sRecipientName,
         public sSendPlace,
-        public sBarCodeID
+        public sBarCodeID,
+        public nPrice
     ) { }
 
 }

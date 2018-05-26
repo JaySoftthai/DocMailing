@@ -9,6 +9,7 @@
 
 <ion-content class="padding" padding>
   <form novalidate [formGroup]="myForm" (ngSubmit)="login()">
+    <div small text-right style="color:#d8d8d8">version:{{CurrVersion}}</div>
     <div class="list list-inset" *ngIf="logined">
       <ion-avatar class="avatar">
         <img col-6 src="{{userphotoUrl}}">
@@ -38,5 +39,6 @@
         </button>
       </label>
     </div>
+
   </form>
 </ion-content>

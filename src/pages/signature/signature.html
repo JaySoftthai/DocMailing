@@ -9,7 +9,9 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <h2 text-center style=" text-align:center">Signature</h2>
+      <ion-col text-center col-12>
+        <h2 style=" text-align:center">ลายเซ็นต์</h2>
+      </ion-col>
       <ion-col col-12>
         <signature-pad [options]="signaturepadOptions" id="signatureCanvas" (onClear)="onClearHandler()" (onSave)="onSaveHandler($event)">
         </signature-pad>
@@ -17,13 +19,13 @@
     </ion-row>
     <ion-row>
       <ion-col col-4>
-        <button ion-button color="danger" (click)="onCancelClick()">Cancel</button>
+        <button ion-button round color="danger" (click)="onCancelClick()">ยกเลิก</button>
       </ion-col>
       <ion-col col-4>
-        <button ion-button color="light" (click)="onClearClick()">Clear</button>
+        <button ion-button round color="light" (click)="onClearClick()">เคลียร์</button>
       </ion-col>
       <ion-col col-4>
-        <button ion-button color="secondary" (click)="drawComplete()">OK</button>
+        <button ion-button round color="secondary" (click)="drawComplete()">ลงนาม</button>
       </ion-col>
     </ion-row>
   </ion-grid>

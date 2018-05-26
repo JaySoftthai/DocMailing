@@ -32,10 +32,10 @@
     </ion-row>
     <ion-row>
       <ion-col col-6>
-        <button ion-button full end default class="btn-Confirm" (click)="ConfirmInbound()">ยืนยัน</button>
+        <button ion-button full end default round class="btn-Confirm" (click)="ConfirmInbound()">ยืนยัน</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button full end default class="btn-Clear" (click)="CancelInbound()">ยกเลิก</button>
+        <button ion-button full end default round class="btn-Clear" (click)="CancelInbound()">ยกเลิก</button>
       </ion-col>
     </ion-row>
 
@@ -43,17 +43,17 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <button ion-button full (click)="CallScaner()">
-    Scan
+  <button ion-button full round (click)="CallScaner()">
+    สแกน
   </button>
   <hr />
   <h6 style="text-align: center;">
-    <small>Or</small>
+    <small>หรือ</small>
   </h6>
   <hr />
-  <ion-input class="bgTextBox" [(ngModel)]="txtDocCode" value="{{sBarCode}}" start placeholder="Enter barcode"></ion-input>
+  <ion-input class="bgTextBox" [(ngModel)]="txtDocCode" value="{{sBarCode}}" start placeholder="กรอกบาร์โค๊ด(กรณีสแกนไม่ได้)"></ion-input>
   <!-- <input start type="text" [(ngModel)]="txtDocCode" value="{{sBarCode}}" /> -->
-  <button ion-button full (click)="GenList()">Manual Key
+  <button ion-button full round (click)="GenList()">เพิ่มรายการด้วยตัวเอง
   </button>
   <ion-list list-md>
     <ion-item *ngFor="let c of lstInbound">

@@ -14,28 +14,13 @@
       </ion-col>
     </ion-row>
   </ion-navbar>
-  <!-- <ion-grid class="grid-head-info">
-    <ion-row>
-      <ion-col col-12 center text-center>
-        <div> 
-  <strong style="color: #514F66;">{{name}}</strong>
-  </div>
-  </ion-col>
-  </ion-row>
-  </ion-grid> -->
 </ion-header>
 
 <ion-content padding>
-  <!-- <ion-slides pager>
-    <ion-slide style="background-color: transparent">
-      <h3>2018.05.21.001:Include check permission </h3>
-      <small>Remark: </small>
-      <small>version {{versionNumber}}</small>
-    </ion-slide>
-  </ion-slides> -->
   <ion-list list-md>
-    <ion-item *ngIf="isNoData" text-center>No Data</ion-item>
-    <ion-item text-center round style="/*border-radius: 64px;*/background-color: #007bff; color:#ffffff;">My Tasks</ion-item>
+    <ion-item text-center round style="  border-top-right-radius: 20px 20px; border-top-left-radius: 20px 20px; background-color: #007bff; color:#ffffff;">My Tasks</ion-item>
+    <ion-item *ngIf="isNoData" text-center>
+      No Data</ion-item>
     <ion-item *ngFor="let c of lstDoc">
       <ion-thumbnail item-start class="list-item-thumbnail">
         <img src="{{c.sStepIcon}}">

@@ -23,8 +23,9 @@ export class DetailPage {
   sub: Subscription;
   errorMessage: string;
   DocID: string;
+  txtPrice: string = '';
   itemObj: trans_request[];
-  DocObj: trans_request = new trans_request(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+  DocObj: trans_request = new trans_request(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public AlertCtrl: AlertController,
@@ -51,12 +52,12 @@ export class DetailPage {
       (res) => {
         this.itemObj = res;
         this.DocObj = this.itemObj[0];
-        console.log(this.itemObj);
 
       },
       (error) => { this.errorMessage = <any>error }
     );
   }
+
   viewremark(sTitle, sMgs) {
 
     let alert = this.AlertCtrl.create({
@@ -79,5 +80,31 @@ export class DetailPage {
     });
     modal.present();
 
+  }
+  update_price(nDocID) {
+    let _Price = this.txtPrice == null ? '0' : this.txtPrice;
+    this.sub = this.MasterdataProv.UPDPriceDocument('update_price', this.DocID, _Price).subscribe(
+      (res) => {
+        this.itemObj = res;
+        this.DocObj = this.itemObj[0];
+
+        let loader = this.loadingCtrl.create({ content: "Loading..." });
+        loader.present();
+        this.BindDetailDocRequest(this.DocID);
+        loader.dismiss();
+      },
+      (error) => { this.errorMessage = <any>error }
+    );
+  }
+  BindDetailDocRequest(DocID) {
+
+    this.sub = this.MasterdataProv.getReqDocument('request_document', DocID).subscribe(
+      (res) => {
+        this.itemObj = res;
+        this.DocObj = this.itemObj[0];
+
+      },
+      (error) => { this.errorMessage = <any>error }
+    );
   }
 }

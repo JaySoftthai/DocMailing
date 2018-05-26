@@ -12,8 +12,10 @@ import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 import { Step } from '../../models/step';
 import { ReceiveItems } from '../../models/receiveItems';
 import { UserAccount } from '../../models/useraccount';
+import { trans_request } from '../../models/trans_request';
 ///Pages
 import { LoginPage } from '../../pages/login/login';
+import { DetailPage } from '../detail/detail';
 
 
 @IonicPage()
@@ -26,6 +28,7 @@ export class AppDataPage {
   lstInbound: Step[] = [];
   isToogle: boolean = false;
   lstDoc: Step[];
+  errorMessage: string = '';
   sBarCode: string = '';
   txtDocCode: string = '';
   lstRecvItms: ReceiveItems[];
@@ -88,7 +91,7 @@ export class AppDataPage {
           this.lstInbound.push(_InboundCode);
 
         } else {
-          this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' is dupplicate.' : ' can use.'));
+          this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
         }
         this.BindDocumentList(barcodeData.cancelled);
       }
@@ -136,10 +139,10 @@ export class AppDataPage {
         this.txtDocCode = '';
 
       } else {
-        this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' is dupplicate.' : ' can use.'));
+        this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
       }
     } else {
-      this.presentToast('Barcode is required!');
+      this.presentToast('กรุณากรอกบาร์โค๊ด');
 
     }
   }
@@ -150,18 +153,35 @@ export class AppDataPage {
 
   presentActionSheet(nDocID, sDocCode) {
     let actionSheet = this.ActShtCtrl.create({
-      title: 'Choose Event',
+      title: 'เลือกการดำเนินการ',
       buttons: [
         {
-          text: 'Edit',
+          text: 'แก้ไข',
           icon: 'create',
           cssClass: 'action-sheet-center',
           handler: () => {
-            //console.log('edit clicked');
+            this.MasterdataProv.getReqDocumentByDocCode('request_document_code', sDocCode).subscribe(
+              (res) => {
+                let lst: trans_request;
+                if (res.length > 0) {
+                  lst = res[0];
+                  let loader = this.loadingCtrl.create({ content: "Loading..." });
+                  loader.present();
+                  this.navCtrl.push(DetailPage, { nID: lst.inDocID });
+                  loader.dismiss();
+                } else {
+                  this.presentToast('ไม่พบรายการ :' + sDocCode);
+                }
+              },
+              (error) => {
+                this.errorMessage = <any>error;
+                this.presentToast(this.errorMessage);
+              }
+            );
           }
         },
         {
-          text: 'Delete',
+          text: 'ลบ',
           icon: 'trash',
           cssClass: 'action-sheet-center',
           handler: () => {
@@ -176,7 +196,7 @@ export class AppDataPage {
           }
         },
         {
-          text: 'Cancel',
+          text: 'ยกเลิก',
           role: 'cancel',
           icon: 'close-circle',
           cssClass: 'action-sheet-center',
@@ -192,18 +212,18 @@ export class AppDataPage {
   }
   ConfirmInbound() {
     let confirm = this.alertCtrl.create({
-      title: 'Do you want to confirm?',
-      message: 'Do you agree to confirm Recieve post/document and update to next status ?',
+      title: 'ยืนยันรายการ?',
+      message: 'ท่านต้องการยืนยันเพื่อดำเนินการปรับสถานะรายการดังกว่าใช่หรือไม่ ?',
       buttons: [
         {
-          text: 'Disagree',
+          text: 'ไม่ยืนยัน',
           handler: () => {
             confirm.dismiss();
             return false;
           }
         },
         {
-          text: 'Agree',
+          text: 'ยืนยัน',
           handler: () => {
             this.UpdateDocumentStatus();
           }
@@ -240,18 +260,18 @@ export class AppDataPage {
   CancelInbound() {
 
     let confirm = this.alertCtrl.create({
-      title: 'Do you want to clear transaction?',
-      message: 'Do you agree to clear transaction post/document?',
+      title: 'ยืนยันการดำเนินการ',
+      message: 'ท่านต้องการยืนยันการยกเลิกการทำรายการทั้งหมดใช่หรือไม่?',
       buttons: [
         {
-          text: 'Disagree',
+          text: 'ไม่ยืนยัน',
           handler: () => {
             confirm.dismiss();
             return false;
           }
         },
         {
-          text: 'Agree',
+          text: 'ยืนยัน',
           handler: () => {
             this.lstInbound = [];
           }
@@ -282,9 +302,9 @@ export class AppDataPage {
       }
       // console.log(this.lstInbound);
       loading.dismiss();
-      let sMsg = 'transaction has been completed.';
+      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
-        sMsg = 'Some items are not available.';
+        sMsg = 'สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว';
       }
       this.presentToast(sMsg);
     }).catch(err => {

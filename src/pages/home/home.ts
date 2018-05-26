@@ -12,6 +12,7 @@ import { UserAccount } from '../../models/useraccount';
 // import { SearchPage } from '../search/search';
 // import { ScanmodePage } from '../scanmode/scanmode';
 // import { MyprofilePage } from '../myprofile/myprofile';
+import { DetailPage } from '../detail/detail';
 
 @Component({
   selector: 'page-home',
@@ -82,5 +83,10 @@ export class HomePage {
       },
       (error) => { this.errorMessage = <any>error }
     );
+  }
+
+
+  viewdetail(nID) {
+    this.navCtrl.push(DetailPage, { nID: nID });
   }
 }

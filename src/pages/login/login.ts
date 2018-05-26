@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { AppVersion } from '@ionic-native/app-version';
 
 // import { Subscription } from 'rxjs/Subscription'; //import Subscription เพื่อ unsubscribe() ข้อมูลจาก Server
 ////import providers
 import { UseraccountProvider } from '../../providers/useraccount/useraccount';
 //import models
 import { UserAccount } from '../../models/useraccount';
-
 
 import { HomePage } from '../home/home';
 
@@ -34,11 +34,11 @@ export class LoginPage {
   fullname: string;
   userphotoUrl: string;
   userposition: string;
-
+  CurrVersion: string = '';
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController
     , private loadingCtrl: LoadingController, private alertCtrl: AlertController
     , private userProv: UseraccountProvider
-    , public storage: Storage
+    , public storage: Storage, private cordova: AppVersion
     , private formBdr: FormBuilder) {
 
     //ตรวจสอบความถูกต้องของฟอร์ม เช่น required, minLength
@@ -56,8 +56,6 @@ export class LoginPage {
     this.userProv.isLogged().then((res: boolean) => {
       this.logined = res;
       this.logouted = !this.logined;
-      console.log('logined:' + this.logined)
-      console.log('logouted:' + this.logouted)
       if (this.logined) {
 
         this.userProv.getUserAccount().then((value: UserAccount) => {
@@ -74,6 +72,7 @@ export class LoginPage {
     });
   }
   ionViewDidLoad() {
+    this.CurrVersion = '0.0.1'
 
   }
   presentToast(err) {
