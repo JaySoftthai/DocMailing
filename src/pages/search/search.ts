@@ -28,7 +28,7 @@ export class SearchPage {
   //Declare param
   nTotalRows: number = 0;//amout all row in db
   nStart: number = 0;//amout Start row display
-  nTop: number = 10;//amout Start row display
+  nTop: number = 15;//amout Start row display
   itemObj: EmployeeInfo;
   sCompanyName: string = '';
   sUserID: string = '';
