@@ -9,7 +9,7 @@ import { UserAccount } from '../../models/useraccount';
 import { LoginPage } from '../login/login';
 
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-logout',
   templateUrl: 'logout.html',

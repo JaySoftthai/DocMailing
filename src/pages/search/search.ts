@@ -18,7 +18,7 @@ import { UserAccount } from '../../models/useraccount';
 import { DetailPage } from '../detail/detail';
 import { LoginPage } from '../../pages/login/login';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',

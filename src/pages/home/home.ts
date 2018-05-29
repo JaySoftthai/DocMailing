@@ -13,6 +13,7 @@ import { UserAccount } from '../../models/useraccount';
 // import { ScanmodePage } from '../scanmode/scanmode';
 // import { MyprofilePage } from '../myprofile/myprofile';
 import { DetailPage } from '../detail/detail';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -53,7 +54,8 @@ export class HomePage {
 
     this.userProv.getUserAccount().then((value: UserAccount) => {
       this.usrdata = value;
-      console.log(this.usrdata)
+      this.isHasService = false;
+      this.isNoData = true;
       if (value != undefined && value.code != null) {
         this.name = ' ' + value.fname + '  ' + value.lname;
         this.position = value.posname;
@@ -61,13 +63,17 @@ export class HomePage {
         this.photo = value.photo != null ? value.photo : '';
 
         this.BindDocumentList();
+      } else {
+        this.navCtrl.push(LoginPage);
       }
+
     });
   }
 
   BindDocumentList(isScroll?: boolean) {
 
     let _UserID = (this.usrdata == null) ? '' : this.usrdata.userid;
+    console.log(_UserID)
     // let _RoleID = (this.usrdata == null) ? '' : this.usrdata.role;
     this.sub = this.MasterdataProv.getDocument_Trans('request_list', '', ['', '', '', '', _UserID], this.nStart, this.nTop).subscribe(
       (res) => {

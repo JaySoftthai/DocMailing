@@ -12,7 +12,7 @@ import { UserAccount } from '../../models/useraccount';
 
 import { HomePage } from '../home/home';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

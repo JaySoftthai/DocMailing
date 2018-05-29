@@ -18,7 +18,7 @@ import { LoginPage } from '../../pages/login/login';
 import { DetailPage } from '../detail/detail';
 
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-app-outbound',
   templateUrl: 'app-outbound.html',

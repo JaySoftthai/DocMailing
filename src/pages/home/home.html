@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header color="Darktone">
   <ion-navbar>
     <ion-row>
       <ion-col>
@@ -7,8 +7,7 @@
         </button>
       </ion-col>
       <ion-col>
-        <ion-title>
-          PTT DocMailing</ion-title>
+        <ion-title> PTT DocMailing</ion-title>
       </ion-col>
       <ion-col>
       </ion-col>
@@ -19,7 +18,7 @@
 <ion-content padding>
   <ion-list list-md>
     <ion-item text-center round style="  border-top-right-radius: 20px 20px; border-top-left-radius: 20px 20px; background-color: #007bff; color:#ffffff;">My Tasks</ion-item>
-    <ion-item *ngIf="isNoData" text-center>
+    <ion-item *ngIf="isNoData" text-center style="min-height: 430px;border-bottom-left-radius: 20px 20px;border-bottom-right-radius: 20px 20px;">
       No Data</ion-item>
     <ion-item *ngFor="let c of lstDoc">
       <ion-thumbnail item-start class="list-item-thumbnail">

@@ -11,7 +11,7 @@ import { UserAccount } from '../../models/useraccount';
 ///Pages
 import { FilesPopoverPage } from '../files-popover/files-popover';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-detail',
   templateUrl: 'detail.html',

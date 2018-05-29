@@ -10,7 +10,7 @@ import { files_request } from '../../models/files_request';
 import { UserAccount } from '../../models/useraccount';
 
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-files-popover',
   templateUrl: 'files-popover.html',

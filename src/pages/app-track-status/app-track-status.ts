@@ -18,7 +18,7 @@ import { LoginPage } from '../../pages/login/login';
 import { SignaturePage } from '../../pages/signature/signature';
 import { DetailPage } from '../detail/detail';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-app-track-status',
   templateUrl: 'app-track-status.html',
