@@ -78,15 +78,15 @@
         <ion-label end text-wrap class="box-detail">{{DocObj.sNotes}}
         </ion-label>
       </ion-item>
-      <ion-item>
-        <ion-label start class="box-head box-head-primary">ค่าใช้จ่าย</ion-label>
+      <ion-item *ngIf="IsMessenger">
+        <ion-label start class="box-head box-head-primary">ค่าเดินทาง</ion-label>
         <ion-label end>
           <input text-right type="number" col-8 [(ngModel)]="txtPrice" value="{{DocObj.nPrice}}"> บาท
         </ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="IsMessenger">
         <ion-label col-12 class="box-head box-head-primary">
-          <button full round ion-button (click)="update_price(DocObj.DocID)">บันทึกค่าใช้จ่าย</button>
+          <button full round ion-button (click)="update_price(DocObj.DocID)">บันทึกค่าเดินทาง</button>
         </ion-label>
       </ion-item>
       <!---->

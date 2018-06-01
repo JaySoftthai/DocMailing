@@ -19,6 +19,7 @@ import { FilesPopoverPage } from '../files-popover/files-popover';
 export class DetailPage {
   userdata: UserAccount;
   IsScanner: boolean;
+  IsMessenger: boolean;
   arr_RoleAcction: string = ',9,10,11,';
   sub: Subscription;
   errorMessage: string;
@@ -37,7 +38,9 @@ export class DetailPage {
 
     this.userProv.getUserAccount().then((value: UserAccount) => {
       this.userdata = value;
-      if (value != undefined && value.code != null) { }
+      if (value != undefined && value.code != null) {
+        this.IsMessenger = (value.role == "11");
+      }
 
       let loader = this.loadingCtrl.create({ content: "Loading..." });
       loader.present();

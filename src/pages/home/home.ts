@@ -86,6 +86,8 @@ export class HomePage {
         this.nTotalRows = this.lstDoc.length;
         this.isHasService = this.nTotalRows > 0;
         this.isNoData = this.nTotalRows == 0;
+
+        console.log(this.lstDoc)
       },
       (error) => { this.errorMessage = <any>error }
     );

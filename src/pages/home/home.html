@@ -26,6 +26,10 @@
       </ion-thumbnail>
       <h2 class="box-head">{{c.sDocRequestNo}}</h2>
       <p class="box-detail">{{c.sStepName}}</p>
+      <small>
+        <label *ngIf="c.nPrice != null" style="font-size: 1.0rem;line-height: normal;text-overflow: inherit;color: #666;">ค่าเดินทาง {{c.nPrice}} บาท</label>
+        <label *ngIf="c.nPrice == null" style="font-size: 1.0rem;line-height: normal;text-overflow: inherit;color: #666;">ค่าเดินทาง - บาท</label>
+      </small>
       <button ion-button clear item-end (click)="viewdetail(c.nDocID)">View</button>
     </ion-item>
   </ion-list>

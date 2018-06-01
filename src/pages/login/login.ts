@@ -63,7 +63,7 @@ export class LoginPage {
             this.user = value;
             this.fullname = ' ' + value.fname + '  ' + value.lname;
             this.userposition = value.poscode + '';
-            this.userphotoUrl = value.photo != null ? value.photo : '../../assets/images/human.png';
+            this.userphotoUrl = value.photo != null ? value.photo : 'assets/images/human.png';
             // this.organization = value.unitname;
           }
         });
