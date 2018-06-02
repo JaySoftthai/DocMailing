@@ -102,7 +102,6 @@ export class AppTrackStatusPage {
       }
 
     }).catch(err => {
-      //console.log('Error', err);
       this.presentToast(err);
     });
   }
@@ -120,7 +119,7 @@ export class AppTrackStatusPage {
     });
 
     toast.onDidDismiss(() => {
-      //console.log('Dismissed toast');
+
     });
 
     toast.present();
@@ -227,40 +226,39 @@ export class AppTrackStatusPage {
           let def_SignatureURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQwAAADICAYAAAAdgt+FAAAFWklEQVR4Xu3UsQ0AMAzDsPb/o12gF+gAZvZEBLrbdhwBAgSCwBWMoGRCgMAXEAyPQIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSIPAANCId1mKSrjoAAAAASUVORK5CYII=";
 
           this.SignatureURL = (data[0] == undefined || data[0] == null) ? def_SignatureURL : data[0];
+
+          let curr = ''; let next = '';
+          if (IsCanUpdate) {
+            switch (this.ddlStatus) {
+              case "5":
+                curr = '3,4';
+                next = '5';
+                break;
+              case "8":
+                curr = '3,4,5,6,7';
+                next = '8';
+                break;
+              case "10":
+                curr = '4,5,6,7,8,9';
+                next = '10';
+                break;
+              case "11":
+                curr = '3,4,5,6,7,8,9,10';
+                next = '11';
+                break;
+
+            }
+            this.UpdateDocumentStatus(curr, next, this.SignatureURL);
+          }
         });
         modal.present();
         IsCanUpdate = true;
-
-        let curr = ''; let next = '';
-        if (IsCanUpdate) {
-          switch (this.ddlStatus) {
-            case "5":
-              curr = '3,4';
-              next = '5';
-              break;
-            case "8":
-              curr = '3,4,5,6,7';
-              next = '8';
-              break;
-            case "10":
-              curr = '4,5,6,7,8,9';
-              next = '10';
-              break;
-            case "11":
-              curr = '3,4,5,6,7,8,9,10';
-              next = '11';
-              break;
-
-          }
-          this.UpdateDocumentStatus(curr, next);
-        }
 
       }
       else {
         ///ถ้าเป็นรายการสถานะอื่นๆที่ไม่ใช่ ปิดงาน IsCanUpdateจะเท่ากับ true เสมอ     แต่ถ้าเป็นปิดงาน(11) SignatureURLจะมีค่าทันที
         IsCanUpdate = true;
         this.SignatureURL = '';
-        console.log('Event IF IsCanUpdate:' + IsCanUpdate + ' ' + this.ddlStatus);
         //Other is not close
         let confirm = this.alertCtrl.create({
           title: 'ยืนยันรายการ',
@@ -297,7 +295,7 @@ export class AppTrackStatusPage {
                       break;
 
                   }
-                  this.UpdateDocumentStatus(curr, next);
+                  this.UpdateDocumentStatus(curr, next, this.SignatureURL);
                 }
               }
             }
@@ -382,22 +380,19 @@ export class AppTrackStatusPage {
     // this.navCtrl.push(DetailPage, { nID: nID });
 
   }
-  UpdateDocumentStatus(CurrStat: string, ToStat: string) {
+  UpdateDocumentStatus(CurrStat: string, ToStat: string, imgSign: string) {
     let loading = this.loadingCtrl.create({ content: 'Loading...' });
     loading.present();//เริ่มแสดง Loading 
-    let imgSignature = this.SignatureURL;
+    let imgSignature = imgSign;
     // let lstSigneture: Step;
     // lstSigneture.sImg = this.SignatureURL;
     let UserScan = '';
-    // let lst =
     this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
-      // let jsnResp = JSON.parse(res["_body"]);
 
       this.lstRecvItms = JSON.parse(res["_body"]);
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       }
-      console.log(this.lstInbound);
       loading.dismiss();
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {

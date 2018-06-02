@@ -53,6 +53,8 @@ export class MasterdataProvider {
 
   postDocument_ScanStatus(StepCurr, StepNext, jsnData, imgSignature, UserScan): Promise<any> {
     let sFile_Handler = 'transaction_scan.ashx';
+    console.log('postDocument_ScanStatus')
+    console.log(imgSignature)
     return this.apiProvider.postApiEndpoint(sFile_Handler, JSON.stringify({ CurrStep: StepCurr, NextStep: StepNext, sImgSign: imgSignature, img: imgSignature, sUserID: UserScan, sAssignUserID: UserScan, itm: jsnData }), imgSignature);
 
   }
