@@ -92,7 +92,7 @@ export class AppTrackStatusPage {
 
 
         if (!IsDupplicate) {
-          let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
+          let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
           this.lstInbound.push(_InboundCode);
 
         } else {
@@ -139,7 +139,7 @@ export class AppTrackStatusPage {
 
       if (!IsDupplicate) {
         // let barcodeData_text = this.txtDocCode;
-        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
         this.txtDocCode = '';
 
@@ -218,7 +218,6 @@ export class AppTrackStatusPage {
   ConfirmInbound() {
     let IsValid = (this.ddlStatus != undefined && this.lstInbound.length > 0);
 
-
     if (IsValid) {
 
       let IsCanUpdate = false;
@@ -228,7 +227,6 @@ export class AppTrackStatusPage {
           let def_SignatureURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQwAAADICAYAAAAdgt+FAAAFWklEQVR4Xu3UsQ0AMAzDsPb/o12gF+gAZvZEBLrbdhwBAgSCwBWMoGRCgMAXEAyPQIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSIPAANCId1mKSrjoAAAAASUVORK5CYII=";
 
           this.SignatureURL = (data[0] == undefined || data[0] == null) ? def_SignatureURL : data[0];
-          console.log(this.SignatureURL)
         });
         modal.present();
         IsCanUpdate = true;
@@ -388,12 +386,13 @@ export class AppTrackStatusPage {
     let loading = this.loadingCtrl.create({ content: 'Loading...' });
     loading.present();//เริ่มแสดง Loading 
     let imgSignature = this.SignatureURL;
-    let lstSigneture: Step;
-    lstSigneture.sImg = this.SignatureURL;
+    // let lstSigneture: Step;
+    // lstSigneture.sImg = this.SignatureURL;
     let UserScan = '';
     // let lst =
-    this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, lstSigneture, UserScan).then(res => {
+    this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
+
       this.lstRecvItms = JSON.parse(res["_body"]);
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
@@ -410,6 +409,6 @@ export class AppTrackStatusPage {
       loading.dismiss();
 
     });
-
+    this.SignatureURL = "";
   }
 }

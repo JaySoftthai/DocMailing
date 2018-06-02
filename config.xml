@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.docmailing.ptt" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>PTT_DocMailing</name>
+<widget id="com.docmailing.ptt" version="0.0.1" 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>DocMailing</name>
     <description>PTT Document/Post Mailing</description>
     <author email="softthai@softthai.com" href="http://www.softthai.com/">Softthai Application</author>
     <content src="index.html" />
