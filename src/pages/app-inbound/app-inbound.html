@@ -1,0 +1,63 @@
+<ion-header>
+
+  <!-- <ion-navbar>
+    <ion-title>Application Data(Read Only)</ion-title>
+  </ion-navbar> -->
+  <ion-toolbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>PTT DocMailing</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-12>
+        <h3 style="color: #514F66;text-align: center;">สแกนรับเข้าเอกสารส่ง บก.</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full end default round class="btn-Confirm" (click)="ConfirmInbound()">ยืนยัน</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full end default round class="btn-Clear" (click)="CancelInbound()">ยกเลิก</button>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div>
+    <!-- *ngIf="IsScanner" -->
+    <button ion-button full round (click)="CallScaner()">
+      สแกน
+    </button>
+    <hr />
+    <h6 style="text-align: center;">
+      <small>หรือ</small>
+    </h6>
+    <hr />
+    <ion-input round class="bgTextBox form-control" [(ngModel)]="txtDocCode" value="{{sBarCode}}" start placeholder="กรอกบาร์โค๊ด(กรณีสแกนไม่ได้)"></ion-input>
+    <!-- <input start type="text" [(ngModel)]="txtDocCode" value="{{sBarCode}}" /> -->
+    <button ion-button full round (click)="GenList()">เพิ่มรายการด้วยตัวเอง
+    </button>
+  </div>
+  <ion-list list-md>
+    <ion-item *ngFor="let c of lstInbound">
+      <ion-thumbnail item-start class="list-item-thumbnail">
+        <img src="{{c.sImg}}">
+      </ion-thumbnail>
+      <h2 class="box-head">{{c.sDetail}}</h2>
+      <p class="box-detail" [ngClass]="{'DefaultFont': c.cActive == 'Y', 'ErrorFont':  c.cActive == 'N' }">{{c.sStepName}}</p>
+      <button ion-button clear item-end (click)="presentActionSheet(c.nDocID,c.sDetail)">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

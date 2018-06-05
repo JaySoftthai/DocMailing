@@ -18,6 +18,7 @@ import { SearchPopoverPage } from '../pages/search-popover/search-popover';
 import { FilesPopoverPage } from '../pages/files-popover/files-popover';
 import { DetailPage } from '../pages/detail/detail';
 import { AppDataPage } from '../pages/app-data/app-data';
+import { AppInboundPage } from '../pages/app-inbound/app-inbound';
 import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 import { LoginPage } from '../pages/login/login';
@@ -41,7 +42,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     MyApp,
     HomePage
     , SearchPage, DetailPage
-    , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppOutboundPage, AppTrackStatusPage
+    , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppInboundPage, AppOutboundPage, AppTrackStatusPage
     , LoginPage, LogoutPage, SignaturePage
     // , MyprofilePage, MytaskPage, ScanmodePage
   ],
@@ -54,7 +55,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
   entryComponents: [
     MyApp,
     HomePage
-    , SearchPage, DetailPage, AppDataPage, AppOutboundPage
+    , SearchPage, DetailPage, AppDataPage, AppInboundPage, AppOutboundPage
     , SearchPopoverPage, FilesPopoverPage, AppTrackStatusPage
     , LoginPage, LogoutPage, SignaturePage
     // , MyprofilePage, MytaskPage, ScanmodePage

@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 // import { ListPage } from '../pages/list/list';
 import { SearchPage } from '../pages/search/search';
 import { AppDataPage } from '../pages/app-data/app-data';
+import { AppInboundPage } from '../pages/app-inbound/app-inbound';
 import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
 import { LoginPage } from '../pages/login/login';
@@ -30,6 +31,7 @@ export class MyApp {
     this.pages = [
       { title: 'หน้าหลัก', component: HomePage },
       { title: 'สแกนรับเข้าเอกสาร', component: AppDataPage },
+      { title: 'สแกนรับเข้าเอกสารส่ง บก.', component: AppInboundPage },
       { title: 'สแกนรับเอกสารจาก บก.', component: AppOutboundPage },
       { title: 'สแกนเปลี่ยนสถานะรายการ', component: AppTrackStatusPage },
       { title: 'ค้นหาเอกสาร', component: SearchPage },

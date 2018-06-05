@@ -19,11 +19,12 @@ import { DetailPage } from '../detail/detail';
 
 
 // @IonicPage()
+
 @Component({
-  selector: 'page-app-outbound',
-  templateUrl: 'app-outbound.html',
+  selector: 'page-app-inbound',
+  templateUrl: 'app-inbound.html',
 })
-export class AppOutboundPage {
+export class AppInboundPage {
 
   Master_DATA: Array<Object>;
   lstInbound: Step[] = [];
@@ -36,7 +37,6 @@ export class AppOutboundPage {
   userdata: UserAccount;
   IsScanner: boolean;
   arr_RoleAcction: string = ',9,10,11,';
-
   constructor(
     public toastCtrl: ToastController,
     public platform: Platform,
@@ -296,13 +296,13 @@ export class AppOutboundPage {
     let imgSignature = '';
     let UserScan = '';
     // let lst =
-    this.MasterdataProv.postDocument_ScanStatus('3,4,5,6', '7', this.lstInbound, imgSignature, UserScan).then(res => {
+    this.MasterdataProv.postDocument_ScanStat('transaction_status', this.lstInbound, imgSignature, UserScan, '4').then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
       this.lstRecvItms = JSON.parse(res["_body"]);
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       }
-      console.log(this.lstInbound);
+      // console.log(this.lstInbound);
       loading.dismiss();
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
@@ -317,4 +317,3 @@ export class AppOutboundPage {
 
   }
 }
-

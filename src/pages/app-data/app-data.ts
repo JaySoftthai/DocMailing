@@ -87,7 +87,7 @@ export class AppDataPage {
 
 
         if (!IsDupplicate) {
-          let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, '../../assets/images/Drop-Down01.png', 'Y');
+          let _InboundCode = new Step('', 'เอกสารรอรับ', barcodeData.text, 'assets/images/Drop-Down03.png', 'Y');
           this.lstInbound.push(_InboundCode);
 
         } else {
@@ -134,7 +134,7 @@ export class AppDataPage {
 
       if (!IsDupplicate) {
         // let barcodeData_text = this.txtDocCode;
-        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, '../../assets/images/Drop-Down01.png', 'Y');
+        let _InboundCode = new Step('', 'เอกสารรอรับ', this.txtDocCode, 'assets/images/Drop-Down03.png', 'Y');
         this.lstInbound.push(_InboundCode);
         this.txtDocCode = '';
 
