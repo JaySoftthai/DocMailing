@@ -246,6 +246,10 @@ export class AppTrackStatusPage {
                 curr = '3,4,5,6,7,8,9,10';
                 next = '11';
                 break;
+              case "15":
+                curr = '2';
+                next = '15';
+                break;
 
             }
             this.UpdateDocumentStatus(curr, next, this.SignatureURL);
