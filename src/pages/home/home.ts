@@ -73,9 +73,9 @@ export class HomePage {
   BindDocumentList(isScroll?: boolean) {
 
     let _UserID = (this.usrdata == null) ? '' : this.usrdata.userid;
-    console.log(_UserID)
+    // console.log(_UserID)
     // let _RoleID = (this.usrdata == null) ? '' : this.usrdata.role;
-    this.sub = this.MasterdataProv.getDocument_Trans('request_list', '', ['', '', '', '', _UserID], this.nStart, this.nTop).subscribe(
+    this.sub = this.MasterdataProv.getDocument_Trans('mytask_list', '', ['', '', '', '', _UserID], this.nStart, this.nTop).subscribe(
       (res) => {
         if (isScroll && this.lstDoc.length > 0)
           this.lstDoc = this.lstDoc.concat(res);
