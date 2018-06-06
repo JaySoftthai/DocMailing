@@ -390,7 +390,7 @@ export class AppTrackStatusPage {
     let imgSignature = imgSign;
     // let lstSigneture: Step;
     // lstSigneture.sImg = this.SignatureURL;
-    let UserScan = '';
+    let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
       this.lstRecvItms = JSON.parse(res["_body"]);

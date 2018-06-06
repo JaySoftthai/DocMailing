@@ -294,7 +294,7 @@ export class AppInboundPage {
     let loading = this.loadingCtrl.create({ content: 'Loading...' });
     loading.present();//เริ่มแสดง Loading 
     let imgSignature = '';
-    let UserScan = '';
+    let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     // let lst =
     this.MasterdataProv.postDocument_ScanStat('transaction_status', this.lstInbound, imgSignature, UserScan, '4').then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
