@@ -40,4 +40,8 @@ page-app-track-status {
         background-color: whitesmoke;
         max-width: 100%;
     }
+    .toolbar-background-md,
+    .toolbar-background-ios {
+        background-color: transparent !important; // background-image: url(../assets/image/bg_portrait.png);
+    }
 }

@@ -22,9 +22,9 @@ export class SignaturePage {
   }
   public signatureImage: string;
   public sTT: string;
+  //'canvasWidth': 268,
   private signaturepadOptions: Object = {
     'minWidth': 0.5,
-    'canvasWidth': 268,
     'canvasHeight': 200,
     'backgroundColor': 'rgb(255,255,255)',
   };

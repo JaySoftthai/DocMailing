@@ -35,4 +35,8 @@ page-app-outbound {
     .bgTextBox {
         background-color: whitesmoke;
     }
+    .toolbar-background-md,
+    .toolbar-background-ios {
+        background-color: transparent !important; // background-image: url(../assets/image/bg_portrait.png);
+    }
 }

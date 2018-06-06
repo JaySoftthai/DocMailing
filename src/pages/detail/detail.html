@@ -15,12 +15,12 @@
     </ion-card-header>
     <ion-card-content class="content_span">
       <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>เลขขอรับบริการ</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sDocRequestNo}}</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>เลขขอรับบริการ</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDocRequestNo}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>ชื่อผู้ส่ง</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sSendName}}</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>ชื่อผู้ส่ง</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sSendName}}</ion-label>
 
       </ion-item>
       <ion-item>
@@ -28,16 +28,16 @@
         <ion-label col-8 end text-wrap class="box-detail">{{DocObj.sSendUnitName}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>ประเภท</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sDocType}}</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>ประเภท</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDocType}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>ประเภทการส่ง</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sParcelType}}</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>ประเภทการส่ง</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDocInternalExternal}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>จุดฝากบริการ</ion-label>
-        <ion-label end text-wrap class="box-detail">{{DocObj.sDeliveryPoint}}</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>จุดฝากบริการ</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDeliveryPoint}}</ion-label>
       </ion-item>
       <ion-item>
         <ion-label start class="box-head box-head-primary"> </ion-label>
@@ -57,27 +57,27 @@
   <ion-card>
     <ion-card-header>ข้อมูลผู้รับเอกสาร</ion-card-header>
     <ion-card-content class="content_span">
-      <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>ชื่อผู้รับ</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sRecipientName}}</ion-label>
-      </ion-item>
+      <ion-list *ngFor="let child of itemObj ; let i = index; ">
+        <ion-item>
+          <ion-label text-wrap end class="box-detail">
+            <p col-12>{{i+1}}. {{ child.sRecipientName }}</p>
+            <small col-12>{{child.sSendPlace}}</small>
+          </ion-label>
+        </ion-item>
+      </ion-list>
       <!-- <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>หน่วยงานปลายทาง</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sSendPlace}}</ion-label>
-      </ion-item> -->
-      <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>สถานที่จัดส่ง</ion-label>
-        <ion-label end class="box-detail">{{DocObj.sSendPlace}}</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>ชื่อผู้รับ ({{idx}})</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sRecipientName}}</ion-label>
       </ion-item>
-      <!-- <ion-item>
-        <ion-label start class="box-head box-head-primary" stacked>จำนวน</ion-label>
-        <ion-label end class="box-detail">1</ion-label>
-      </ion-item> -->
       <ion-item>
-        <ion-label start class="box-head box-head-primary">หมายเหตุ</ion-label>
-        <ion-label end text-wrap class="box-detail">{{DocObj.sNotes}}
+        <ion-label col-4 start class="box-head box-head-primary" stacked>สถานที่จัดส่ง</ion-label>
+        <ion-label col-8 end text-wrap class="box-detail">{{DocObj.sSendPlace}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>หมายเหตุ</ion-label>
+        <ion-label col-8 end text-wrap class="box-detail">{{DocObj.sNotes}}
         </ion-label>
-      </ion-item>
+      </ion-item> -->
       <ion-item *ngIf="IsMessenger">
         <ion-label start class="box-head box-head-primary">ค่าเดินทาง</ion-label>
         <ion-label end>
@@ -89,7 +89,6 @@
           <button full round ion-button (click)="update_price(DocObj.DocID)">บันทึกค่าเดินทาง</button>
         </ion-label>
       </ion-item>
-      <!---->
       <!-- <ion-item>
         <ion-label start class="box-head box-head-primary" stacked>ลายเซ็นต์</ion-label>
         <ion-label end class="box-detail">

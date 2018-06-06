@@ -17,6 +17,7 @@ import { FilesPopoverPage } from '../files-popover/files-popover';
   templateUrl: 'detail.html',
 })
 export class DetailPage {
+  information: any[];
   userdata: UserAccount;
   IsScanner: boolean;
   IsMessenger: boolean;
@@ -53,8 +54,10 @@ export class DetailPage {
 
     this.sub = this.MasterdataProv.getReqDocument('request_document', this.DocID).subscribe(
       (res) => {
+        this.information == res;
         this.itemObj = res;
         this.DocObj = this.itemObj[0];
+        console.log(this.itemObj)
 
       },
       (error) => { this.errorMessage = <any>error }
@@ -88,6 +91,7 @@ export class DetailPage {
     let _Price = this.txtPrice == null ? '0' : this.txtPrice;
     this.sub = this.MasterdataProv.UPDPriceDocument('update_price', this.DocID, _Price).subscribe(
       (res) => {
+        this.information == res;
         this.itemObj = res;
         this.DocObj = this.itemObj[0];
 
@@ -103,11 +107,18 @@ export class DetailPage {
 
     this.sub = this.MasterdataProv.getReqDocument('request_document', DocID).subscribe(
       (res) => {
+        this.information == res;
         this.itemObj = res;
         this.DocObj = this.itemObj[0];
-
       },
       (error) => { this.errorMessage = <any>error }
     );
+  }
+  toggleSection(i) {
+    this.information[i].cRefer = !this.information[i].cRefer;
+  }
+
+  toggleItem(i, j) {
+    this.information[i].cRefer = !this.information[i].cRefer;
   }
 }

@@ -7,35 +7,18 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>PTT DocMailing</ion-title>
+    <ion-title>สแกนรับเข้าเอกสารส่ง บก.</ion-title>
     <!-- <ion-buttons end>
       <button ion-button icon-only color="royal">
         <ion-icon name="person-add"></ion-icon>
       </button>
     </ion-buttons> -->
   </ion-toolbar>
-  <ion-toolbar>
-    <ion-row>
-      <ion-col col-12>
-        <h3 style="color: #514F66;text-align: center;">สแกนรับเข้าเอกสารส่ง บก.</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button full end default round class="btn-Confirm" (click)="ConfirmInbound()">ยืนยัน</button>
-      </ion-col>
-      <ion-col col-6>
-        <button ion-button full end default round class="btn-Clear" (click)="CancelInbound()">ยกเลิก</button>
-      </ion-col>
-    </ion-row>
-
-
-  </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <div>
     <!-- *ngIf="IsScanner" -->
-    <button ion-button full round (click)="CallScaner()">
+    <button ion-button full round color="secondary" (click)="CallScaner()">
       สแกน
     </button>
     <hr />
@@ -61,3 +44,15 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full end default round class="btn-Confirm" (click)="ConfirmInbound()">ยืนยัน</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full end default round class="btn-Clear" (click)="CancelInbound()">ยกเลิก</button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
