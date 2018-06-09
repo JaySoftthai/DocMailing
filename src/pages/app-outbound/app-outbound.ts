@@ -113,7 +113,7 @@ export class AppOutboundPage {
     let toast = this.toastCtrl.create({
       message: err,
       duration: 3000,
-      position: 'buttom'
+      position: 'top'
     });
 
     toast.onDidDismiss(() => {
@@ -302,7 +302,7 @@ export class AppOutboundPage {
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       }
-      console.log(this.lstInbound);
+
       loading.dismiss();
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
