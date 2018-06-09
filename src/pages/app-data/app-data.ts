@@ -297,12 +297,14 @@ export class AppDataPage {
     this.MasterdataProv.postDocument_ScanStat_3('transaction_status', this.lstInbound, imgSignature, UserScan).then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
       this.lstRecvItms = JSON.parse(res["_body"]);
+      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
+      } else {
+        sMsg = 'no response from server.';
       }
       // console.log(this.lstInbound);
       loading.dismiss();
-      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
         sMsg = 'สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว';
       }

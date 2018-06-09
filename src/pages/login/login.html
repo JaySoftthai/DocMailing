@@ -1,9 +1,17 @@
 <ion-header>
-
+  <!---->
   <ion-navbar>
-    <ion-title text-center>PTT-DocMailing</ion-title>
+    <button ion-button icon-only menuToggle *ngIf="logined">
+      <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
-
+  <!--
+  <ion-toolbar *ngIf="logined">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+  </ion-toolbar>-->
 </ion-header>
 
 

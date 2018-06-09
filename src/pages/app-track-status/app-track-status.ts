@@ -231,15 +231,15 @@ export class AppTrackStatusPage {
           if (IsCanUpdate) {
             switch (this.ddlStatus) {
               case "5":
-                curr = '3,4';
+                curr = '2,3,4';
                 next = '5';
                 break;
               case "8":
-                curr = '3,4,5,6,7';
+                curr = '2,3,4,5,6,7';
                 next = '8';
                 break;
               case "10":
-                curr = '4,5,6,7,8,9';
+                curr = '2,3,4,5,6,7,8,9';
                 next = '10';
                 break;
               case "11":
@@ -294,7 +294,7 @@ export class AppTrackStatusPage {
                       next = '10';
                       break;
                     case "11":
-                      curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7,8,9,10';
+                      curr = '3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7,8,9,10';
                       next = '11';
                       break;
 
@@ -394,11 +394,13 @@ export class AppTrackStatusPage {
     this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
       this.lstRecvItms = JSON.parse(res["_body"]);
+      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
+      } else {
+        sMsg = 'no response from server.';
       }
       loading.dismiss();
-      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
         sMsg = 'สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว';
       }

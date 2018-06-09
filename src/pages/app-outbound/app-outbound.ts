@@ -303,7 +303,7 @@ export class AppOutboundPage {
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       } else {
-        let sMsg = 'no response from server.';
+        sMsg = 'no response from server.';
       }
 
       loading.dismiss();
