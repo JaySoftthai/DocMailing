@@ -282,19 +282,19 @@ export class AppTrackStatusPage {
                 if (IsCanUpdate) {
                   switch (this.ddlStatus) {
                     case "5":
-                      curr = '3,4';
+                      curr = '2,3,4';
                       next = '5';
                       break;
                     case "8":
-                      curr = '3,4,5,6,7';
+                      curr = '2,3,4,5,6,7';//curr = '3,4,5,6,7';
                       next = '8';
                       break;
                     case "10":
-                      curr = '4,5,6,7,8,9';
+                      curr = '2,3,4,5,6,7,8,9';//curr = '4,5,6,7,8,9';
                       next = '10';
                       break;
                     case "11":
-                      curr = '3,4,5,6,7,8,9,10';
+                      curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7,8,9,10';
                       next = '11';
                       break;
 
