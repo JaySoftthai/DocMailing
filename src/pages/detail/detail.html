@@ -27,7 +27,7 @@
         <ion-label col-8 end text-wrap class="box-detail">{{DocObj.sSendUnitName}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label col-4 start class="box-head box-head-primary" stacked>ประเภท</ion-label>
+        <ion-label col-4 start class="box-head box-head-primary" stacked>ประเภทพัสดุ</ion-label>
         <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDocType}} ({{DocObj.sParcelType}})</ion-label>
       </ion-item>
       <ion-item>
@@ -59,7 +59,7 @@
       <ion-list *ngFor="let child of itemObj ; let i = index; ">
         <ion-item>
           <ion-label text-wrap end class="box-detail">
-            <p col-12>{{i+1}}. {{ child.sRecipientName }} ({{child.sTrackingNumber}})</p>
+            <p col-12>{{i+1}}. {{ child.sRecipientName }} ({{Tel. child.sTrackingNumber}})</p>
             <small col-12>{{child.sSendPlace}}</small>
           </ion-label>
         </ion-item>
