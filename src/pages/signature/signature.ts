@@ -46,6 +46,8 @@ export class SignaturePage {
 
   ngAfterViewInit() {
     // this.signaturePad is now available
+
+    this.signaturePad.resizeCanvas();
     this.signaturePad.set('minWidth', 0.5); // set szimek/signature_pad options at runtime
     this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
   }
@@ -64,5 +66,12 @@ export class SignaturePage {
     this.viewCtrl.dismiss([sSign_URL]);
   }
 
+  canvasResize() {
+    console.log('canvas:canvasResize')
+    let canvas = document.querySelector('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = canvas.clientHeight;
+    this.signaturePad.clear();
+  }
 
 }
