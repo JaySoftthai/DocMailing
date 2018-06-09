@@ -21,7 +21,6 @@
       <ion-item>
         <ion-label col-4 start class="box-head box-head-primary" stacked>ชื่อผู้ส่ง</ion-label>
         <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sSendName}}</ion-label>
-
       </ion-item>
       <ion-item>
         <ion-label col-4 start class="box-head box-head-primary" stacked>หน่วยงานที่สังกัด</ion-label>
@@ -29,7 +28,7 @@
       </ion-item>
       <ion-item>
         <ion-label col-4 start class="box-head box-head-primary" stacked>ประเภท</ion-label>
-        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDocType}}</ion-label>
+        <ion-label col-8 text-wrap end class="box-detail">{{DocObj.sDocType}} ({{DocObj.sParcelType}})</ion-label>
       </ion-item>
       <ion-item>
         <ion-label col-4 start class="box-head box-head-primary" stacked>ประเภทการส่ง</ion-label>
@@ -60,7 +59,7 @@
       <ion-list *ngFor="let child of itemObj ; let i = index; ">
         <ion-item>
           <ion-label text-wrap end class="box-detail">
-            <p col-12>{{i+1}}. {{ child.sRecipientName }}</p>
+            <p col-12>{{i+1}}. {{ child.sRecipientName }} ({{child.sTrackingNumber}})</p>
             <small col-12>{{child.sSendPlace}}</small>
           </ion-label>
         </ion-item>
