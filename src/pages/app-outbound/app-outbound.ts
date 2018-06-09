@@ -113,7 +113,7 @@ export class AppOutboundPage {
     let toast = this.toastCtrl.create({
       message: err,
       duration: 3000,
-      position: 'top'
+      position: 'buttom'
     });
 
     toast.onDidDismiss(() => {
@@ -299,12 +299,14 @@ export class AppOutboundPage {
     this.MasterdataProv.postDocument_ScanStatus('2,3,4,5,6', '7', this.lstInbound, imgSignature, UserScan).then(res => {
       // let jsnResp = JSON.parse(res["_body"]);
       this.lstRecvItms = JSON.parse(res["_body"]);
+      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
+      } else {
+        let sMsg = 'no response from server.';
       }
 
       loading.dismiss();
-      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
         sMsg = 'สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว';
       }
