@@ -59,7 +59,7 @@
       <ion-list *ngFor="let child of itemObj ; let i = index; ">
         <ion-item>
           <ion-label text-wrap end class="box-detail">
-            <p col-12>{{i+1}}. {{ child.sRecipientName }} ({{Tel. child.sTrackingNumber}})</p>
+            <p col-12>{{i+1}}. {{ child.sRecipientName }} (Tel.{{child.sTrackingNumber}})</p>
             <small col-12>{{child.sSendPlace}}</small>
           </ion-label>
         </ion-item>
