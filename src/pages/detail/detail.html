@@ -11,7 +11,7 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      ข้อมูลผู้ส่งเอกสาร
+      {{Sender_HeaderText}}
     </ion-card-header>
     <ion-card-content class="content_span">
       <ion-item>
@@ -54,7 +54,7 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header>ข้อมูลผู้รับเอกสาร</ion-card-header>
+    <ion-card-header>{{Reciept_HeaderText}}</ion-card-header>
     <ion-card-content class="content_span">
       <ion-list *ngFor="let child of itemObj ; let i = index; ">
         <ion-item>

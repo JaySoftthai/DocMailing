@@ -17,6 +17,8 @@ import { FilesPopoverPage } from '../files-popover/files-popover';
   templateUrl: 'detail.html',
 })
 export class DetailPage {
+  Sender_HeaderText: string = '';
+  Reciept_HeaderText: string = '';
   information: any[];
   userdata: UserAccount;
   IsScanner: boolean;
@@ -57,8 +59,14 @@ export class DetailPage {
         this.information == res;
         this.itemObj = res;
         this.DocObj = this.itemObj[0];
-        console.log(this.itemObj)
 
+        this.Sender_HeaderText = 'ข้อมูลผู้ส่งเอกสาร';
+        this.Reciept_HeaderText = 'ข้อมูลผู้รับเอกสาร';
+        if (this.itemObj.length > 0) {
+          console.log(this.itemObj[0].nItemType)
+          this.Sender_HeaderText = 'ข้อมูลผู้' + (this.itemObj[0].nItemType == "1" ? 'รับ' : 'ส่ง') + 'เอกสาร';
+          this.Reciept_HeaderText = 'ข้อมูลผู้' + (this.itemObj[0].nItemType == "1" ? 'ส่ง' : 'รับ') + 'เอกสาร';
+        }
       },
       (error) => { this.errorMessage = <any>error }
     );
