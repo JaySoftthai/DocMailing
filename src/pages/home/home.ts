@@ -32,7 +32,7 @@ export class HomePage {
 
   nTotalRows: number = 0;//amout all row in db
   nStart: number = 0;//amout Start row display
-  nTop: number = 15;//amout Start row display
+  nTop: number = 100;//amout Start row display
   lstDoc: trans_request[];
   isHasService: boolean;
   isNoData: boolean;
