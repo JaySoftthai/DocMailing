@@ -85,8 +85,8 @@ export class AppDataPage {
           IsDupplicate = aray_inbnd.length > 0;
         }
 
-
         if (!IsDupplicate) {
+
           let _InboundCode = new Step('', 'เอกสารรอรับ', barcodeData.text, 'assets/images/Drop-Down03.png', 'Y');
           this.lstInbound.push(_InboundCode);
 
@@ -123,6 +123,10 @@ export class AppDataPage {
 
   GenList() {
     if (this.txtDocCode != "") {
+      //check expression
+      let re = /^([0-9]{1,4}\-[0-9]{1,2}\-[0-9]{1,5})$/;
+      let result_expression = re.test(this.txtDocCode);
+
       //check dupplicate
       let IsDupplicate = false;
       if (this.txtDocCode != "" && this.lstInbound.length > 0) {
@@ -132,14 +136,15 @@ export class AppDataPage {
         IsDupplicate = aray_inbnd.length > 0;
       }
 
-      if (!IsDupplicate) {
+      if (!IsDupplicate && result_expression) {
         // let barcodeData_text = this.txtDocCode;
         let _InboundCode = new Step('', 'เอกสารรอรับ', this.txtDocCode, 'assets/images/Drop-Down03.png', 'Y');
         this.lstInbound.push(_InboundCode);
         this.txtDocCode = '';
 
       } else {
-        this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
+
+        this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ((result_expression) ? '' : ' รูปแบบไม่ถูกต้อง')));
       }
     } else {
       this.presentToast('กรุณากรอกบาร์โค๊ด');
@@ -156,7 +161,7 @@ export class AppDataPage {
       title: 'เลือกการดำเนินการ',
       buttons: [
         {
-          text: 'แก้ไข',
+          text: 'ดูรายละเอียด',
           icon: 'create',
           cssClass: 'action-sheet-center',
           handler: () => {
@@ -167,7 +172,7 @@ export class AppDataPage {
                   lst = res[0];
                   let loader = this.loadingCtrl.create({ content: "Loading..." });
                   loader.present();
-                  this.navCtrl.push(DetailPage, { nID: lst.inDocID });
+                  this.navCtrl.push(DetailPage, { nID: lst.nDocID });
                   loader.dismiss();
                 } else {
                   this.presentToast('ไม่พบรายการ :' + sDocCode);

@@ -27,7 +27,7 @@ export class DetailPage {
   DocID: string;
   txtPrice: string = '';
   itemObj: trans_request[];
-  DocObj: trans_request = new trans_request(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+  DocObj: trans_request = new trans_request(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public AlertCtrl: AlertController,

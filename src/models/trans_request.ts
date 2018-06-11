@@ -1,6 +1,7 @@
 export class trans_request {
     constructor(
         public inDocID,
+        public nDocID,
         public sDocRequestNo,
         public nItemType,
         public sItemType,
