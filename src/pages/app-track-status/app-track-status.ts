@@ -266,7 +266,7 @@ export class AppTrackStatusPage {
         //Other is not close
         let confirm = this.alertCtrl.create({
           title: 'ยืนยันรายการ',
-          message: 'ท่านต้องการยืนยันเพื่อดำเนินการปรับสถานะรายการดังกว่าใช่หรือไม่ ?',
+          message: 'ท่านต้องการยืนยันเพื่อดำเนินการปรับสถานะรายการดังกล่าวใช่หรือไม่ ?',
           buttons: [
             {
               text: 'ไม่ยืนยัน',
