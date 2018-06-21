@@ -1,8 +1,8 @@
 //import Component 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Platform, LoadingController, ModalController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
-// import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 ////import providers 
 import { MasterdataProvider } from '../../providers/masterdata/masterdata';
@@ -15,33 +15,38 @@ import { UserAccount } from '../../models/useraccount';
 import { trans_request } from '../../models/trans_request';
 ///Pages
 import { LoginPage } from '../../pages/login/login';
+import { SignaturePage } from '../../pages/signature/signature';
 import { DetailPage } from '../detail/detail';
-
 
 // @IonicPage()
 @Component({
-  selector: 'page-app-outbound',
-  templateUrl: 'app-outbound.html',
+  selector: 'page-app-reviev-status',
+  templateUrl: 'app-reviev-status.html',
 })
-export class AppOutboundPage {
-
-  ScanDataType: string = '0';
+export class AppRevievStatusPage {
+  lstStatus: Step[];
+  // lstStatus = new Step{  "7", "ยืนยันรับงานจาก บก.", "14", "นำเอกสารกลับไปกอง บก.", "15", "ไม่มีเอกสารปลายทาง", "16", "บก.รับงานเอกสาร", "18", "ยืนยันรับงานจาก บก.เพื่อส่งเอกสาร", "19", "ปิดงาน" }
+  ScanDataType: string = '1';
   Master_DATA: Array<Object>;
   lstInbound: Step[] = [];
   isToogle: boolean = false;
   lstDoc: Step[];
-  errorMessage: string = '';
   sBarCode: string = '';
   txtDocCode: string = '';
+  SignatureURL: string = '';
+  lstRespDocUDP3: Step[];
+  sub: Subscription;
+  errorMessage: string;
   lstRecvItms: ReceiveItems[];
+  ///Ctrl
+  ddlStatus: any;
   userdata: UserAccount;
   IsScanner: boolean;
   arr_RoleAcction: string = ',9,10,11,';
-
   constructor(
     public toastCtrl: ToastController,
-    public platform: Platform,
-    public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController, private loadingCtrl: LoadingController,
+    public platform: Platform, private loadingCtrl: LoadingController, private modalCtrl: ModalController,
+    public alertCtrl: AlertController, private ActShtCtrl: ActionSheetController,
     public navCtrl: NavController, private MasterdataProv: MasterdataProvider, private userProv: UseraccountProvider,
     public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
     this.platform.ready().then(() => {
@@ -49,8 +54,8 @@ export class AppOutboundPage {
     });
   }
 
-
   ionViewDidLoad() {
+
     this.userProv.getUserAccount().then((value: UserAccount) => {
       this.userdata = value;
       if (value != undefined && value.code != null) {
@@ -90,7 +95,7 @@ export class AppOutboundPage {
 
 
         if (!IsDupplicate) {
-          let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
+          let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
           this.lstInbound.push(_InboundCode);
 
         } else {
@@ -100,7 +105,6 @@ export class AppOutboundPage {
       }
 
     }).catch(err => {
-      //console.log('Error', err);
       this.presentToast(err);
     });
   }
@@ -118,7 +122,7 @@ export class AppOutboundPage {
     });
 
     toast.onDidDismiss(() => {
-      //console.log('Dismissed toast');
+
     });
 
     toast.present();
@@ -140,7 +144,7 @@ export class AppOutboundPage {
 
       if (!IsDupplicate && result_expression) {
         // let barcodeData_text = this.txtDocCode;
-        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+        let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
         this.lstInbound.push(_InboundCode);
         this.txtDocCode = '';
 
@@ -217,26 +221,130 @@ export class AppOutboundPage {
     actionSheet.present();
   }
   ConfirmInbound() {
-    let confirm = this.alertCtrl.create({
-      title: 'ยืนยันรายการ?',
-      message: 'ท่านต้องการยืนยันเพื่อดำเนินการปรับสถานะรายการดังกล่าวใช่หรือไม่ ?',
-      buttons: [
-        {
-          text: 'ไม่ยืนยัน',
-          handler: () => {
-            confirm.dismiss();
-            return false;
+    let IsValid = (this.ddlStatus != undefined && this.lstInbound.length > 0);
+
+    if (IsValid) {
+
+      let IsCanUpdate = false;
+      if (this.ddlStatus == "19") { //ถ้าเป็นการปิดงาน
+        let modal = this.modalCtrl.create(SignaturePage, { lst: this.lstInbound, Updater: this.userdata.code });
+        modal.onDidDismiss(data => {
+          let def_SignatureURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQwAAADICAYAAAAdgt+FAAAFWklEQVR4Xu3UsQ0AMAzDsPb/o12gF+gAZvZEBLrbdhwBAgSCwBWMoGRCgMAXEAyPQIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSICAYfoAAgSwgGJnKkAABwfADBAhkAcHIVIYECAiGHyBAIAsIRqYyJEBAMPwAAQJZQDAylSEBAoLhBwgQyAKCkakMCRAQDD9AgEAWEIxMZUiAgGD4AQIEsoBgZCpDAgQEww8QIJAFBCNTGRIgIBh+gACBLCAYmcqQAAHB8AMECGQBwchUhgQICIYfIEAgCwhGpjIkQEAw/AABAllAMDKVIQECguEHCBDIAoKRqQwJEBAMP0CAQBYQjExlSICAYPgBAgSygGBkKkMCBATDDxAgkAUEI1MZEiAgGH6AAIEsIBiZypAAAcHwAwQIZAHByFSGBAgIhh8gQCALCEamMiRAQDD8AAECWUAwMpUhAQKC4QcIEMgCgpGpDAkQEAw/QIBAFhCMTGVIgIBg+AECBLKAYGQqQwIEBMMPECCQBQQjUxkSIPAANCId1mKSrjoAAAAASUVORK5CYII=";
+
+          this.SignatureURL = (data[0] == undefined || data[0] == null) ? def_SignatureURL : data[0];
+
+          let curr = ''; let next = '';
+          if (IsCanUpdate) {
+            switch (this.ddlStatus) {
+              case "7":
+                curr = '6,7,14,15,16,17,18';
+                next = '7';
+                break;
+              case "14":
+                curr = '6,7,14,15,16,17,18';
+                next = '14';
+                break;
+              case "15":
+                curr = '6,7,14,15,16,17,18';
+                next = '15';
+                break;
+              case "16":
+                curr = '6,7,14,15,16,17,18';
+                next = '16';
+                break;
+              case "18":
+                curr = '6,7,14,15,16,17,18';
+                next = '18';
+                break;
+              case "19":
+                curr = '6,7,14,15,16,17,18';
+                next = '19';
+                break;
+
+            }
+            this.UpdateDocumentStatus(curr, next, this.SignatureURL);
           }
-        },
-        {
-          text: 'ยืนยัน',
-          handler: () => {
-            this.UpdateDocumentStatus();
+        });
+        modal.present();
+        IsCanUpdate = true;
+
+      }
+      else {
+        ///ถ้าเป็นรายการสถานะอื่นๆที่ไม่ใช่ ปิดงาน IsCanUpdateจะเท่ากับ true เสมอ     แต่ถ้าเป็นปิดงาน(11) SignatureURLจะมีค่าทันที
+        IsCanUpdate = true;
+        this.SignatureURL = '';
+        //Other is not close
+        let confirm = this.alertCtrl.create({
+          title: 'ยืนยันรายการ',
+          message: 'ท่านต้องการยืนยันเพื่อดำเนินการปรับสถานะรายการดังกล่าวใช่หรือไม่ ?',
+          buttons: [
+            {
+              text: 'ไม่ยืนยัน',
+              handler: () => {
+                confirm.dismiss();
+                return false;
+              }
+            },
+            {
+              text: 'ยืนยัน',
+              handler: () => {
+                let curr = ''; let next = '';
+                if (IsCanUpdate) {
+                  switch (this.ddlStatus) {
+                    case "7":
+                      curr = '6,7,14,15,16,17,18';
+                      next = '7';
+                      break;
+                    case "14":
+                      curr = '6,7,14,15,16,17,18';
+                      next = '14';
+                      break;
+                    case "15":
+                      curr = '6,7,14,15,16,17,18';
+                      next = '15';
+                      break;
+                    case "16":
+                      curr = '6,7,14,15,16,17,18';
+                      next = '16';
+                      break;
+                    case "18":
+                      curr = '6,7,14,15,16,17,18';
+                      next = '18';
+                      break;
+                    case "19":
+                      curr = '6,7,14,15,16,17,18';
+                      next = '19';
+                      break;
+
+                  }
+                  this.UpdateDocumentStatus(curr, next, this.SignatureURL);
+                }
+              }
+            }
+          ]
+        });
+        confirm.present();
+      }
+    } else {
+
+      let wrnMsg = (this.ddlStatus == undefined) ? "กรุณาระบุสถานะที่ต้องการดำเนินการ" : ((this.lstInbound.length <= 0) ? "กรุณาสแกนรายการที่ต้องการดำเนินการอย่างน้อยหนึ่งรายการ" : "");
+
+      let wrn = this.alertCtrl.create({
+        title: 'แจ้งเตือน',
+        message: wrnMsg,
+        buttons: [
+          {
+            text: 'ตกลง',
+            handler: () => {
+              wrn.dismiss();
+              return false;
+            }
           }
-        }
-      ]
-    });
-    confirm.present();
+        ]
+      });
+      wrn.present();
+
+    }
   }
   CheckDupplicate(sDocCode): Promise<boolean> {
     return new Promise(resolve => {
@@ -294,14 +402,15 @@ export class AppOutboundPage {
     // this.navCtrl.push(DetailPage, { nID: nID });
 
   }
-  UpdateDocumentStatus() {
+  UpdateDocumentStatus(CurrStat: string, ToStat: string, imgSign: string) {
     let loading = this.loadingCtrl.create({ content: 'Loading...' });
     loading.present();//เริ่มแสดง Loading 
-    let imgSignature = '';
+    let imgSignature = imgSign;
+    // let lstSigneture: Step;
+    // lstSigneture.sImg = this.SignatureURL;
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
-    // let lst =
-    this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, '2,3,4,5,6', '7', this.lstInbound, imgSignature, UserScan).then(res => {
-      // let jsnResp = JSON.parse(res["_body"]);
+    this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
+
       this.lstRecvItms = JSON.parse(res["_body"]);
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
       if (this.lstRecvItms.length > 0) {
@@ -309,7 +418,6 @@ export class AppOutboundPage {
       } else {
         sMsg = 'no response from server.';
       }
-
       loading.dismiss();
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
         sMsg = 'สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว';
@@ -320,7 +428,6 @@ export class AppOutboundPage {
       loading.dismiss();
 
     });
-
+    this.SignatureURL = "";
   }
 }
-

@@ -24,6 +24,8 @@ import { DetailPage } from '../detail/detail';
   templateUrl: 'app-data.html',
 })
 export class AppDataPage {
+
+  ScanDataType: string = '0';
   Master_DATA: Array<Object>;
   lstInbound: Step[] = [];
   isToogle: boolean = false;

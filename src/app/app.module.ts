@@ -21,6 +21,7 @@ import { AppDataPage } from '../pages/app-data/app-data';
 import { AppInboundPage } from '../pages/app-inbound/app-inbound';
 import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
+import { AppRevievStatusPage } from '../pages/app-reviev-status/app-reviev-status';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { SignaturePage } from '../pages/signature/signature';
@@ -43,7 +44,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     HomePage
     , SearchPage, DetailPage
     , SearchPopoverPage, FilesPopoverPage, AppDataPage, AppInboundPage, AppOutboundPage, AppTrackStatusPage
-    , LoginPage, LogoutPage, SignaturePage
+    , LoginPage, LogoutPage, SignaturePage, AppRevievStatusPage
     // , MyprofilePage, MytaskPage, ScanmodePage
   ],
   imports: [
@@ -57,7 +58,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     HomePage
     , SearchPage, DetailPage, AppDataPage, AppInboundPage, AppOutboundPage
     , SearchPopoverPage, FilesPopoverPage, AppTrackStatusPage
-    , LoginPage, LogoutPage, SignaturePage
+    , LoginPage, LogoutPage, SignaturePage, AppRevievStatusPage
     // , MyprofilePage, MytaskPage, ScanmodePage
   ],
   providers: [

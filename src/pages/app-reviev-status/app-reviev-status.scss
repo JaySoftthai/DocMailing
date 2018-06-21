@@ -1,0 +1,47 @@
+page-app-reviev-status {
+    .ErrorFont {
+        color: #d61e19;
+    }
+    .DefaultFont {
+        // color: #00dd00;
+    }
+    .btn-Confirm {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+    .btn-Clear {
+        color: #fff;
+        background-color: #d61e19;
+        border-color: #d61e19;
+    }
+    .list-item-thumbnail {
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+    .list-item-thumbnail>img {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    .action-sheet-center {
+        text-align: center !important;
+        -webkit-box-pack: center !important;
+    }
+    .action-sheet-center .button-inner {
+        text-align: center !important;
+        -webkit-box-pack: center !important;
+        -webkit-box-align: center !important;
+    }
+    .bgTextBox {
+        background-color: whitesmoke;
+    }
+    .select-ios,
+    .select-md {
+        background-color: whitesmoke;
+        max-width: 100%;
+    }
+    .toolbar-background-md,
+    .toolbar-background-ios {
+        background-color: transparent !important; // background-image: url(../assets/image/bg_portrait.png);
+    }
+}

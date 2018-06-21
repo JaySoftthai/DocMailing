@@ -24,7 +24,7 @@ import { DetailPage } from '../detail/detail';
   templateUrl: 'app-track-status.html',
 })
 export class AppTrackStatusPage {
-
+  ScanDataType: string = '0';
   Master_DATA: Array<Object>;
   lstInbound: Step[] = [];
   isToogle: boolean = false;
@@ -233,16 +233,24 @@ export class AppTrackStatusPage {
           let curr = ''; let next = '';
           if (IsCanUpdate) {
             switch (this.ddlStatus) {
+              case "3":
+                curr = '2,3,4,5,6,7,8,9,10';
+                next = '3';
+                break;
+              case "4":
+                curr = '2,3,4,5,6,7,8,9,10';
+                next = '4';
+                break;
               case "5":
-                curr = '2,3,4';
+                curr = '2,3,4,5,6,7,8,9,10';
                 next = '5';
                 break;
               case "8":
-                curr = '2,3,4,5,6,7';
+                curr = '2,3,4,5,6,7,8,9,10';
                 next = '8';
                 break;
               case "10":
-                curr = '2,3,4,5,6,7,8,9';
+                curr = '2,3,4,5,6,7,8,9,10';
                 next = '10';
                 break;
               case "11":
@@ -284,16 +292,24 @@ export class AppTrackStatusPage {
                 let curr = ''; let next = '';
                 if (IsCanUpdate) {
                   switch (this.ddlStatus) {
+                    case "3":
+                      curr = '2,3,4,5,6,7,8,9,10';
+                      next = '3';
+                      break;
+                    case "4":
+                      curr = '2,3,4,5,6,7,8,9,10';
+                      next = '4';
+                      break;
                     case "5":
-                      curr = '2,3,4';
+                      curr = '2,3,4,5,6,7,8,9,10';
                       next = '5';
                       break;
                     case "8":
-                      curr = '2,3,4,5,6,7';//curr = '3,4,5,6,7';
+                      curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7';
                       next = '8';
                       break;
                     case "10":
-                      curr = '2,3,4,5,6,7,8,9';//curr = '4,5,6,7,8,9';
+                      curr = '2,3,4,5,6,7,8,9,10';//curr = '4,5,6,7,8,9';
                       next = '10';
                       break;
                     case "11":
@@ -393,8 +409,9 @@ export class AppTrackStatusPage {
     let imgSignature = imgSign;
     // let lstSigneture: Step;
     // lstSigneture.sImg = this.SignatureURL;
+    // console.log(this.ScanDataType)
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
-    this.MasterdataProv.postDocument_ScanStatus(CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
+    this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
       this.lstRecvItms = JSON.parse(res["_body"]);
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';

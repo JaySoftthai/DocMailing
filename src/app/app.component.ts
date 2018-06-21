@@ -10,6 +10,7 @@ import { AppDataPage } from '../pages/app-data/app-data';
 import { AppInboundPage } from '../pages/app-inbound/app-inbound';
 import { AppOutboundPage } from '../pages/app-outbound/app-outbound';
 import { AppTrackStatusPage } from '../pages/app-track-status/app-track-status';
+import { AppRevievStatusPage } from '../pages/app-reviev-status/app-reviev-status';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 // import { SignaturePage } from '../pages/signature/signature';
@@ -30,10 +31,11 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'หน้าหลัก', component: HomePage },
-      { title: 'สแกนรับเข้าเอกสาร', component: AppDataPage },
-      { title: 'สแกนรับเข้าเอกสารส่ง บก.', component: AppInboundPage },
-      { title: 'สแกนรับเอกสารจาก บก.', component: AppOutboundPage },
-      { title: 'สแกนเปลี่ยนสถานะรายการ', component: AppTrackStatusPage },
+      // { title: 'สแกนรับเข้าเอกสาร', component: AppDataPage },
+      // { title: 'สแกนรับเข้าเอกสารส่ง บก.', component: AppInboundPage },
+      // { title: 'สแกนรับเอกสารจาก บก.', component: AppOutboundPage },
+      { title: 'สแกนเปลี่ยนสถานะ(ส่งเอกสาร)', component: AppTrackStatusPage },
+      { title: 'สแกนเปลี่ยนสถานะ(รับเอกสาร)', component: AppRevievStatusPage },
       { title: 'ค้นหาเอกสาร', component: SearchPage },
       { title: 'ข้อมูลผู้ใช้งาน', component: LoginPage },
       // { title: 'ออกจากระบบ', component: LogoutPage }
