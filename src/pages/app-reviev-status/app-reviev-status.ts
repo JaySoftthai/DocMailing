@@ -262,7 +262,10 @@ export class AppRevievStatusPage {
                 break;
 
             }
-            this.UpdateDocumentStatus(curr, next, this.SignatureURL);
+
+            if (data[1]) {//if click cancel from sifnaturepage we will update
+              this.UpdateDocumentStatus(curr, next, this.SignatureURL);
+            }
           }
         });
         modal.present();

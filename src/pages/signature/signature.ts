@@ -36,7 +36,7 @@ export class SignaturePage {
     this.signatureImage = this.signaturePad.toDataURL();
     // console.log(this.signatureImage);
     let sSign_URL = this.signatureImage;
-    this.viewCtrl.dismiss([sSign_URL]);
+    this.viewCtrl.dismiss([sSign_URL, true]);
   }
 
   // ngAfterViewInit() {
@@ -64,7 +64,7 @@ export class SignaturePage {
     let sSign_URL = '';
 
     sSign_URL = this.signatureImage;
-    this.viewCtrl.dismiss([sSign_URL]);
+    this.viewCtrl.dismiss([sSign_URL, false]);
   }
 
   canvasResize() {
