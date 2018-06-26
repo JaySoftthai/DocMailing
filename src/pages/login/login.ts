@@ -72,7 +72,7 @@ export class LoginPage {
     });
   }
   ionViewDidLoad() {
-    this.CurrVersion = '2018.06.06.009-0.0.1'
+    this.CurrVersion = '0.1.1'
 
   }
   presentToast(err) {
