@@ -245,6 +245,10 @@ export class AppTrackStatusPage {
                 curr = '2,3,4,5,6,7,8,9,10';
                 next = '5';
                 break;
+              case "7":
+                curr = '2,3,4,5,6,7,8,9,10';
+                next = '7';
+                break;
               case "8":
                 curr = '2,3,4,5,6,7,8,9,10';
                 next = '8';
@@ -303,6 +307,10 @@ export class AppTrackStatusPage {
                     case "5":
                       curr = '2,3,4,5,6,7,8,9,10';
                       next = '5';
+                      break;
+                    case "7":
+                      curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7';
+                      next = '7';
                       break;
                     case "8":
                       curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7';
