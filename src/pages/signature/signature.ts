@@ -21,6 +21,10 @@ export class SignaturePage {
 
   }
   public signatureImage: string;
+  public window_innerWidth: number;
+  public canvas_clientWidth: number;
+  public canvas_clientHeight: number;
+
   public sTT: string;
   //'canvasWidth': 268,
   private signaturepadOptions: Object = {
@@ -69,6 +73,10 @@ export class SignaturePage {
 
   canvasResize() {
     let canvas = document.querySelector('canvas');
+
+    this.window_innerWidth = window.innerWidth;
+    this.canvas_clientWidth = canvas.clientWidth;
+    this.canvas_clientHeight = canvas.clientHeight;
     console.log('canvas:canvasResize')
     console.log('window.innerWidth=' + window.innerWidth)
     console.log('canvas.clientWidth=' + canvas.clientWidth)
