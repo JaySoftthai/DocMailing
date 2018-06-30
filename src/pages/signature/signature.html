@@ -11,10 +11,6 @@
     <ion-row>
       <ion-col text-center col-12>
         <h2 style=" text-align:center">ลายเซ็นต์</h2>
-        <h2 style=" text-align:center">
-          {{window_innerWidth}} {{canvas_clientWidth}} {{canvas_clientHeight}}
-
-        </h2>
       </ion-col>
       <ion-col col-12>
         <signature-pad col-12 [options]="signaturepadOptions" id="signatureCanvas" (onClear)="onClearHandler()" (onSave)="onSaveHandler($event)">
