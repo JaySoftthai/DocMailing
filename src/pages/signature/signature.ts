@@ -71,8 +71,9 @@ export class SignaturePage {
     let canvas = document.querySelector('canvas');
     console.log('canvas:canvasResize')
     console.log('window.innerWidth=' + window.innerWidth)
-    console.log('window.innerWidth=' + canvas.clientHeight)
-    canvas.width = (window.innerWidth * 0.75692307692307692307692307692308);
+    console.log('canvas.clientWidth=' + canvas.clientWidth)
+    console.log('canvas.clientHeight=' + canvas.clientHeight)
+    canvas.width = (canvas.clientWidth * 0.75692307692307692307692307692308);
     canvas.height = 200;//canvas.clientHeight;
     this.signaturePad.clear();
   }
