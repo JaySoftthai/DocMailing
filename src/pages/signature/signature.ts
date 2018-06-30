@@ -73,15 +73,36 @@ export class SignaturePage {
 
   canvasResize() {
     let canvas = document.querySelector('canvas');
+    /*
+    #iPad 
+    768*0.70692307692307692307692307692308
+    1024*0.60692307692307692307692307692308
+    #Phone
+    360*0.74
+    640*
+    */
+    let ratio = 0.70692307692307692307692307692308;
+    if (window.innerWidth <= 360) {
+      ratio = 0.74;
+    } else if (window.innerWidth > 360 && window.innerWidth <= 640) {
+      ratio = 0.74;
+    } else if (window.innerWidth > 640 && window.innerWidth <= 768) {
+      ratio = 0.70692307692307692307692307692308;
+    } else if (window.innerWidth > 768 && window.innerWidth <= 1024) {
+      ratio = 0.60692307692307692307692307692308;
+    } else if (window.innerWidth > 1024) {
+      ratio = 0.80;
+    }
+
 
     this.window_innerWidth = window.innerWidth;
     this.canvas_clientWidth = canvas.clientWidth;
-    this.canvas_clientHeight = (window.innerWidth * 0.70692307692307692307692307692308);
+    this.canvas_clientHeight = (window.innerWidth * ratio);
     console.log('canvas:canvasResize')
     console.log('window.innerWidth=' + window.innerWidth)
     console.log('canvas.clientWidth=' + canvas.clientWidth)
     console.log('canvas.clientHeight=' + canvas.clientHeight)
-    canvas.width = (window.innerWidth * 0.70692307692307692307692307692308);
+    canvas.width = (window.innerWidth * ratio);
     canvas.height = 200;//canvas.clientHeight; 
     this.signaturePad.clear();
   }
