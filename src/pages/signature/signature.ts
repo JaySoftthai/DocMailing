@@ -76,20 +76,20 @@ export class SignaturePage {
     /*
     #iPad 
     768*0.70692307692307692307692307692308
-    1024*0.60692307692307692307692307692308
+    1024*0.56692307692307692307692307692308
     #Phone
-    360*0.74
-    640*
+    360*0.745
+    640*0.925
     */
     let ratio = 0.70692307692307692307692307692308;
     if (window.innerWidth <= 360) {
-      ratio = 0.74;
+      ratio = 0.85;
     } else if (window.innerWidth > 360 && window.innerWidth <= 640) {
-      ratio = 0.74;
+      ratio = 0.925;
     } else if (window.innerWidth > 640 && window.innerWidth <= 768) {
       ratio = 0.70692307692307692307692307692308;
     } else if (window.innerWidth > 768 && window.innerWidth <= 1024) {
-      ratio = 0.60692307692307692307692307692308;
+      ratio = 0.56692307692307692307692307692308;
     } else if (window.innerWidth > 1024) {
       ratio = 0.80;
     }
