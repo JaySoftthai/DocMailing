@@ -76,12 +76,12 @@ export class SignaturePage {
 
     this.window_innerWidth = window.innerWidth;
     this.canvas_clientWidth = canvas.clientWidth;
-    this.canvas_clientHeight = (window.innerWidth * 0.65692307692307692307692307692308);
+    this.canvas_clientHeight = (window.innerWidth * 0.70692307692307692307692307692308);
     console.log('canvas:canvasResize')
     console.log('window.innerWidth=' + window.innerWidth)
     console.log('canvas.clientWidth=' + canvas.clientWidth)
     console.log('canvas.clientHeight=' + canvas.clientHeight)
-    canvas.width = (window.innerWidth * 0.65692307692307692307692307692308);
+    canvas.width = (window.innerWidth * 0.70692307692307692307692307692308);
     canvas.height = 200;//canvas.clientHeight; 
     this.signaturePad.clear();
   }
