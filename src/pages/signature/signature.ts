@@ -85,13 +85,13 @@ export class SignaturePage {
     if (window.innerWidth <= 360) {
       ratio = 0.85;
     } else if (window.innerWidth > 360 && window.innerWidth <= 640) {
-      ratio = 0.925;
+      ratio = 0.921875;//0.925;
     } else if (window.innerWidth > 640 && window.innerWidth <= 768) {
       ratio = 0.70692307692307692307692307692308;
     } else if (window.innerWidth > 768 && window.innerWidth <= 1024) {
-      ratio = 0.56692307692307692307692307692308;
+      ratio = 0.55;
     } else if (window.innerWidth > 1024) {
-      ratio = 0.80;
+      ratio = 0.40;
     }
 
 
