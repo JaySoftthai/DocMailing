@@ -141,6 +141,7 @@ export class AppTrackStatusPage {
   BindDocumentList(isCanceled?: boolean) {
     if (!isCanceled) {
       //this.CallScaner();
+      return false;
     }
   }
   presentToast(err) {
