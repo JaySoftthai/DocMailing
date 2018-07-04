@@ -117,6 +117,7 @@ export class AppRevievStatusPage {
                     handler: () => {
                       let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
                       this.lstInbound.push(_InboundCode);
+                      this.txtDocCode = '';
                     }
                   }
                 ]
@@ -125,7 +126,7 @@ export class AppRevievStatusPage {
             } else {
               let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
               this.lstInbound.push(_InboundCode);
-              barcodeData.cancelled = true;
+              this.txtDocCode = '';
               return false;
             }
           });
@@ -188,19 +189,19 @@ export class AppRevievStatusPage {
               message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
               buttons: [
                 {
+                  text: 'ไม่ยืนยัน',
+                  handler: () => {
+                    confirm.dismiss();
+                    return false;
+                  }
+                },
+                {
                   text: 'ยืนยัน',
                   handler: () => {
 
                     let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
                     this.lstInbound.push(_InboundCode);
                     this.txtDocCode = '';
-                  }
-                },
-                {
-                  text: 'ไม่ยืนยัน',
-                  handler: () => {
-                    confirm.dismiss();
-                    return false;
                   }
                 }
               ]
