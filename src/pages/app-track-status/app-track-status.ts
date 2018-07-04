@@ -101,18 +101,20 @@ export class AppTrackStatusPage {
                 message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
                 buttons: [
                   {
-                    text: 'ยืนยัน',
-                    handler: () => {
-
-                      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-                      this.lstInbound.push(_InboundCode);
-                      this.txtDocCode = '';
-                    }
-                  },
-                  {
                     text: 'ไม่ยืนยัน',
                     handler: () => {
                       confirm.dismiss();
+                      return false;
+
+                    }
+                  },
+                  {
+                    text: 'ยืนยัน',
+                    handler: () => {
+                      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+                      this.lstInbound.push(_InboundCode);
+                      this.txtDocCode = '';
+                      barcodeData.cancelled = true;
                       return false;
                     }
                   }
@@ -130,7 +132,7 @@ export class AppTrackStatusPage {
         } else {
           this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
         }
-        this.BindDocumentList(barcodeData.cancelled);
+        // this.BindDocumentList(barcodeData.cancelled);
       }
 
     }).catch(err => {
@@ -140,7 +142,7 @@ export class AppTrackStatusPage {
 
   BindDocumentList(isCanceled?: boolean) {
     if (!isCanceled) {
-      //this.CallScaner();
+      //this.CallScaner(); 
     } else {
 
       return false;
