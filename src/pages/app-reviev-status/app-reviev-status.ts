@@ -99,6 +99,8 @@ export class AppRevievStatusPage {
           // this.lstInbound.push(_InboundCode);
 
           this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', barcodeData.text, this.userdata.code).subscribe((res) => {
+
+            this.presentToast(barcodeData.text + ' ' + this.userdata.code + ' ' + res.length);
             if (res.length <= 0) {
               let confirm = this.alertCtrl.create({
                 title: 'แจ้งเตือน',
