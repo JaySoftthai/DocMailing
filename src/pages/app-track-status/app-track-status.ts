@@ -135,7 +135,7 @@ export class AppTrackStatusPage {
         } else {
           this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
         }
-        // this.BindDocumentList(barcodeData.cancelled);
+        this.BindDocumentList(barcodeData.cancelled);
       }
 
     }).catch(err => {
