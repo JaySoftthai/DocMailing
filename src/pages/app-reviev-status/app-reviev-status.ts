@@ -77,8 +77,8 @@ export class AppRevievStatusPage {
       , disableAnimations: false
       , disableSuccessBeep: false
       // , prompt: "Do you want to next?"
-      // , orientation: "portrait"
-      , resultDisplayDuration: 1000
+      // , orientation: "portrait" 1000
+      , resultDisplayDuration: 0
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
@@ -128,6 +128,7 @@ export class AppRevievStatusPage {
         } else {
           this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
         }
+
         this.BindDocumentList(barcodeData.cancelled);
       }
 

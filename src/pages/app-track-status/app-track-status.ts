@@ -74,8 +74,8 @@ export class AppTrackStatusPage {
       , disableAnimations: false
       , disableSuccessBeep: false
       // , prompt: "Do you want to next?"
-      // , orientation: "portrait"
-      , resultDisplayDuration: 1000
+      // , orientation: "portrait"1000
+      , resultDisplayDuration: 0
     }).then(barcodeData => {
 
       this.sBarCode = barcodeData.text;
