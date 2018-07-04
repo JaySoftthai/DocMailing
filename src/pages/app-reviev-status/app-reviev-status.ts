@@ -138,7 +138,7 @@ export class AppRevievStatusPage {
 
   BindDocumentList(isCanceled?: boolean) {
     if (!isCanceled) {
-      this.CallScaner();
+      //this.CallScaner();
     }
   }
   presentToast(err) {
