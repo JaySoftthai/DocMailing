@@ -95,14 +95,14 @@ export class AppRevievStatusPage {
 
 
         if (!IsDupplicate) {
-          let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-          this.lstInbound.push(_InboundCode);
-          /*
-          this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', this.txtDocCode, this.userdata.code).subscribe((res) => {
+          // let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
+          // this.lstInbound.push(_InboundCode);
+
+          this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', barcodeData.text, this.userdata.code).subscribe((res) => {
             if (res.length <= 0) {
               let confirm = this.alertCtrl.create({
                 title: 'แจ้งเตือน',
-                message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
+                message: 'เอกสาร ' + barcodeData.text + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
                 buttons: [
                   {
                     text: 'ไม่ยืนยัน',
@@ -129,7 +129,7 @@ export class AppRevievStatusPage {
               return false;
             }
           });
-*/
+
         } else {
           this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
         }
@@ -144,7 +144,7 @@ export class AppRevievStatusPage {
 
   BindDocumentList(isCanceled?: boolean) {
     if (!isCanceled) {
-      this.CallScaner();
+      // this.CallScaner();
     }
   }
   presentToast(err) {
@@ -176,44 +176,43 @@ export class AppRevievStatusPage {
       }
 
       if (!IsDupplicate && result_expression) {
-        // let barcodeData_text = this.txtDocCode;
-        let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-        this.lstInbound.push(_InboundCode);
-        this.txtDocCode = '';
+        // let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+        // this.lstInbound.push(_InboundCode);
+        // this.txtDocCode = '';
 
-        /*
-                this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', this.txtDocCode, this.userdata.code).subscribe((res) => {
-                  if (res.length <= 0) {
-                    let confirm = this.alertCtrl.create({
-                      title: 'แจ้งเตือน',
-                      message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
-                      buttons: [
-                        {
-                          text: 'ยืนยัน',
-                          handler: () => {
-        
-                            let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-                            this.lstInbound.push(_InboundCode);
-                            this.txtDocCode = '';
-                          }
-                        },
-                        {
-                          text: 'ไม่ยืนยัน',
-                          handler: () => {
-                            confirm.dismiss();
-                            return false;
-                          }
-                        }
-                      ]
-                    });
-                    confirm.present();
-                  } else {
+
+        this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', this.txtDocCode, this.userdata.code).subscribe((res) => {
+          if (res.length <= 0) {
+            let confirm = this.alertCtrl.create({
+              title: 'แจ้งเตือน',
+              message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
+              buttons: [
+                {
+                  text: 'ยืนยัน',
+                  handler: () => {
+
                     let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
                     this.lstInbound.push(_InboundCode);
                     this.txtDocCode = '';
                   }
-                });
-         */
+                },
+                {
+                  text: 'ไม่ยืนยัน',
+                  handler: () => {
+                    confirm.dismiss();
+                    return false;
+                  }
+                }
+              ]
+            });
+            confirm.present();
+          } else {
+            let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+            this.lstInbound.push(_InboundCode);
+            this.txtDocCode = '';
+          }
+        });
+
 
       } else {
         this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ((result_expression) ? '' : ' รูปแบบไม่ถูกต้อง')));
