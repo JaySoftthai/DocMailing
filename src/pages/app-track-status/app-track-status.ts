@@ -92,8 +92,40 @@ export class AppTrackStatusPage {
 
 
         if (!IsDupplicate) {
-          let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-          this.lstInbound.push(_InboundCode);
+
+
+          this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', this.txtDocCode, this.userdata.code).subscribe((res) => {
+            if (res.length <= 0) {
+              let confirm = this.alertCtrl.create({
+                title: 'แจ้งเตือน',
+                message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
+                buttons: [
+                  {
+                    text: 'ยืนยัน',
+                    handler: () => {
+
+                      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+                      this.lstInbound.push(_InboundCode);
+                      this.txtDocCode = '';
+                    }
+                  },
+                  {
+                    text: 'ไม่ยืนยัน',
+                    handler: () => {
+                      confirm.dismiss();
+                      return false;
+                    }
+                  }
+                ]
+              });
+              confirm.present();
+            } else {
+              let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+              this.lstInbound.push(_InboundCode);
+              this.txtDocCode = '';
+            }
+          });
+
 
         } else {
           this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
@@ -141,9 +173,39 @@ export class AppTrackStatusPage {
 
       if (!IsDupplicate && result_expression) {
         // let barcodeData_text = this.txtDocCode;
-        let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-        this.lstInbound.push(_InboundCode);
-        this.txtDocCode = '';
+
+        this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', this.txtDocCode, this.userdata.code).subscribe((res) => {
+          if (res.length <= 0) {
+            let confirm = this.alertCtrl.create({
+              title: 'แจ้งเตือน',
+              message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
+              buttons: [
+                {
+                  text: 'ยืนยัน',
+                  handler: () => {
+
+                    let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+                    this.lstInbound.push(_InboundCode);
+                    this.txtDocCode = '';
+                  }
+                },
+                {
+                  text: 'ไม่ยืนยัน',
+                  handler: () => {
+                    confirm.dismiss();
+                    return false;
+                  }
+                }
+              ]
+            });
+            confirm.present();
+          } else {
+            let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
+            this.lstInbound.push(_InboundCode);
+            this.txtDocCode = '';
+          }
+        });
+
 
       } else {
         this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ((result_expression) ? '' : ' รูปแบบไม่ถูกต้อง')));
