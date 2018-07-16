@@ -307,19 +307,19 @@ export class AppRevievStatusPage {
             switch (this.ddlStatus) {
               case "2":
                 curr = '2,3,4,5,6,7,14,15,16,17,18';
-                next = '3';
+                next = '2';
                 break;
               case "3":
                 curr = '2,3,4,5,6,7,14,15,16,17,18';
-                next = '4';
+                next = '2';
                 break;
               case "4":
                 curr = '2,3,4,5,6,7,14,15,16,17,18';
-                next = '5';
+                next = '4';
                 break;
               case "7":
                 curr = '2,3,4,5,6,7,14,15,16,17,18';
-                next = '14';
+                next = '7';
                 break;
               case "14":
                 curr = '2,3,4,5,6,7,14,15,16,17,18';
@@ -377,20 +377,19 @@ export class AppRevievStatusPage {
                   switch (this.ddlStatus) {
                     case "2":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
-                      next = '3';
+                      next = '2';
                       break;
                     case "3":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
-                      next = '4';
+                      next = '2';
                       break;
                     case "4":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
-                      next = '5';
+                      next = '4';
                       break;
                     case "7":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
-                      next = '14';
-                      break;
+                      next = '7';
                     case "14":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '14';
