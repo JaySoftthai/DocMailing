@@ -44,4 +44,9 @@ page-app-reviev-status {
     .toolbar-background-ios {
         background-color: transparent !important; // background-image: url(../assets/image/bg_portrait.png);
     }
+    .alert-md,
+    .alert-ios,
+    .alert-radio-group {
+        max-height: 400px !important;
+    }
 }
