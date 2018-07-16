@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.docmailing.ptt" version="0.1.1" 
-    xmlns="http://www.w3.org/ns/widgets" 
-    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.docmailing.ptt" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>DocMailing</name>
     <description>PTT Document/Post Mailing</description>
     <author email="softthai@softthai.com" href="http://www.softthai.com/">Softthai Application</author>
@@ -63,7 +61,6 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
         <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
@@ -97,17 +94,13 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <engine name="android" spec="6.3.0" />
-    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <plugin name="cordova-plugin-photo-library" spec="^2.1.1">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
     </plugin>
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.16" />
-    <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
-    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="info.protonet.imageresizer" spec="^0.1.1" />
     <plugin name="com.synconset.imagepicker" spec="~2.1.10">
@@ -133,5 +126,10 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="~1.6.0" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <engine name="android" spec="~6.3.0" />
     <engine name="ios" spec="~4.5.4" />
+    <plugin name="cordova-plugin-filepath" spec="^1.3.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
 </widget>

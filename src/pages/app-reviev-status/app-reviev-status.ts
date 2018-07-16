@@ -305,28 +305,40 @@ export class AppRevievStatusPage {
           let curr = ''; let next = '';
           if (IsCanUpdate) {
             switch (this.ddlStatus) {
+              case "2":
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                next = '7';
+                break;
+              case "3":
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                next = '7';
+                break;
+              case "4":
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                next = '7';
+                break;
               case "7":
-                curr = '6,7,14,15,16,17,18';
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '7';
                 break;
               case "14":
-                curr = '6,7,14,15,16,17,18';
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '14';
                 break;
               case "15":
-                curr = '6,7,14,15,16,17,18';
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '15';
                 break;
               case "16":
-                curr = '6,7,14,15,16,17,18';
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '16';
                 break;
               case "18":
-                curr = '6,7,14,15,16,17,18';
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '18';
                 break;
               case "19":
-                curr = '6,7,14,15,16,17,18';
+                curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '19';
                 break;
 
@@ -363,28 +375,40 @@ export class AppRevievStatusPage {
                 let curr = ''; let next = '';
                 if (IsCanUpdate) {
                   switch (this.ddlStatus) {
+                    case "2":
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      next = '7';
+                      break;
+                    case "3":
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      next = '7';
+                      break;
+                    case "4":
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      next = '7';
+                      break;
                     case "7":
-                      curr = '6,7,14,15,16,17,18';
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '7';
                       break;
                     case "14":
-                      curr = '6,7,14,15,16,17,18';
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '14';
                       break;
                     case "15":
-                      curr = '6,7,14,15,16,17,18';
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '15';
                       break;
                     case "16":
-                      curr = '6,7,14,15,16,17,18';
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '16';
                       break;
                     case "18":
-                      curr = '6,7,14,15,16,17,18';
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '18';
                       break;
                     case "19":
-                      curr = '6,7,14,15,16,17,18';
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '19';
                       break;
 

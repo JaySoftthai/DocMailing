@@ -30,6 +30,9 @@
         <label *ngIf="c.nPrice != null" style="font-size: 1.0rem;line-height: normal;text-overflow: inherit;color: #666;">ค่าเดินทาง {{c.nPrice}} บาท</label>
         <label *ngIf="c.nPrice == null" style="font-size: 1.0rem;line-height: normal;text-overflow: inherit;color: #666;">ค่าเดินทาง - บาท</label>
       </small>
+      <button ion-button clear item-end (click)="presentActionSheet(c.nDocID,c.sDetail)">
+        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+      </button>
       <button ion-button clear item-end (click)="viewdetail(c.nDocID)">View</button>
     </ion-item>
   </ion-list>

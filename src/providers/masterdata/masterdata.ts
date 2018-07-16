@@ -93,5 +93,15 @@ export class MasterdataProvider {
 
     return this.apiProvider.getApiEndpoint(sFile_Handler);
   }
+
+  gettUploadURL() {
+    return this.apiProvider.getUploadUrl() + 'uploadfiles.ashx';
+
+  }
+  postUploadPicture(sDataType, jsnData, imgSignature, UserScan, ToStep): Promise<any> {
+    let sFile_Handler = 'transaction_status.ashx';
+    return this.apiProvider.postUploadEndpoint(sFile_Handler, JSON.stringify({ img: imgSignature, sUserID: UserScan, sAssignUserID: UserScan, itm: jsnData, NextStep: ToStep }), imgSignature);
+
+  }
   ///End Method
 }

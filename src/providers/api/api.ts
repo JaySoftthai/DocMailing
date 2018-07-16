@@ -17,6 +17,7 @@ import { Autocompletereturn } from '../../models/autocompletereturn';
 export class ApiProvider {
   apiUrl: string;
   epiUrl: string;
+  UploadUrl: string;
 
   constructor(public http: Http, public network: Network) {
     // this.apiUrl = "http://localhost:1871/Mobile/";
@@ -29,10 +30,16 @@ export class ApiProvider {
     // this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
     this.epiUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
 
+    // this.epiUrl = "http://localhost:1871/Mobile/";
+    // this.epiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
+    // this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
+    this.UploadUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+
   }
 
   getApiUrl(): string { return this.apiUrl; }
   getWebUrl(): string { return this.epiUrl; }
+  getUploadUrl(): string { return this.UploadUrl; }
 
 
   //ดึงข้อมูลจาก Backend ด้วย method get() ตาม URL ที่ระบุไว้
@@ -50,6 +57,22 @@ export class ApiProvider {
         .subscribe(res => {
           resolve(res);
           // this.data.response = res["_body"];
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+  getUploadEndpoint(sFile_Handler: string): Observable<any> {
+    return this.http.get(this.UploadUrl + sFile_Handler)
+      .map((res: Response) => <any>res.json())
+      .catch(this.handleError);
+  }
+  postUploadEndpoint(sFile_Handler: string, jsStringItem: string, imgSignature: string): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.UploadUrl + sFile_Handler, jsStringItem)
+        .subscribe(res => {
+          resolve(res);
         }, (err) => {
           reject(err);
         });

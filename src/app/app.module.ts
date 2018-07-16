@@ -9,7 +9,10 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { SignaturePadModule } from 'angular2-signaturepad';
-// import { ActionSheetController } from 'ionic-angular'
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -71,6 +74,10 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     AutocompletesProvider
     , MasterdataProvider, AppVersion, Base64ToGallery, BarcodeScanner, UseraccountProvider
     // ,UserloginProvider
+    , Camera
+    , File
+    , FileTransfer
+    , FilePath
   ]
 })
 export class AppModule { }
