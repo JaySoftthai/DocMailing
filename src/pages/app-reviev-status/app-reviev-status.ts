@@ -516,7 +516,7 @@ export class AppRevievStatusPage {
       }
       loading.dismiss();
       if (this.lstInbound.filter((w) => w.cActive == 'N').length > 0) {
-        sMsg = 'สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว';
+        sMsg = 'ไม่สามารถดำเนินการได้ กรุณาตรวจสอบความถูกต้องของข้อมูล';//สถานะรายการบางรายการไม่อยู่ในขั้นตอนดังกล่าว
       }
       this.presentToast(sMsg);
     }).catch(err => {

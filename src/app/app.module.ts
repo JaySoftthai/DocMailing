@@ -13,6 +13,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -51,7 +52,7 @@ import { UseraccountProvider } from '../providers/useraccount/useraccount';
     // , MyprofilePage, MytaskPage, ScanmodePage
   ],
   imports: [
-    BrowserModule, HttpModule,
+    BrowserModule, HttpModule, TextMaskModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(), SignaturePadModule
   ],

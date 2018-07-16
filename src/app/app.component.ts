@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 import { HomePage } from '../pages/home/home';
 // import { ListPage } from '../pages/list/list';
@@ -59,4 +60,19 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  public price = 0;
+  private currencyMask = createNumberMask({
+    prefix: '',
+    suffix: '',
+    includeThousandsSeparator: true,
+    thousandsSeparatorSymbol: ',',
+    allowDecimal: true,
+    decimalSymbol: '.',
+    decimalLimit: 2,
+    integerLimit: null,
+    requireDecimal: false,
+    allowNegative: false,
+    allowLeadingZeroes: false
+  });
 }
