@@ -375,10 +375,6 @@ export class AppRevievStatusPage {
                 let curr = ''; let next = '';
                 if (IsCanUpdate) {
                   switch (this.ddlStatus) {
-                    case "2":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
-                      next = '2';
-                      break;
                     case "3":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '3';
@@ -386,6 +382,10 @@ export class AppRevievStatusPage {
                     case "4":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '4';
+                      break;
+                    case "5":
+                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      next = '5';
                       break;
                     case "7":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
