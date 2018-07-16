@@ -381,7 +381,7 @@ export class AppRevievStatusPage {
                       break;
                     case "3":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
-                      next = '2';
+                      next = '3';
                       break;
                     case "4":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
