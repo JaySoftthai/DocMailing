@@ -58,7 +58,7 @@ export class SearchPopoverPage {
   InitCtrl() {
 
     this.BindCounterServices();
-    this.BindStep();
+    // this.BindStep();
 
   }
   BindCounterServices(isScroll?: boolean) {
@@ -75,7 +75,33 @@ export class SearchPopoverPage {
     );
   }
   BindStep(isScroll?: boolean) {
-
+    /*switch (item_)
+                        {
+                            case "0": //ร่างเอกสาร
+                                Condition_Status += "(d.nStep=0  AND d.cStatus='D')";
+                                break;
+                            case "1": //รออนุมัติ
+                                Condition_Status += "(d.nStep=1 AND d.cStatus='Y')";
+                                break;
+                            case "2": //ไม่อนุมัติ
+                                Condition_Status += "(d.nStep=1 AND d.cStatus='R')";
+                                break;
+                            case "3": //เอกสารระหว่างดำเนินการ
+                                Condition_Status += "(d.nStep IN (2,3,4,5,6,7,14,15,16,17,18) AND d.cStatus='Y')";
+                                break;
+                            case "4": //เอกสารเข้า (คือเอกสารที่ผู้รับเป็นของเรา)
+                                Condition_Status += "d.nDocID IN (SELECT [nDocID] FROM [TDocument_Recipient] WHERE [sRecipientID]='" + sUserID + "' AND cDel='N')";
+                                break;
+                            case "5": //เอกสารส่งคืน
+                                Condition_Status += "d.nStep=8";
+                                break;
+                            case "6": //ปิดงาน
+                                Condition_Status += "d.nStep IN (11,19)";
+                                break;
+                            case "7": //ยกเลิก
+                                Condition_Status += "d.cStatus='C'";
+                                break;
+                        } */
     this.sub = this.MasterDataProv.getData_Master('masterdata_status', '', 0, 50).subscribe(
       (res) => {
         if (isScroll && this.lstStep.length > 0)
