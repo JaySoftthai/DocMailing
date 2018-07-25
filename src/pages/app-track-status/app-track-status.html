@@ -18,14 +18,14 @@
     <ion-row>
       <ion-col col-12>
         <ion-select full [(ngModel)]="ddlStatus" placeholder="Select status">
-          <ion-option value="3">รับเข้าเอกสาร</ion-option>
-          <ion-option value="4">รับเข้าเอกสารส่ง กด.</ion-option>
-          <ion-option value="5">กด. รับงานเอกสาร</ion-option>
-          <ion-option value="7">ยืนยันรับงานจาก กด.</ion-option>
-          <ion-option value="8">เอกสารส่งคืน</ion-option>
-          <ion-option value="10">ปลายทางไม่มีผู้รับ</ion-option>
+          <!-- <ion-option value="3" *ngIf="isMessenger">รับเข้าเอกสาร</ion-option> -->
+          <ion-option value="4" *ngIf="isCourier">รับเข้าเอกสารส่ง กด.</ion-option>
+          <ion-option value="5" *ngIf="isManager || isMessenger">กด. รับงานเอกสาร</ion-option>
+          <ion-option value="7" *ngIf="isCourier || isMessenger">ยืนยันรับงานจาก กด.</ion-option>
+          <ion-option value="8" *ngIf="isManager || isCourier || isMessenger">เอกสารส่งคืน</ion-option>
+          <ion-option value="10" *ngIf="isManager || isCourier || isMessenger">ปลายทางไม่มีผู้รับ</ion-option>
           <!--<ion-option value="15">ไม่มีเอกสารปลายทาง</ion-option>-->
-          <ion-option value="11">ปิดงาน</ion-option>
+          <ion-option value="11" *ngIf="isManager || isCourier || isMessenger">ปิดงาน</ion-option>
         </ion-select>
       </ion-col>
     </ion-row>

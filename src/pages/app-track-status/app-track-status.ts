@@ -40,6 +40,9 @@ export class AppTrackStatusPage {
   ddlStatus: any;
   userdata: UserAccount;
   IsScanner: boolean;
+  isMessenger: boolean = false;
+  isCourier: boolean = false;
+  isManager: boolean = false;
   arr_RoleAcction: string = ',9,10,11,';
   constructor(
     public toastCtrl: ToastController,
@@ -56,6 +59,10 @@ export class AppTrackStatusPage {
     this.userProv.getUserAccount().then((value: UserAccount) => {
       this.userdata = value;
       if (value != undefined && value.code != null) {
+
+        this.isMessenger = (this.userdata.role == "11");
+        this.isCourier = (this.userdata.role == "10");
+        this.isManager = (this.userdata.role == "9");
         this.IsScanner = this.arr_RoleAcction.indexOf(',' + this.userdata.role + ',') > 0;
       } else {
         this.navCtrl.setRoot(LoginPage);

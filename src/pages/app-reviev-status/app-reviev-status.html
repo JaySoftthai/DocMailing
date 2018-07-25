@@ -18,15 +18,15 @@
     <ion-row>
       <ion-col col-12>
         <ion-select full [(ngModel)]="ddlStatus" placeholder="Select status">
-          <ion-option value="3">รับเข้าเอกสาร</ion-option>
-          <ion-option value="4">รับเข้าเอกสารส่ง กด.</ion-option>
-          <ion-option value="5">กด. รับงานเอกสาร</ion-option>
-          <ion-option value="7">ยืนยันรับงานจาก กด.</ion-option>
-          <ion-option value="14">นำเอกสารกลับไปกอง กด.</ion-option>
-          <ion-option value="15">ไม่มีเอกสารปลายทาง</ion-option>
-          <ion-option value="16">กด.รับงานเอกสาร</ion-option>
-          <ion-option value="18">ยืนยันรับงานจาก กด.เพื่อส่งเอกสาร</ion-option>
-          <ion-option value="19">ปิดงาน</ion-option>
+          <!-- <ion-option value="3">รับเข้าเอกสาร</ion-option> -->
+          <ion-option value="4" *ngIf="isCourier">รับเข้าเอกสารส่ง กด.</ion-option>
+          <ion-option value="5" *ngIf="isManager || isMessenger">กด. รับงานเอกสาร</ion-option>
+          <ion-option value="7" *ngIf="isMessenger">ยืนยันรับงานจาก กด.</ion-option>
+          <ion-option value="14" *ngIf="isMessenger || isMessenger">นำเอกสารกลับไปกอง กด.</ion-option>
+          <ion-option value="15" *ngIf="isMessenger">ไม่มีเอกสารปลายทาง</ion-option>
+          <ion-option value="16" *ngIf="isManager || isMessenger">{{isMessenger ? 'กด. รับงานเอกสาร' : 'กด. รับงาน Messenger'}}</ion-option>
+          <ion-option value="18" *ngIf="isCourier || isMessenger">ยืนยันรับงานจาก กด.เพื่อส่งเอกสาร</ion-option>
+          <ion-option value="19" *ngIf="isManager || isCourier || isMessenger">ปิดงาน</ion-option>
         </ion-select>
       </ion-col>
     </ion-row>
