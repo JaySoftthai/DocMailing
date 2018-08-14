@@ -107,7 +107,9 @@ export class AppRevievStatusPage {
           this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', barcodeData.text, this.userdata.code).subscribe((res) => {
 
             // this.presentToast(barcodeData.text + ' ' + this.userdata.code + ' ' + res.length);
-            if (res.length <= 0) {
+
+            let isCourierRole = (this.userdata.role == "10");
+            if (res.length <= 0 && (!isCourierRole)) {
               let confirm = this.alertCtrl.create({
                 title: 'แจ้งเตือน',
                 message: 'เอกสาร ' + barcodeData.text + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
