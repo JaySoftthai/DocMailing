@@ -396,7 +396,6 @@ export class AppRevievStatusPage {
                       next = '5';
                       break;
                     case "7":
-                      this.presentToast(IsCanUpdate + ' ' + this.ddlStatus)
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '7';
                     case "14":
@@ -511,8 +510,8 @@ export class AppRevievStatusPage {
     loading.present();//เริ่มแสดง Loading 
     let imgSignature = imgSign;
     // let lstSigneture: Step;
-    // lstSigneture.sImg = this.SignatureURL;
-    this.presentToast(ToStat + ' - ' + this.ddlStatus)
+    // lstSigneture.sImg = this.SignatureURL; 
+    ToStat = this.ddlStatus;
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
