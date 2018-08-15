@@ -512,10 +512,10 @@ export class AppRevievStatusPage {
     let imgSignature = imgSign;
     // let lstSigneture: Step;
     // lstSigneture.sImg = this.SignatureURL;
+    this.presentToast(ToStat)
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
-      this.presentToast(CurrStat + ' ' + ToStat)
       this.lstRecvItms = JSON.parse(res["_body"]);
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย.';
       if (this.lstRecvItms.length > 0) {
