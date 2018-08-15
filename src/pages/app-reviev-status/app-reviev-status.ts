@@ -512,7 +512,7 @@ export class AppRevievStatusPage {
     let imgSignature = imgSign;
     // let lstSigneture: Step;
     // lstSigneture.sImg = this.SignatureURL;
-    this.presentToast(ToStat)
+    this.presentToast(ToStat + ' - ' + this.ddlStatus)
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
