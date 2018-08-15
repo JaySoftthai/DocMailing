@@ -1,8 +1,8 @@
 {
   "name": "DocMailing",
-  "app_id": "5dc4853f",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "5dc4853f"
 }

@@ -109,7 +109,7 @@ export class AppRevievStatusPage {
             // this.presentToast(barcodeData.text + ' ' + this.userdata.code + ' ' + res.length);
 
             let isCourierRole = (this.userdata.role == "10");
-            if (res.length <= 0 && (!isCourierRole)) {
+            if (res.length <= 0 && (isCourierRole)) {
               let confirm = this.alertCtrl.create({
                 title: 'แจ้งเตือน',
                 message: 'เอกสาร ' + barcodeData.text + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
