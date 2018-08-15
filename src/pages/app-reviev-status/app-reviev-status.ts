@@ -382,7 +382,6 @@ export class AppRevievStatusPage {
               handler: () => {
                 let curr = ''; let next = '';
                 if (IsCanUpdate) {
-                  this.presentToast(IsCanUpdate + ' ' + this.ddlStatus)
                   switch (this.ddlStatus) {
                     case "3":
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
@@ -397,6 +396,7 @@ export class AppRevievStatusPage {
                       next = '5';
                       break;
                     case "7":
+                      this.presentToast(IsCanUpdate + ' ' + this.ddlStatus)
                       curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '7';
                     case "14":
@@ -515,6 +515,7 @@ export class AppRevievStatusPage {
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
+      this.presentToast(CurrStat + ' ' + ToStat)
       this.lstRecvItms = JSON.parse(res["_body"]);
       let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย.';
       if (this.lstRecvItms.length > 0) {
