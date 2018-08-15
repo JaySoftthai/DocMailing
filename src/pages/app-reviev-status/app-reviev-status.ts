@@ -515,7 +515,7 @@ export class AppRevievStatusPage {
     this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 
       this.lstRecvItms = JSON.parse(res["_body"]);
-      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย';
+      let sMsg = 'ดำเนินการทำรายการเสร็จเรียบร้อย.';
       if (this.lstRecvItms.length > 0) {
         this.lstInbound = this.lstRecvItms[0].itm.filter((w) => w.cActive != 'Y');
       } else {
