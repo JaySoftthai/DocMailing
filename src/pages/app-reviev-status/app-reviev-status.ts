@@ -312,6 +312,7 @@ export class AppRevievStatusPage {
 
           let curr = ''; let next = '';
           if (IsCanUpdate) {
+            this.presentToast(this.ddlStatus)
             switch (this.ddlStatus) {
               case "3":
                 curr = '2,3,4,5,6,7,14,15,16,17,18';
