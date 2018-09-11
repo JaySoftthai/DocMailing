@@ -20,6 +20,7 @@ import { HomePage } from '../home/home';
 export class LoginPage {
   txtUsername: string;
   txtPassword: string;
+  ddlUserGroup: string;
   errorMessage: string;
   usracc: UserAccount;
 
@@ -29,6 +30,7 @@ export class LoginPage {
   myForm: FormGroup;
   username: FormControl;
   password: FormControl;
+  usergroup: FormControl;
   remember: FormControl;
   user: UserAccount;
   fullname: string;
@@ -43,10 +45,11 @@ export class LoginPage {
 
     //ตรวจสอบความถูกต้องของฟอร์ม เช่น required, minLength
     this.username = this.formBdr.control('', Validators.required);
+    this.usergroup = this.formBdr.control('', Validators.required);
     this.password = this.formBdr.control('', Validators.compose([Validators.required, Validators.minLength(8)]));
     this.remember = this.formBdr.control('');
 
-    this.myForm = this.formBdr.group({ 'username': this.username, 'password': this.password, 'remember': this.remember });
+    this.myForm = this.formBdr.group({ 'username': this.username, 'password': this.password, 'remember': this.remember, 'usergroup': this.usergroup });
 
     this.userProv.createTable();
   }
@@ -97,9 +100,10 @@ export class LoginPage {
     //รับข้อมูลต่างๆมาจากฟอร์ม
     let username = this.myForm.controls['username'].value;
     let password = this.myForm.controls['password'].value;
+    let usergroup = this.myForm.controls['usergroup'].value;
     let remember = true;
-
-    this.userProv.login(username, password, remember).then((res: boolean) => {
+    usergroup = (usergroup + "" != "") ? usergroup.replace('BSA', '') : usergroup;
+    this.userProv.login(usergroup + "" + username, password, remember).then((res: boolean) => {
       /*nSubID	nMainID	sName
 9		บก.
 10	Courier

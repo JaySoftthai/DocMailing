@@ -125,18 +125,42 @@ export class AppRevievStatusPage {
                   {
                     text: 'ยืนยัน',
                     handler: () => {
-                      let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-                      this.lstInbound.push(_InboundCode);
-                      this.txtDocCode = '';
+
+                      this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
+                        (res) => {
+                          let lst: trans_request;
+                          if (res.length > 0) {
+                            lst = res[0];
+                            let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                            this.lstInbound.push(_InboundCode);
+                            this.txtDocCode = '';
+                          }
+                        },
+                        (error) => {
+                          this.errorMessage = <any>error;
+                          this.presentToast(this.errorMessage);
+                        });
                     }
                   }
                 ]
               });
               confirm.present();
             } else {
-              let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-              this.lstInbound.push(_InboundCode);
-              this.txtDocCode = '';
+
+              this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
+                (res) => {
+                  let lst: trans_request;
+                  if (res.length > 0) {
+                    lst = res[0];
+                    let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                    this.lstInbound.push(_InboundCode);
+                    this.txtDocCode = '';
+                  }
+                },
+                (error) => {
+                  this.errorMessage = <any>error;
+                  this.presentToast(this.errorMessage);
+                });
               return false;
             }
           });
@@ -173,7 +197,9 @@ export class AppRevievStatusPage {
   }
 
   GenList() {
-    if (this.txtDocCode != "") {
+
+    let SelectStatus = (this.ddlStatus != undefined && this.ddlStatus != "");
+    if (this.txtDocCode != "" && SelectStatus) {
       //check expression
       let re = /^([0-9]{1,4}\-[0-9]{1,2}\-[0-9]{1,5})$/;
       let result_expression = re.test(this.txtDocCode);
@@ -209,18 +235,41 @@ export class AppRevievStatusPage {
                   text: 'ยืนยัน',
                   handler: () => {
 
-                    let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-                    this.lstInbound.push(_InboundCode);
-                    this.txtDocCode = '';
+
+                    this.MasterdataProv.getReqDocumentByDocCode('request_document_code', this.txtDocCode).subscribe(
+                      (res) => {
+                        let lst: trans_request;
+                        if (res.length > 0) {
+                          lst = res[0];
+                          let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
+                          this.lstInbound.push(_InboundCode);
+                          this.txtDocCode = '';
+                        }
+                      },
+                      (error) => {
+                        this.errorMessage = <any>error;
+                        this.presentToast(this.errorMessage);
+                      });
                   }
                 }
               ]
             });
             confirm.present();
           } else {
-            let _InboundCode = new Step('', 'เอกสารพร้อมรับ', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-            this.lstInbound.push(_InboundCode);
-            this.txtDocCode = '';
+            this.MasterdataProv.getReqDocumentByDocCode('request_document_code', this.txtDocCode).subscribe(
+              (res) => {
+                let lst: trans_request;
+                if (res.length > 0) {
+                  lst = res[0];
+                  let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
+                  this.lstInbound.push(_InboundCode);
+                  this.txtDocCode = '';
+                }
+              },
+              (error) => {
+                this.errorMessage = <any>error;
+                this.presentToast(this.errorMessage);
+              });
           }
         });
 
@@ -229,7 +278,11 @@ export class AppRevievStatusPage {
         this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ((result_expression) ? '' : ' รูปแบบไม่ถูกต้อง')));
       }
     } else {
-      this.presentToast('กรุณากรอกบาร์โค๊ด');
+      let cond_msg = "";
+      cond_msg += (!SelectStatus) ? (cond_msg == "" ? "กรุณา" : "และ") + "ระบุสถานะที่ต้องการดำเนินการ" : "";
+      cond_msg += (this.txtDocCode == "") ? (cond_msg == "" ? "กรุณา" : "และ") + "กรอกบาร์โค๊ด" : "";
+
+      this.presentToast(cond_msg);
 
     }
   }
@@ -314,39 +367,39 @@ export class AppRevievStatusPage {
           if (IsCanUpdate) {
             switch (this.ddlStatus) {
               case "3":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '2,3,4,5';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '3';
                 break;
               case "4":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '2,3,4,5';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '4';
                 break;
               case "5":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '2,3,4,5';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '5';
                 break;
               case "7":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '7';
                 break;
               case "14":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '14';
                 break;
               case "15":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '15';
                 break;
               case "16":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '16';
                 break;
               case "18":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '18';
                 break;
               case "19":
-                curr = '2,3,4,5,6,7,14,15,16,17,18';
+                curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                 next = '19';
                 break;
 
@@ -384,38 +437,38 @@ export class AppRevievStatusPage {
                 if (IsCanUpdate) {
                   switch (this.ddlStatus) {
                     case "3":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '2,3,4,5';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '3';
                       break;
                     case "4":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '2,3,4,5';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '4';
                       break;
                     case "5":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '2,3,4,5';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '5';
                       break;
                     case "7":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '7';
                     case "14":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '14';
                       break;
                     case "15":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '15';
                       break;
                     case "16":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '16';
                       break;
                     case "18":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '18';
                       break;
                     case "19":
-                      curr = '2,3,4,5,6,7,14,15,16,17,18';
+                      curr = '5,6,7,14,15,16,17,18';//curr = '2,3,4,5,6,7,14,15,16,17,18';
                       next = '19';
                       break;
 

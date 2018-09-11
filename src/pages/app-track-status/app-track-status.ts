@@ -124,18 +124,41 @@ export class AppTrackStatusPage {
                   {
                     text: 'ยืนยัน',
                     handler: () => {
-                      let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-                      this.lstInbound.push(_InboundCode);
-                      this.txtDocCode = '';
+                      this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
+                        (res) => {
+                          let lst: trans_request;
+                          if (res.length > 0) {
+                            lst = res[0];
+                            let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                            this.lstInbound.push(_InboundCode);
+                            this.txtDocCode = '';
+                          }
+                        },
+                        (error) => {
+                          this.errorMessage = <any>error;
+                          this.presentToast(this.errorMessage);
+                        });
                     }
                   }
                 ]
               });
               confirm.present();
             } else {
-              let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-              this.lstInbound.push(_InboundCode);
-              this.txtDocCode = '';
+
+              this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
+                (res) => {
+                  let lst: trans_request;
+                  if (res.length > 0) {
+                    lst = res[0];
+                    let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                    this.lstInbound.push(_InboundCode);
+                    this.txtDocCode = '';
+                  }
+                },
+                (error) => {
+                  this.errorMessage = <any>error;
+                  this.presentToast(this.errorMessage);
+                });
             }
           });
 
@@ -171,7 +194,9 @@ export class AppTrackStatusPage {
   }
 
   GenList() {
-    if (this.txtDocCode != "") {
+    let SelectStatus = (this.ddlStatus != undefined && this.ddlStatus != "");
+
+    if (this.txtDocCode != "" && SelectStatus) {
       //check expression
       let re = /^([0-9]{1,4}\-[0-9]{1,2}\-[0-9]{1,5})$/;
       let result_expression = re.test(this.txtDocCode);
@@ -199,9 +224,20 @@ export class AppTrackStatusPage {
                   text: 'ยืนยัน',
                   handler: () => {
 
-                    let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-                    this.lstInbound.push(_InboundCode);
-                    this.txtDocCode = '';
+                    this.MasterdataProv.getReqDocumentByDocCode('request_document_code', this.txtDocCode).subscribe(
+                      (res) => {
+                        let lst: trans_request;
+                        if (res.length > 0) {
+                          lst = res[0];
+                          let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
+                          this.lstInbound.push(_InboundCode);
+                          this.txtDocCode = '';
+                        }
+                      },
+                      (error) => {
+                        this.errorMessage = <any>error;
+                        this.presentToast(this.errorMessage);
+                      });
                   }
                 },
                 {
@@ -215,9 +251,21 @@ export class AppTrackStatusPage {
             });
             confirm.present();
           } else {
-            let _InboundCode = new Step('', 'เอกสารพร้อมส่ง', this.txtDocCode, 'assets/images/Drop-Down01.png', 'Y');
-            this.lstInbound.push(_InboundCode);
-            this.txtDocCode = '';
+
+            this.MasterdataProv.getReqDocumentByDocCode('request_document_code', this.txtDocCode).subscribe(
+              (res) => {
+                let lst: trans_request;
+                if (res.length > 0) {
+                  lst = res[0];
+                  let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
+                  this.lstInbound.push(_InboundCode);
+                  this.txtDocCode = '';
+                }
+              },
+              (error) => {
+                this.errorMessage = <any>error;
+                this.presentToast(this.errorMessage);
+              });
           }
         });
 
@@ -226,7 +274,11 @@ export class AppTrackStatusPage {
         this.presentToast(this.txtDocCode + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ((result_expression) ? '' : ' รูปแบบไม่ถูกต้อง')));
       }
     } else {
-      this.presentToast('กรุณากรอกบาร์โค๊ด');
+      let cond_msg = "";
+      cond_msg += (!SelectStatus) ? (cond_msg == "" ? "กรุณา" : "และ") + "ระบุสถานะที่ต้องการดำเนินการ" : "";
+      cond_msg += (this.txtDocCode == "") ? (cond_msg == "" ? "กรุณา" : "และ") + "กรอกบาร์โค๊ด" : "";
+
+      this.presentToast(cond_msg);
 
     }
   }
@@ -311,31 +363,31 @@ export class AppTrackStatusPage {
           if (IsCanUpdate) {
             switch (this.ddlStatus) {
               case "3":
-                curr = '2,3,4,5,6,7,8,9,10';
+                curr = '2,3,4,5';//curr = '2,3,4,5,6,7,8,9,10';
                 next = '3';
                 break;
               case "4":
-                curr = '2,3,4,5,6,7,8,9,10';
+                curr = '2,3,4,5';//curr = '2,3,4,5,6,7,8,9,10';
                 next = '4';
                 break;
               case "5":
-                curr = '2,3,4,5,6,7,8,9,10';
+                curr = '6,7,8,9,10';// curr = '2,3,4,5,6,7,8,9,10';
                 next = '5';
                 break;
               case "7":
-                curr = '2,3,4,5,6,7,8,9,10';
+                curr = '5,6,7,8,9,10';//curr = '2,3,4,5,6,7,8,9,10';
                 next = '7';
                 break;
               case "8":
-                curr = '2,3,4,5,6,7,8,9,10';
+                curr = '5,6,7,8,9,10';//curr = '2,3,4,5,6,7,8,9,10';
                 next = '8';
                 break;
               case "10":
-                curr = '2,3,4,5,6,7,8,9,10';
+                curr = '5,6,7,8,9,10';//curr = '2,3,4,5,6,7,8,9,10';
                 next = '10';
                 break;
               case "11":
-                curr = '3,4,5,6,7,8,9,10';
+                curr = '5,6,7,8,9,10';//curr = '3,4,5,6,7,8,9,10';
                 next = '11';
                 break;
               case "15":
@@ -376,31 +428,31 @@ export class AppTrackStatusPage {
                 if (IsCanUpdate) {
                   switch (this.ddlStatus) {
                     case "3":
-                      curr = '2,3,4,5,6,7,8,9,10';
+                      curr = '2,3,4,5';//curr = '2,3,4,5,6,7,8,9,10';
                       next = '3';
                       break;
                     case "4":
-                      curr = '2,3,4,5,6,7,8,9,10';
+                      curr = '2,3,4,5,6,7,8,9,10';//curr = '2,3,4,5,6,7,8,9,10';
                       next = '4';
                       break;
                     case "5":
-                      curr = '2,3,4,5,6,7,8,9,10';
+                      curr = '5,6,7,8,9,10';//curr = '2,3,4,5,6,7,8,9,10';
                       next = '5';
                       break;
                     case "7":
-                      curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7';
+                      curr = '5,6,7,8,9,10';//curr = '3,4,5,6,7';
                       next = '7';
                       break;
                     case "8":
-                      curr = '2,3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7';
+                      curr = '5,6,7,8,9,10';//curr = '3,4,5,6,7';
                       next = '8';
                       break;
                     case "10":
-                      curr = '2,3,4,5,6,7,8,9,10';//curr = '4,5,6,7,8,9';
+                      curr = '5,6,7,8,9,10';//curr = '4,5,6,7,8,9';
                       next = '10';
                       break;
                     case "11":
-                      curr = '3,4,5,6,7,8,9,10';//curr = '3,4,5,6,7,8,9,10';
+                      curr = '5,6,7,8,9,10';//curr = '3,4,5,6,7,8,9,10';
                       next = '11';
                       break;
 

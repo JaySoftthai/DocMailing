@@ -35,6 +35,13 @@
     </div>
     <div class="list list-inset" *ngIf="logouted">
       <label class="item item-input floating">
+        <ion-select class="form-control" full placeholder="Company" [(ngModel)]="ddlUserGroup" formControlName="usergroup" style="max-width:100%;">
+          <ion-option value="10" (selected)="selected">PTT</ion-option>
+          <ion-option value="61">PTTOR</ion-option>
+          <ion-option value="BSA">BSA</ion-option>
+        </ion-select>
+      </label>
+      <label class="item item-input floating">
         <input class="form-control" type="text" placeholder="Username" [(ngModel)]="txtUsername" formControlName="username">
       </label>
       <label class="item item-input">
