@@ -103,5 +103,51 @@ export class MasterdataProvider {
     return this.apiProvider.postUploadEndpoint(sFile_Handler, JSON.stringify({ img: imgSignature, sUserID: UserScan, sAssignUserID: UserScan, itm: jsnData, NextStep: ToStep }), imgSignature);
 
   }
+  IsAllowStatus4Scaner(sMode, sScanStatus, sCurrStatus): boolean {
+    let res: boolean = true;
+    let aray_Send: string[] = ["2", "3", "4"];
+    let aray_Send_LT: string[] = ["2", "3", "4"];
+    let aray_Send_GT: string[] = ["5", "6", "7", "8", "9", "10"];
+    let aray_Reciev_LT: string[] = ["2", "3", "4"];
+    let aray_Reciev_GT: string[] = ["5", "7", "14", "15", "16", "18", "19"];
+    let IsNotPassHeadBGor = (aray_Send.indexOf(sCurrStatus) > -1);
+    if (sMode == "send") {
+      switch (sScanStatus) {
+        case "3":
+        case "4":
+        case "5":
+          res = (aray_Send_LT.indexOf(sCurrStatus) > -1);
+          break;
+        case "7":
+        case "8":
+        case "10":
+        case "11":
+          res = (aray_Send_GT.indexOf(sCurrStatus) > -1);
+          break;
+        default: res = false; break;
+      }
+
+    } else {//revciev
+
+      switch (sScanStatus) {
+        case "3":
+        case "4":
+        case "5":
+          res = (aray_Reciev_LT.indexOf(sCurrStatus) > -1);
+          break;
+        case "7":
+        case "14":
+        case "15":
+        case "16":
+        case "18":
+        case "19":
+          res = (aray_Reciev_GT.indexOf(sCurrStatus) > -1);
+          break;
+        default: res = false; break;
+      }
+
+    }
+    return res;
+  }
   ///End Method
 }

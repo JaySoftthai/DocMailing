@@ -131,9 +131,14 @@ export class AppRevievStatusPage {
                           let lst: trans_request;
                           if (res.length > 0) {
                             lst = res[0];
-                            let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
-                            this.lstInbound.push(_InboundCode);
-                            this.txtDocCode = '';
+                            let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("send", this.ddlStatus, lst.nStep);
+                            if (IsAllowThisStatus) {
+                              let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                              this.lstInbound.push(_InboundCode);
+                              this.txtDocCode = '';
+                            } else {
+                              this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
+                            }
                           }
                         },
                         (error) => {
@@ -152,9 +157,14 @@ export class AppRevievStatusPage {
                   let lst: trans_request;
                   if (res.length > 0) {
                     lst = res[0];
-                    let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
-                    this.lstInbound.push(_InboundCode);
-                    this.txtDocCode = '';
+                    let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("send", this.ddlStatus, lst.nStep);
+                    if (IsAllowThisStatus) {
+                      let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                      this.lstInbound.push(_InboundCode);
+                      this.txtDocCode = '';
+                    } else {
+                      this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
+                    }
                   }
                 },
                 (error) => {
@@ -241,9 +251,14 @@ export class AppRevievStatusPage {
                         let lst: trans_request;
                         if (res.length > 0) {
                           lst = res[0];
-                          let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
-                          this.lstInbound.push(_InboundCode);
-                          this.txtDocCode = '';
+                          let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("send", this.ddlStatus, lst.nStep);
+                          if (IsAllowThisStatus) {
+                            let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
+                            this.lstInbound.push(_InboundCode);
+                            this.txtDocCode = '';
+                          } else {
+                            this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
+                          }
                         }
                       },
                       (error) => {
@@ -261,9 +276,14 @@ export class AppRevievStatusPage {
                 let lst: trans_request;
                 if (res.length > 0) {
                   lst = res[0];
-                  let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
-                  this.lstInbound.push(_InboundCode);
-                  this.txtDocCode = '';
+                  let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("send", this.ddlStatus, lst.nStep);
+                  if (IsAllowThisStatus) {
+                    let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
+                    this.lstInbound.push(_InboundCode);
+                    this.txtDocCode = '';
+                  } else {
+                    this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
+                  }
                 }
               },
               (error) => {
