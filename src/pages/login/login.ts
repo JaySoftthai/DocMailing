@@ -93,35 +93,41 @@ export class LoginPage {
   }
 
   login(): void {
-    //แสดง loading controller
-    let loader = this.loadingCtrl.create({ content: "Loading..." });
-    loader.present();
+    // console.log(this.myForm.controls['usergroup'].value)
+    if (this.myForm.controls['username'].value == undefined || this.myForm.controls['password'].value == undefined || this.myForm.controls['usergroup'].value == undefined) {
 
-    //รับข้อมูลต่างๆมาจากฟอร์ม
-    let username = this.myForm.controls['username'].value;
-    let password = this.myForm.controls['password'].value;
-    let usergroup = this.myForm.controls['usergroup'].value;
-    let remember = true;
-    usergroup = (usergroup + "" != "") ? usergroup.replace('BSA', '') : usergroup;
-    this.userProv.login(usergroup + "" + username, password, remember).then((res: boolean) => {
-      /*nSubID	nMainID	sName
-9		บก.
-10	Courier
-11	Messenger */
-      this.logined = res;
-      if (this.logined) {
-        this.navCtrl.setRoot(HomePage);
-      }
-      else {
-        //แจ้งเตือนกรณี username และ password ไม่ถูกต้อง
-        let alert = this.alertCtrl.create({ title: 'รหัสพนักงานและรหัสผ่านไม่ถูกต้อง!', buttons: ['ตกลง'] });
-        alert.present();
-      }
+      this.presentToast('กรุณาระบุข้อมูลเพื่อยืนยันการเข้าใช้งานทั้งหมดให้ถูกต้องครบถ้วน');
+    } else {
+      //แสดง loading controller
+      let loader = this.loadingCtrl.create({ content: "Loading..." });
+      loader.present();
 
-      loader.dismiss();//ให้ Loading หายไปกรณีเกิดการทำงานเสร็จสมบูรณ์
-    }).catch(error => {
-      loader.dismiss();//ให้ Loading หายไปกรณีที่เกิด error
-    });
+      //รับข้อมูลต่างๆมาจากฟอร์ม 
+      let username = this.myForm.controls['username'].value;
+      let password = this.myForm.controls['password'].value;
+      let usergroup = this.myForm.controls['usergroup'].value;
+      let remember = true;
+      usergroup = (usergroup + "" != "") ? ((usergroup == "") ? "BSA" : usergroup).replace("BSA", "") : usergroup;
+      this.userProv.login(usergroup + "" + username, password, remember).then((res: boolean) => {
+        /*nSubID	nMainID	sName
+  9		บก.
+  10	Courier
+  11	Messenger */
+        this.logined = res;
+        if (this.logined) {
+          this.navCtrl.setRoot(HomePage);
+        }
+        else {
+          //แจ้งเตือนกรณี username และ password ไม่ถูกต้อง
+          let alert = this.alertCtrl.create({ title: 'รหัสพนักงานและรหัสผ่านไม่ถูกต้อง!', buttons: ['ตกลง'] });
+          alert.present();
+        }
+
+        loader.dismiss();//ให้ Loading หายไปกรณีเกิดการทำงานเสร็จสมบูรณ์
+      }).catch(error => {
+        loader.dismiss();//ให้ Loading หายไปกรณีที่เกิด error
+      });
+    }
   }
   logout() {
 
