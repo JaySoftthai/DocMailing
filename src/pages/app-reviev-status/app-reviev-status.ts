@@ -75,121 +75,125 @@ export class AppRevievStatusPage {
   }
   CallScaner() {
 
-    this.barcodeScanner.scan({
-      preferFrontCamera: false
-      , showFlipCameraButton: false
-      , showTorchButton: false
-      , torchOn: false
-      , disableAnimations: false
-      , disableSuccessBeep: false
-      // , prompt: "Do you want to next?"
-      // , orientation: "portrait" 1000
-      , resultDisplayDuration: 0
-    }).then(barcodeData => {
+    if (this.ddlStatus == null && this.ddlStatus == undefined && this.ddlStatus == "") {
+      this.presentToast('ระบุสถานะที่ต้องการดำเนินการ');
+    } else {
+      this.barcodeScanner.scan({
+        preferFrontCamera: false
+        , showFlipCameraButton: false
+        , showTorchButton: false
+        , torchOn: false
+        , disableAnimations: false
+        , disableSuccessBeep: false
+        // , prompt: "Do you want to next?"
+        // , orientation: "portrait" 1000
+        , resultDisplayDuration: 0
+      }).then(barcodeData => {
 
-      this.sBarCode = barcodeData.text;
-      if (barcodeData.text != "") {
+        this.sBarCode = barcodeData.text;
+        if (barcodeData.text != "") {
 
-        //check dupplicate
-        let IsDupplicate = false;
-        if (barcodeData.text != "" && this.lstInbound.length > 0) {
-          let aray_inbnd = this.lstInbound.filter(f => {
-            return (f.sDetail.toLowerCase() == barcodeData.text.toLowerCase());
-          });
-          IsDupplicate = aray_inbnd.length > 0;
-        }
+          //check dupplicate
+          let IsDupplicate = false;
+          if (barcodeData.text != "" && this.lstInbound.length > 0) {
+            let aray_inbnd = this.lstInbound.filter(f => {
+              return (f.sDetail.toLowerCase() == barcodeData.text.toLowerCase());
+            });
+            IsDupplicate = aray_inbnd.length > 0;
+          }
 
 
-        if (!IsDupplicate) {
-          // let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
-          // this.lstInbound.push(_InboundCode);
+          if (!IsDupplicate) {
+            // let _InboundCode = new Step('', 'เอกสารพร้อมรับ', barcodeData.text, 'assets/images/Drop-Down01.png', 'Y');
+            // this.lstInbound.push(_InboundCode);
 
-          this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', barcodeData.text, this.userdata.code).subscribe((res) => {
+            this.MasterdataProv.checkReqDocumentByDocCode('checkPRMS', barcodeData.text, this.userdata.code).subscribe((res) => {
 
-            // this.presentToast(barcodeData.text + ' ' + this.userdata.code + ' ' + res.length);
+              // this.presentToast(barcodeData.text + ' ' + this.userdata.code + ' ' + res.length);
 
-            let isCourierRole = (this.userdata.role == "10");
-            if (res.length <= 0 && (isCourierRole)) {
-              let confirm = this.alertCtrl.create({
-                title: 'แจ้งเตือน',
-                message: 'เอกสาร ' + barcodeData.text + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
-                buttons: [
-                  {
-                    text: 'ไม่ยืนยัน',
-                    handler: () => {
+              let isCourierRole = (this.userdata.role == "10");
+              if (res.length <= 0 && (isCourierRole)) {
+                let confirm = this.alertCtrl.create({
+                  title: 'แจ้งเตือน',
+                  message: 'เอกสาร ' + barcodeData.text + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
+                  buttons: [
+                    {
+                      text: 'ไม่ยืนยัน',
+                      handler: () => {
 
-                      confirm.dismiss();
-                      return false;
+                        confirm.dismiss();
+                        return false;
+                      }
+                    },
+                    {
+                      text: 'ยืนยัน',
+                      handler: () => {
+
+                        this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
+                          (res) => {
+                            let lst: trans_request;
+                            if (res.length > 0) {
+                              lst = res[0];
+                              let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+
+                              if (IsAllowThisStatus) {
+                                let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                                this.lstInbound.push(_InboundCode);
+                                this.txtDocCode = '';
+                              } else {
+                                this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
+                              }
+                            }
+                          },
+                          (error) => {
+                            this.errorMessage = <any>error;
+                            this.presentToast(this.errorMessage);
+                          });
+                      }
+                    }
+                  ]
+                });
+                confirm.present();
+              } else {
+
+                this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
+                  (res) => {
+                    let lst: trans_request;
+                    if (res.length > 0) {
+                      lst = res[0];
+                      let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+                      ////console.log('reciev:scan on area')
+                      ////console.log(IsAllowThisStatus)
+                      ////console.log(this.ddlStatus)
+                      ////console.log(lst.nStep)
+                      if (IsAllowThisStatus) {
+                        let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
+                        this.lstInbound.push(_InboundCode);
+                        this.txtDocCode = '';
+                      } else {
+                        this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
+                      }
                     }
                   },
-                  {
-                    text: 'ยืนยัน',
-                    handler: () => {
+                  (error) => {
+                    this.errorMessage = <any>error;
+                    this.presentToast(this.errorMessage);
+                  });
+                return false;
+              }
+            });
 
-                      this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
-                        (res) => {
-                          let lst: trans_request;
-                          if (res.length > 0) {
-                            lst = res[0];
-                            let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+          } else {
+            this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
+          }
 
-                            if (IsAllowThisStatus) {
-                              let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
-                              this.lstInbound.push(_InboundCode);
-                              this.txtDocCode = '';
-                            } else {
-                              this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
-                            }
-                          }
-                        },
-                        (error) => {
-                          this.errorMessage = <any>error;
-                          this.presentToast(this.errorMessage);
-                        });
-                    }
-                  }
-                ]
-              });
-              confirm.present();
-            } else {
-
-              this.MasterdataProv.getReqDocumentByDocCode('request_document_code', barcodeData.text).subscribe(
-                (res) => {
-                  let lst: trans_request;
-                  if (res.length > 0) {
-                    lst = res[0];
-                    let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
-                    ////console.log('reciev:scan on area')
-                    ////console.log(IsAllowThisStatus)
-                    ////console.log(this.ddlStatus)
-                    ////console.log(lst.nStep)
-                    if (IsAllowThisStatus) {
-                      let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
-                      this.lstInbound.push(_InboundCode);
-                      this.txtDocCode = '';
-                    } else {
-                      this.presentToast('ไม่สามารถดำเนินการเอกสารดังกล่าวในสถานะที่เลือกได้');
-                    }
-                  }
-                },
-                (error) => {
-                  this.errorMessage = <any>error;
-                  this.presentToast(this.errorMessage);
-                });
-              return false;
-            }
-          });
-
-        } else {
-          this.presentToast(barcodeData.text + ' ' + ((IsDupplicate) ? ' มีอยู่แล้วในรายการ' : ' สามารถใช้ได้'));
+          this.BindDocumentList(barcodeData.cancelled);
         }
 
-        this.BindDocumentList(barcodeData.cancelled);
-      }
-
-    }).catch(err => {
-      this.presentToast(err);
-    });
+      }).catch(err => {
+        this.presentToast(err);
+      });
+    }
   }
 
   BindDocumentList(isCanceled?: boolean) {
