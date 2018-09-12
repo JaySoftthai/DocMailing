@@ -45,8 +45,11 @@ page-app-track-status {
         background-color: transparent !important; // background-image: url(../assets/image/bg_portrait.png);
     }
     .alert-md,
-    .alert-ios,
-    .alert-radio-group {
+    .alert-ios {
         max-height: 400px !important;
+    }
+    .alert-md .alert-radio-group,
+    .alert-ios .alert-radio-group {
+        max-height: 100% !important;
     }
 }
