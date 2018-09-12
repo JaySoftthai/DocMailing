@@ -132,6 +132,7 @@ export class AppRevievStatusPage {
                           if (res.length > 0) {
                             lst = res[0];
                             let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+
                             if (IsAllowThisStatus) {
                               let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
                               this.lstInbound.push(_InboundCode);
@@ -158,6 +159,10 @@ export class AppRevievStatusPage {
                   if (res.length > 0) {
                     lst = res[0];
                     let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+                    ////console.log('reciev:scan on area')
+                    ////console.log(IsAllowThisStatus)
+                    ////console.log(this.ddlStatus)
+                    ////console.log(lst.nStep)
                     if (IsAllowThisStatus) {
                       let _InboundCode = new Step('', lst.sStepName, barcodeData.text, lst.sStepIcon, 'Y');
                       this.lstInbound.push(_InboundCode);
@@ -252,6 +257,11 @@ export class AppRevievStatusPage {
                         if (res.length > 0) {
                           lst = res[0];
                           let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+
+                          ////console.log('reciev:scan on area')
+                          ////console.log(IsAllowThisStatus)
+                          ////console.log(this.ddlStatus)
+                          ////console.log(lst.nStep)
                           if (IsAllowThisStatus) {
                             let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
                             this.lstInbound.push(_InboundCode);
@@ -277,6 +287,11 @@ export class AppRevievStatusPage {
                 if (res.length > 0) {
                   lst = res[0];
                   let IsAllowThisStatus = this.MasterdataProv.IsAllowStatus4Scaner("reciev", this.ddlStatus, lst.nStep);
+
+                  ////console.log('reciev:scan on area')
+                  ////console.log(IsAllowThisStatus)
+                  ////console.log(this.ddlStatus)
+                  ////console.log(lst.nStep)
                   if (IsAllowThisStatus) {
                     let _InboundCode = new Step('', lst.sStepName, this.txtDocCode, lst.sStepIcon, 'Y');
                     this.lstInbound.push(_InboundCode);

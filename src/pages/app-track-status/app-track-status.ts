@@ -237,7 +237,14 @@ export class AppTrackStatusPage {
               title: 'แจ้งเตือน',
               message: 'เอกสาร ' + this.txtDocCode + ' ไม่ได้อยู่ในพื้นที่ความรับผิดชอบ ท่านต้องการยืนยันการทำรายการหรือไม่ ?',
               buttons: [
+
                 {
+                  text: 'ไม่ยืนยัน',
+                  handler: () => {
+                    confirm.dismiss();
+                    return false;
+                  }
+                }, {
                   text: 'ยืนยัน',
                   handler: () => {
 
@@ -260,13 +267,6 @@ export class AppTrackStatusPage {
                         this.errorMessage = <any>error;
                         this.presentToast(this.errorMessage);
                       });
-                  }
-                },
-                {
-                  text: 'ไม่ยืนยัน',
-                  handler: () => {
-                    confirm.dismiss();
-                    return false;
                   }
                 }
               ]
@@ -575,7 +575,7 @@ export class AppTrackStatusPage {
     let imgSignature = imgSign;
     // let lstSigneture: Step;
     // lstSigneture.sImg = this.SignatureURL;
-    // console.log(this.ScanDataType)
+    // //console.log(this.ScanDataType)
     let UserScan = (this.userdata == null) ? '' : this.userdata.code;
     this.MasterdataProv.postDocument_ScanStatus(this.ScanDataType, CurrStat, ToStat, this.lstInbound, imgSignature, UserScan).then(res => {
 

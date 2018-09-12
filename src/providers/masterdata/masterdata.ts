@@ -59,9 +59,9 @@ export class MasterdataProvider {
 
   postDocument_ScanStatus(sDataType, StepCurr, StepNext, jsnData, imgSignature, UserScan): Promise<any> {
     let sFile_Handler = 'transaction_scan.ashx';
-    // console.log(StepCurr)
-    // console.log(StepNext)
-    // console.log(sDataType)
+    // //console.log(StepCurr)
+    // //console.log(StepNext)
+    // //console.log(sDataType)
     return this.apiProvider.postApiEndpoint(sFile_Handler, JSON.stringify({ CurrStep: StepCurr, NextStep: StepNext, sImgSign: imgSignature, img: imgSignature, sUserID: UserScan, sAssignUserID: UserScan, ScanItemType: sDataType, itm: jsnData }), imgSignature);
 
   }
@@ -105,35 +105,40 @@ export class MasterdataProvider {
   }
   IsAllowStatus4Scaner(sMode, sScanStatus, sCurrStatus): boolean {
     let res: boolean = true;
-    let aray_Send: string[] = ["2", "3", "4"];
-    let aray_Send_LT: string[] = ["2", "3", "4"];
-    let aray_Send_GT: string[] = ["5", "6", "7", "8", "9", "10"];
-    let aray_Reciev_LT: string[] = ["2", "3", "4"];
-    let aray_Reciev_GT: string[] = ["5", "7", "14", "15", "16", "18", "19"];
-    let IsNotPassHeadBGor = (aray_Send.indexOf(sCurrStatus) > -1);
+    let aray_Send: string = ",2,3,4";
+    let aray_Send_LT: string = ",2,3,4,";
+    let aray_Send_GT: string = ",5,6,7,8,9,10,";
+    let aray_Reciev_LT: string = ",2,3,4,";
+    let aray_Reciev_GT: string = ",5,7,14,15,16,18,19,";
+    let IsNotPassHeadBGor = (aray_Send.indexOf("," + sCurrStatus + ",") > -1);
+
     if (sMode == "send") {
       switch (sScanStatus) {
         case "3":
         case "4":
         case "5":
-          res = (aray_Send_LT.indexOf(sCurrStatus) > -1);
+          res = (aray_Send_LT.indexOf("," + sCurrStatus + ",") > -1);
           break;
         case "7":
         case "8":
         case "10":
         case "11":
-          res = (aray_Send_GT.indexOf(sCurrStatus) > -1);
+          res = (aray_Send_GT.indexOf("," + sCurrStatus + ",") > -1);
           break;
         default: res = false; break;
       }
 
     } else {//revciev
 
+      //console.log('reciev Func  sScanStatus:' + sScanStatus + ' DocStatus:' + sCurrStatus + ' rest:' + (aray_Reciev_LT.indexOf("," + sCurrStatus + ",") > -1))
       switch (sScanStatus) {
         case "3":
         case "4":
         case "5":
-          res = (aray_Reciev_LT.indexOf(sCurrStatus) > -1);
+          //console.log(aray_Reciev_LT)
+          //console.log(aray_Reciev_LT.indexOf(sCurrStatus))
+          //console.log(aray_Reciev_LT.indexOf("," + sCurrStatus + ","))
+          res = (aray_Reciev_LT.indexOf("," + sCurrStatus + ",") > -1);
           break;
         case "7":
         case "14":
@@ -141,7 +146,7 @@ export class MasterdataProvider {
         case "16":
         case "18":
         case "19":
-          res = (aray_Reciev_GT.indexOf(sCurrStatus) > -1);
+          res = (aray_Reciev_GT.indexOf("," + sCurrStatus + ",") > -1);
           break;
         default: res = false; break;
       }
