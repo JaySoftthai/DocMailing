@@ -75,7 +75,7 @@ export class AppRevievStatusPage {
   }
   CallScaner() {
 
-    if (this.ddlStatus == null && this.ddlStatus == undefined && this.ddlStatus == "") {
+    if (this.ddlStatus == null || this.ddlStatus || undefined || this.ddlStatus == "") {
       this.presentToast('ระบุสถานะที่ต้องการดำเนินการ');
     } else {
       this.barcodeScanner.scan({

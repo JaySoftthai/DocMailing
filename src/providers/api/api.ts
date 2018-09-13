@@ -20,7 +20,7 @@ export class ApiProvider {
   UploadUrl: string;
 
   constructor(public http: Http, public network: Network) {
-    // this.apiUrl = "http://localhost:1871/Mobile/"; 
+    // this.apiUrl = "http://localhost:1871/Mobile/";
     // this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
     // this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
     this.apiUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
