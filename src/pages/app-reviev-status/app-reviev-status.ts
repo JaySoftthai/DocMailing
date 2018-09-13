@@ -40,6 +40,7 @@ export class AppRevievStatusPage {
   lstRecvItms: ReceiveItems[];
   ///Ctrl
   ddlStatus: any;
+  OldStatus: any;
   userdata: UserAccount;
   IsScanner: boolean;
   isMessenger: boolean = false;
@@ -625,5 +626,43 @@ export class AppRevievStatusPage {
 
     });
     this.SignatureURL = "";
+  }
+
+  onStatusCancel(onevent) {
+    return false;
+  }
+  onStatusClick(event) {
+    this.OldStatus = this.ddlStatus;
+  }
+  onStatusChange(onevent, oldVal) {
+
+    if (this.lstInbound.length > 0 && this.ddlStatus != this.OldStatus) {
+      let confirm = this.alertCtrl.create({
+        title: 'แจ้งเตือน',
+        message: 'หากท่านต้องการเปลี่ยนสถานะการแสกนรายการเอกสารที่เคยดำเนินการไว้ รายการจะถูกยกเลิก<br><br>ท่านต้องการยกเลิกรายการใช่หรือไม่ ?',
+        buttons: [
+          {
+            text: 'ไม่ยืนยัน',
+            handler: () => {
+              confirm.dismiss();
+              this.ddlStatus = this.OldStatus;
+              return false;
+
+            }
+          },
+          {
+            text: 'ยืนยัน',
+            handler: () => {
+              console.log(this.lstInbound)
+              this.OldStatus = onevent;
+
+              this.lstInbound = [];
+              console.log(this.lstInbound)
+            }
+          }
+        ]
+      });
+      confirm.present();
+    }
   }
 }
