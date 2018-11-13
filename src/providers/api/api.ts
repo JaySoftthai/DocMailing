@@ -23,17 +23,20 @@ export class ApiProvider {
     // this.apiUrl = "http://localhost:1871/Mobile/";
     // this.apiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
     // this.apiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
-    this.apiUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+    // this.apiUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+    this.apiUrl = "https://pttweb11.pttplc.com/PTT_Doc_Mailing/mobile/";
 
     // this.epiUrl = "http://localhost:1871/Mobile/";
     // this.epiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
     // this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
-    this.epiUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+    // this.epiUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+    this.apiUrl = "https://pttweb11.pttplc.com/PTT_Doc_Mailing/mobile/";
 
     // this.epiUrl = "http://localhost:1871/Mobile/";
     // this.epiUrl = "http://dev2012/PTT_Doc_Mailing/Mobile/";
     // this.epiUrl = "http://www.softthai.com/ptt_doc_mailing/Mobile/";
-    this.UploadUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+    // this.UploadUrl = "https://pttwebtest11.pttplc.com/PTT_Doc_Mailing_Test/Mobile/";
+    this.apiUrl = "https://pttweb11.pttplc.com/PTT_Doc_Mailing/mobile/";
 
   }
 
